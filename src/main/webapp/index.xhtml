@@ -6,13 +6,13 @@
 
 <h:head>
     <title>SupPictures Home</title>
-    <h:outputStylesheet library = "css" name="index.css"/>
+    <h:outputStylesheet library = "css" name="main.css"/>
     <h:outputStylesheet name="css/bootstrap.css"/>
 </h:head>
 
 <h:body>
     <!--Main Container-->
-    <div class="container-fluid">
+    <div class="container-fluid p-0">
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,17 +23,17 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#">Nature</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Explore</a>
+                        <a class="nav-link" href="#">Automobile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Hot</a>
+                        <a class="nav-link" href="#">Animal</a>
                     </li>
                 </ul>
                 <form class="form-inline w-75">
-                    <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search"/>
+                    <input class="form-control w-75 mr-1" type="search" placeholder="Search" aria-label="Search"/>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav">
@@ -48,12 +48,23 @@
         </nav>
         <!--Navbar End-->
         <!--Jumbotron-->
-        <div class="jumbotron  d-flex justify-content-center flex-column align-items-center">
-            <h1 class="display-4">SupPictures</h1>
-            <p class="lead">The internet’s source of freely useable images. </p>
-            <p>Powered by creators everywhere.</p>
+        <div class="jumbotron  d-flex justify-content-center flex-column align-items-center pl-0 pr-0">
+            <div class=" w-100 d-flex justify-content-center flex-row align-content-around pl-0 pr-0">
+                <div class="pr-5">
+                    <h1 class="display-4">SupPictures</h1>
+                    <p class="lead">The internet’s source to share pictures</p>
+                </div>
+                <div class="pr-5">
+                    <h2 class="display-4 text-center">3</h2>
+                    <p class="lead text-center">Users</p>
+                </div>
+                <div class="pr-5">
+                    <h2 class="display-4 text-center">5500</h2>
+                    <p class="lead text-center">Pictures</p>
+                </div>
+            </div>
             <form class="form-inline w-75 d-flex justify-content-center">
-                <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search"/>
+                <input class="form-control w-75  mr-1" type="search" placeholder="Search for free photos and pictures" aria-label="Search"/>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
