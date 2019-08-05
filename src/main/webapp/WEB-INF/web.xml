@@ -11,6 +11,8 @@
   <display-name>Archetype Created Web Application</display-name>
   <welcome-file-list>
     <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>signIn.xhtml</welcome-file>
+    <welcome-file>signUp.xhtml</welcome-file>
   </welcome-file-list>
   <!--
      FacesServlet is main servlet responsible to handle all request.
@@ -44,4 +46,15 @@
     <servlet-name>jersey-servlet</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+
+  <!-- CSS Hot Swapping Fix-->
+  <context-param>
+    <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+    <param-value>0</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+  </context-param>
+  <!--  CSS Hot Swapping Fix End -->
 </web-app>
