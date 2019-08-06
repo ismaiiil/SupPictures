@@ -1,6 +1,7 @@
 package com.supinfo.suppictures.rest;
 
 import com.supinfo.suppictures.Core.Utils.JPAUtil;
+import com.supinfo.suppictures.Core.ValueObjects.JpaUserDao;
 import com.supinfo.suppictures.Core.ValueObjects.User;
 
 import java.util.ArrayList;
@@ -21,45 +22,21 @@ public class RestHelloWorld
     @Produces("text/html")
     public Response getStartingPage()
     {
-        create("TestUser");
-
+        create("Tom","Riddle", "Marvolo");
         String output = "<h1>Hello World!<h1>" +
-                "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>"
-                + readAll().toString();
+                "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>";
         return Response.status(200).entity(output).build();
     }
 
-    public static void create(String name) {
-        // Create an EntityManager
-        EntityManager manager = JPAUtil.getEntityManagerFactory().createEntityManager();
-        EntityTransaction transaction = null;
+    public static void create(String firstName,String lastName, String username) {
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUsername(username);
 
-        try {
-            // Get a transaction
-            transaction = manager.getTransaction();
-            // Begin the transaction
-            transaction.begin();
+        JpaUserDao jpaUserDao = new JpaUserDao();
+        jpaUserDao.createUser(user);
 
-            // Create a new User object
-            User user = new User();
-            user.setName(name);
-
-            // Save the User object
-            manager.persist(user);
-
-            // Commit the transaction
-            transaction.commit();
-        } catch (Exception ex) {
-            // If there are any exceptions, roll back the changes
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            // Print the Exception
-            ex.printStackTrace();
-        } finally {
-            // Close the EntityManager
-            manager.close();
-        }
     }
 
     public static ArrayList readAll() {
@@ -95,7 +72,7 @@ public class RestHelloWorld
         }
         ArrayList<String> userToString = new ArrayList<>();
         for (Object u:users) {
-            userToString.add(((User) u).getName());
+            userToString.add(((User) u).getFirstName());
         }
         return userToString;
     }
