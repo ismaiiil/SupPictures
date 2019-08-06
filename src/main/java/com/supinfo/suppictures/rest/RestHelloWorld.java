@@ -42,12 +42,8 @@ public class RestHelloWorld
     }
 
     public static Boolean verifyUser(){
-        User user = new User();
-        user.setUsername("TRiddle");
-        user.setPassword("password1234");
-
         JpaUserDao jpaUserDao = new JpaUserDao();
-        return jpaUserDao.verifyUser(user);
+        return jpaUserDao.verifyUser("TRiddle","password1234");
     }
 
     public static ArrayList readAll() {

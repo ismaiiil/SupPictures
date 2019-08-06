@@ -46,16 +46,17 @@ public class JpaUserDao implements UserDao {
     }
 
 
-    @Override
-    public Boolean verifyUser(User user) {
 
-        User userEntity = entityManager.find(User.class,user.getUsername());
+    @Override
+    public Boolean verifyUser(String username, String password) {
+
+        User userEntity = entityManager.find(User.class,username);
 
         if (userEntity == null){
             return false;
         }
         else{
-            if(userEntity.getPassword().equals(user.getPassword())){
+            if(userEntity.getPassword().equals(password)){
                 return true;
             }
             else {
