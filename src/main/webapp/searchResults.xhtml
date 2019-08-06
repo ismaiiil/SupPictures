@@ -3,7 +3,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>SupPictures Home</title>
@@ -12,49 +13,24 @@
 </h:head>
 
 <h:body>
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 position-relative" style="height: 100vh;">
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a href="#"><img class="index-logo" src="resources/images/icon.png" alt="SupPictures logo"/></a>
-            <a class="navbar-brand" href="#">SupPictures</a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Explore</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Hot</a>
-                    </li>
-                </ul>
-                <form class="form-inline w-75">
-                    <input class="form-control w-75  mr-1" type="search" placeholder="Search" aria-label="Search"/>
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Log in<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <ui:insert name="header">
+            <ui:include src="templates/navbar.xhtml" />
+        </ui:insert>
         <!--Navbar End-->
+
+        <!--Search Title-->
         <div class="d-flex  justify-content-around align-content-center flex-column">
             <div class="results-text mt-5 mb-5">
                 <h1>Photography Results</h1>
                 <h5>3 photography pictures</h5>
             </div>
         </div>
+        <!--Search Title End-->
+
         <!--Search Results Image Gallery-->
-        <div class="d-flex  justify-content-around align-items-center">
+        <div class="d-flex  justify-content-around align-items-start">
             <div class="d-flex flex-wrap justify-content-center align-items-center">
                 <c:forEach var = "i" begin="1" end="3">
                     <div class="col-4 d-flex justify-content-center ">
@@ -65,6 +41,8 @@
             </div>
         </div>
         <!--Search Results Image Gallery End-->
+
+
     </div>
 </h:body>
 </html>

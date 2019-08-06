@@ -6,6 +6,7 @@
 
 footer {
     background: #e9ecef;
+    bottom: 0;
 }
 body {
     background: #f8f9fa;
@@ -17,7 +18,7 @@ body {
 .hgt-100{
     height: 100vh;
 }
-form{
+sign-up-form{
     width: 700px;
 }
 .sign-up-logo{
@@ -46,7 +47,7 @@ form{
     background-size: cover;
 }
 /*Sign In Page*/
-form{
+.sign-in--form{
     width: 650px;
 }
 .btn-login{
@@ -66,4 +67,11 @@ form{
 }
 .index-logo{
     width: 50px;
+}
+/*Edit profile*/
+.edit-container{
+    height: 90vh;
+}
+.edit-page-wrapper{
+    height: 100vh;
 }

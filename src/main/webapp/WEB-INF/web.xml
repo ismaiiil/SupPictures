@@ -14,6 +14,8 @@
     <welcome-file>signIn.xhtml</welcome-file>
     <welcome-file>signUp.xhtml</welcome-file>
     <welcome-file>searchResults.xhtml</welcome-file>
+    <welcome-file>editProfile.xhtml</welcome-file>
+    <welcome-file>userProfile.xhtml</welcome-file>
   </welcome-file-list>
   <!--
      FacesServlet is main servlet responsible to handle all request.

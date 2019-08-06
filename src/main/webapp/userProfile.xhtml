@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>SupPictures Home</title>
+    <h:outputStylesheet library = "css" name="main.css"/>
+    <h:outputStylesheet name="css/bootstrap.css"/>
+</h:head>
+
+<h:body>
+    <!--Main Container-->
+    <div class="container-fluid p-0">
+        <ui:insert name="header">
+            <ui:include src="templates/navbar.xhtml" />
+        </ui:insert>
+    </div>
+
+    <!--Search Title-->
+    <div class="d-flex  justify-content-center align-items-center flex-column">
+
+        <div class="mt-5 mb-5 d-flex justify-content-center flex-column align-items-center ">
+            <h1>John Doe</h1>
+            <h5>Upload and share photos and pictures</h5>
+            <span><button class="btn btn-outline-primary" type="submit">Edit Profile</button></span>
+        </div>
+
+    </div>
+    <!--Search Title End-->
+
+
+</h:body>
+</html>
