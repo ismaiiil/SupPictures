@@ -4,6 +4,7 @@ import com.supinfo.suppictures.Core.Utils.JPAUtil;
 import com.supinfo.suppictures.Core.ValueObjects.JpaUserDao;
 import com.supinfo.suppictures.Core.ValueObjects.User;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,21 +23,30 @@ public class RestHelloWorld
     @Produces("text/html")
     public Response getStartingPage()
     {
-        create("Tom","Riddle", "Marvolo");
+        create("Tom","Riddle", "TRiddle", "password1234");
         String output = "<h1>Hello World!<h1>" +
-                "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>";
+                "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + verifyUser();
         return Response.status(200).entity(output).build();
     }
 
-    public static void create(String firstName,String lastName, String username) {
+    public static void create(String firstName,String lastName, String username,String password) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUsername(username);
+        user.setPassword(password);
 
         JpaUserDao jpaUserDao = new JpaUserDao();
         jpaUserDao.createUser(user);
+    }
 
+    public static Boolean verifyUser(){
+        User user = new User();
+        user.setUsername("TRiddle");
+        user.setPassword("password1234");
+
+        JpaUserDao jpaUserDao = new JpaUserDao();
+        return jpaUserDao.verifyUser(user);
     }
 
     public static ArrayList readAll() {
