@@ -34,6 +34,7 @@ public class RestHelloWorld
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUsername(username);
+
         user.setPassword(password);
 
         JpaUserDao jpaUserDao = new JpaUserDao();
