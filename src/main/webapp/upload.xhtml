@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:j="http://java.sun.com/jsf/html"
+      xmlns:h1="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      lang="en">
+
+<h:head>
+    <title>SupPictures Home</title>
+
+</h:head>
+
+<h:body>
+    <h:outputStylesheet library = "css" name="index.css"/>
+    <h:outputStylesheet name="css/bootstrap.css"/>
+
+    <!-- notice the enctype for file upload -->
+    <h:form prependid="false" enctype="multipart/form-data">
+        <h:panelGrid>
+        <!-- Shows the error or success message -->
+        <h:outputText value="#{uploadController.message}"
+                          rendered="#{!empty uploadController.message}"/>
+        <h1:inputFile mode="simple"
+                     a:accept="image/*" value="#{uploadController.file1}"
+                      />
+        <!-- action which is responsible for uploading file(s) -->
+        <h:commandButton action="#{uploadController.uploadFile()}"
+                         value="Upload"/>
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>
