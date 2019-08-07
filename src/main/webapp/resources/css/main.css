@@ -6,16 +6,11 @@
     border-radius: 7px;
     cursor: pointer;
 }
+
 .navbar-z-index{
     z-index: 1030;
 }
-.jumbotron-bgd{
-    background-image: url("/resources/images/jumbotron-bgd.jpg"); /* The image used */
-    /*background-color: #e9ecef; !* Used if the image is unavailable *!*/
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-}
+
 .modal-dialog{
     position: relative;
 }
@@ -55,6 +50,7 @@
     top: 0;
     width: inherit;
 }
+
 .image-overlay{
     width: 500px;
     cursor: pointer;
@@ -64,7 +60,6 @@
     left: 0;
     right: 0;
     height: 100%;
-
     opacity: 0;
     transition: .5s ease;
     border-radius: 7px;
@@ -73,10 +68,10 @@
     position: relative;
     border-radius: 7px;
 }
-.image-container:hover .img-grid-item {
+.image-container:hover .img-grid-item,.image-container:hover .img-grid-item-admin {
     opacity: 0.6;
 }
-.image-container:hover .image-overlay{
+.image-container:hover .image-overlay,.image-container:hover .image-overlay-admin{
     opacity: 1;
 }
 
@@ -177,6 +172,44 @@ body {
 
 }
 .modal-image-container:hover .modal-image-overlay{
+    opacity: 1;
+
+}
+/*admin page*/
+
+.img-grid-item-admin{
+    width: 200px;
+    height: inherit;
+    transition: .5s ease;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.image-user-icon-admin{
+    width:30px;
+    opacity: 1;
+}
+.image-info-user-admin{
+    font-size: 10px;
+    opacity: 1;
+}
+
+.image-overlay-admin{
+    width:200px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    border-radius: 7px;
+}
+
+.view-count-text-admin{
+    font-size: 10px;
     opacity: 1;
 
 }
