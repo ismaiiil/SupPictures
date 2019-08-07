@@ -17,23 +17,23 @@
 
 <ui:composition>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="image-shadow navbar navbar-expand-lg navbar-light bg-light position-fixed w-100 navbar-z-index">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <h:form>
+        <h:form styleClass="w-25 w-25 d-flex align-items-center">
             <h:link outcome="/index.xhtml"><img class="index-logo" src="resources/images/icon.png" alt="SupPictures logo"/></h:link>
             <h:link class="navbar-brand" outcome="/index.xhtml">SupPictures</h:link>
         </h:form>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <div class="collapse navbar-collapse w-100" id="navbarTogglerDemo03">
 
             <form class="form-inline w-100 d-flex align-contents-center justify-content-center">
                 <input class="form-control w-75 mr-1" type="search" placeholder="Search for free photos and pictures" aria-label="Search"/>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-            <h:form>
-                <ul class="navbar-nav w-25">
-                    <li class="nav-item">
+            <h:form styleClass=" w-25 d-flex align-items-center justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item p-2">
                         <h:outputText rendered="#{userManager.userLoggedIn}" value="Hello #{userManager.currentUser.firstName}"/>
                     </li>
                     <li class="nav-item">
@@ -43,11 +43,12 @@
                         <h:link class="nav-link" outcome="/signUp.xhtml" rendered="#{!userManager.userLoggedIn}" value ="Sign Up"/>
                     </li>
                     <li class="nav-item">
-                        <h:commandLink class="nav-link" action="#{userManager.logout}" rendered="#{userManager.userLoggedIn}" value ="Log Out"/>
-                    </li>
-                    <li class="nav-item">
                         <h:link class="nav-link" rendered="#{userManager.userLoggedIn}" outcome="/userProfile.xhtml"><img src="resources/images/user.png" alt="" style="width: 20px;"/></h:link>
                     </li>
+                    <li class="nav-item">
+                        <h:commandLink class="nav-link" action="#{userManager.logout}" rendered="#{userManager.userLoggedIn}" value ="Log Out"/>
+                    </li>
+
                 </ul>
              </h:form>
         </div>
