@@ -33,9 +33,53 @@
         <div class="d-flex  justify-content-around align-items-start">
             <div class="d-flex flex-wrap justify-content-center align-items-center">
                 <c:forEach var = "i" begin="1" end="3">
-                    <div class="col-4 d-flex justify-content-center ">
-                        <h:graphicImage class="img-grid-item" value = "https://images.pexels.com/photos/1124092/pexels-photo-1124092.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" />
+                    <div class="col-4 d-flex justify-content-center image-container ">
+                        <h:graphicImage class="image-shadow img-grid-item  img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
+                        <div class="image-overlay" data-toggle="modal" data-target="#myModal" >
+                            <div class="d-flex align-items-center justify-content-between image-info  h-25">
+                                <div class="d-flex align-items-center justify-content-center p-1 pl-2">
+                                    <img class="image-user-icon " src="resources/images/image-user.png" alt=""/>
+                                    <p class="image-info-user ml-1 m-0 ">Username</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center p-1 pr-2">
+                                    <img class="image-user-icon" src="resources/images/eye.png" alt=""/>
+                                    <p class="view-count-text ml-1 m-0  ">40</p>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
+                    <!-- Picture Modal -->
+                    <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header align-items-center">
+                                    <div class="d-flex align-items-center justify-content-start w-25">
+                                        <img class="image-user-icon" src="resources/images/image-user.png" alt=""/>
+                                        <p class="image-info-user ml-2 m-0">Username</p>
+                                    </div>
+                                    <h5 class="modal-title w-50 text-center" id="myModalTitle">Image Title</h5>
+                                    <div class="w-25">
+                                        <button type="button" class="close close-modal m-0" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="modal-body pb-0">
+                                    <h:graphicImage class="img-modal img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
+                                    <p class="lead pt-3 pb-3">This is the image desciption</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="d-flex align-items-center justify-content-center p-1 pr-2">
+                                        <img class="image-user-icon" src="resources/images/eye.png" alt=""/>
+                                        <p class="view-count-text ml-1 m-0  ">40</p>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Picture Modal End -->
                 </c:forEach>
 
             </div>
@@ -44,5 +88,10 @@
 
 
     </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="application/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="application/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="application/javascript"></script>
 </h:body>
 </html>
