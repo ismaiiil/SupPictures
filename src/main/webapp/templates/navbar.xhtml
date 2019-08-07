@@ -21,8 +21,10 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a href="#"><img class="index-logo" src="resources/images/icon.png" alt="SupPictures logo"/></a>
-        <a class="navbar-brand" href="#">SupPictures</a>
+        <h:form>
+            <h:link outcome="/index.xhtml"><img class="index-logo" src="resources/images/icon.png" alt="SupPictures logo"/></h:link>
+            <h:link class="navbar-brand" outcome="/index.xhtml">SupPictures</h:link>
+        </h:form>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
             <form class="form-inline w-100 d-flex align-contents-center justify-content-center">
@@ -32,19 +34,19 @@
             <h:form>
                 <ul class="navbar-nav w-25">
                     <li class="nav-item">
-                        <h:outputText class="nav-link"  rendered="#{userManager.userLoggedIn}" value="Hello #{userManager.currentUser.firstName}"/>
+                        <h:outputText rendered="#{userManager.userLoggedIn}" value="Hello #{userManager.currentUser.firstName}"/>
                     </li>
                     <li class="nav-item">
-                        <h:commandLink class="nav-link" action="signIn" rendered="#{!userManager.userLoggedIn}" value="Log in" />
+                        <h:link class="nav-link" outcome="/signIn.xhtml" rendered="#{!userManager.userLoggedIn}" value="Log in" />
                     </li>
                     <li class="nav-item">
-                        <h:commandLink class="nav-link" action="signUp" rendered="#{!userManager.userLoggedIn}" value ="Sign Up"/>
+                        <h:link class="nav-link" outcome="/signUp.xhtml" rendered="#{!userManager.userLoggedIn}" value ="Sign Up"/>
                     </li>
                     <li class="nav-item">
                         <h:commandLink class="nav-link" action="#{userManager.logout}" rendered="#{userManager.userLoggedIn}" value ="Log Out"/>
                     </li>
                     <li class="nav-item">
-                        <h:commandLink class="nav-link" rendered="#{userManager.userLoggedIn}" action="userProfile"><img src="resources/images/user.png" alt="" style="width: 20px;"/></h:commandLink>
+                        <h:link class="nav-link" rendered="#{userManager.userLoggedIn}" outcome="/userProfile.xhtml"><img src="resources/images/user.png" alt="" style="width: 20px;"/></h:link>
                     </li>
                 </ul>
              </h:form>

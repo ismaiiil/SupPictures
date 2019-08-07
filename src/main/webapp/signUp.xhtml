@@ -3,7 +3,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <h:outputStylesheet library = "css" name="main.css"/>
     <h:outputStylesheet name="css/bootstrap.css"/>
@@ -54,7 +55,7 @@
                     <div class="form-group">
                         <label for="emailAddress">Email</label>
                         <!--<input type="email" class="form-control" id="emailAddress"/>-->
-                        <h:inputText class="form-control" id="emailAddress" value="#{userManager.email}" required="true" requiredMessage="Please enter your email id" />
+                        <h:inputText class="form-control" id="emailAddress" a:type="email" value="#{userManager.email}" required="true" requiredMessage="Please enter your email id" />
                         <h:message for="emailAddress"/>
 
                     </div>
