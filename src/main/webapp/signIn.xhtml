@@ -22,13 +22,13 @@
                 </div>
                 <div class="form-group">
                     <label for="userName">Username</label>
-                    <h:inputText type="text" class="form-control" value="#{loginManager.username}" id="userName" aria-describedby="username" />
+                    <h:inputText type="text" class="form-control" value="#{userManager.username}" id="userName" aria-describedby="username" />
                 </div>
                 <div class="form-group">
                     <label for="userPassword">Password</label>
-                    <h:inputText type="password" class="form-control" value="#{loginManager.password}" id="userPassword" />
+                    <h:inputText type="password" class="form-control" value="#{userManager.password}" id="userPassword" />
                 </div>
-                <h:commandLink id="link" action="#{loginManager.login}"
+                <h:commandLink id="link" action="#{userManager.login}"
                                value="click"/>
             </h:form>
             <!--Sign In Form End-->
