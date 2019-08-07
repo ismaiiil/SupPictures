@@ -13,12 +13,12 @@
         <properties>
             <!-- database connection -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/suppictures" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:8889/suppictures" />
             <property name="javax.persistence.jdbc.user" value="supuser" />
             <property name="javax.persistence.jdbc.password" value="password" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
         </properties>
     </persistence-unit>
 

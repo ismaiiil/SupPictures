@@ -22,46 +22,68 @@
             <!--Centered Form-->
             <div class="p-5 sign-in-center d-flex justify-content-center align-content-center">
                 <!--Form-->
-                <form class="sign-up-form">
 
+                <h:form styleClass="sign-up-form">
                     <div class="form-group d-flex justify-content-around flex-column">
                         <h1 class="text-center mt-2">Join SupPictures</h1>
                         <small class="text-center mt-2 mb-5 pb-5">Already have an account? <a href="#">Login</a></small>
                     </div>
+                    <h:messages styleClass="text-danger" globalOnly="true"/>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName" value=""/>
+                            <!--<input type="text" class="form-control" id="firstName" value=""/>-->
+                            <h:inputText class="form-control" id="firstName" value="#{userManager.firstName}" required="true" requiredMessage="Please enter your first name" />
+                            <h:message for="firstName" />
                         </div>
                         <div class="form-group col-md-6">
                             <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" value=""/>
+                            <!--<input type="text" class="form-control" id="lastName" value=""/>-->
+                            <h:inputText class="form-control" id="lastName" value="#{userManager.lastName}" required="true" requiredMessage="Please enter your last name" />
+                            <h:message for="lastName"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="userName">Username</label>
-                        <input type="text" class="form-control" id="userNamer"/>
+                        <!--<input type="text" class="form-control" id="userNamer"/>-->
+                        <h:inputText class="form-control" id="userName" value="#{userManager.username}" required="true" requiredMessage="Please enter a username" />
+                        <h:message for="userName"/>
+
+
                     </div>
                     <div class="form-group">
                         <label for="emailAddress">Email</label>
-                        <input type="email" class="form-control" id="emailAddress"/>
+                        <!--<input type="email" class="form-control" id="emailAddress"/>-->
+                        <h:inputText class="form-control" id="emailAddress" value="#{userManager.email}" required="true" requiredMessage="Please enter your email id" />
+                        <h:message for="emailAddress"/>
+
                     </div>
                     <div class="form-group">
                         <label for="phoneNumber">Phone Number</label>
-                        <input type="tel" class="form-control" id="phoneNumber"/>
+                        <!--<input type="tel" class="form-control" id="phoneNumber"/>-->
+                        <h:inputText class="form-control" id="phoneNumber" value="#{userManager.tel}" required="true" requiredMessage="Please enter your phone number" />
+                        <h:message for="phoneNumber"/>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password"/>
+                            <!--<input type="password" class="form-control" id="password"/>-->
+                            <h:inputSecret id="password" value="#{userManager.password}" required="true" requiredMessage="Please enter your password" />
+                            <h:message for="password"/>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="retypePassword">Retype Password</label>
-                            <input type="password" class="form-control" id="retypePassword"/>
+                            <!--<input type="password" class="form-control" id="retypePassword"/>-->
+                            <h:inputSecret id="retypePassword" value="#{userManager.passConfirm}" required="true" requiredMessage="Please confirm your password" />
+                            <h:message for="retypePassword"/>
+
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 mt-2">Sign Up</button>
-                </form>
+                    <!--<button type="submit" class="btn btn-primary w-100 mt-2">Sign Up</button>-->
+                    <h:commandButton value="Sign Up" type="submit"  action="#{userManager.signUp}" />
+
+                </h:form>
+
                 <!--Form End-->
             </div>
             <!--Centered Form End-->
