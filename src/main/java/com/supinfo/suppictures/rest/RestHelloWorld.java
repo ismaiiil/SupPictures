@@ -2,6 +2,7 @@ package com.supinfo.suppictures.rest;
 
 import com.supinfo.suppictures.Core.Utils.JPAUtil;
 import com.supinfo.suppictures.Core.ValueObjects.JpaUserDaoImpl;
+import com.supinfo.suppictures.Core.ValueObjects.Picture;
 import com.supinfo.suppictures.Core.ValueObjects.User;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -24,7 +25,8 @@ public class RestHelloWorld
     @Produces("text/html")
     public Response getStartingPage()
     {
-        create("Tom","Riddle", "TRiddle323", "password1234");
+        //create("Tom","Riddle", "TRiddle323", "password1234");
+        createPicture("Pic 1","Zafr la feu");
         String output = "<h1>Hello World!<h1>" +
                 "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser());
         return Response.status(200).entity(output).build();
@@ -44,6 +46,18 @@ public class RestHelloWorld
             System.out.println("Rollback Exception");
         } catch (Exception e) {
             System.out.println("General Exception");
+        }
+    }
+
+    public static void createPicture(String name, String description){
+        Picture picture = new Picture();
+        picture.setName(name);
+        picture.setDescription(description);
+
+        try {
+            JPAUtil.getJpaPictureDaoImpl().createPicture(picture);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,8 +1,6 @@
 package com.supinfo.suppictures.Core.ValueObjects;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -10,6 +8,7 @@ import java.sql.Date;
 public class Picture {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
     private String name;
