@@ -14,7 +14,7 @@
         <!--Centered Form-->
         <div class="sign-in-center d-flex justify-content-center align-content-center">
             <!--Sign In Form-->
-            <form class="h-50">
+            <h:form class="h-50">
                 <div class="form-group d-flex justify-content-around flex-column">
                     <a  class="text-center" href="#"><img class="sign-in-logo mt-5" src="resources/images/icon.png" alt="SupPictures logo"/></a>
                     <h3 class="text-center mt-2">Login</h3>
@@ -22,14 +22,15 @@
                 </div>
                 <div class="form-group">
                     <label for="userName">Username</label>
-                    <input type="text" class="form-control" id="userName" aria-describedby="username" value=""/>
+                    <h:inputText type="text" class="form-control" value="#{userManager.username}" id="userName" aria-describedby="username" />
                 </div>
                 <div class="form-group">
                     <label for="userPassword">Password</label>
-                    <input type="password" class="form-control" id="userPassword" value=""/>
+                    <h:inputText type="password" class="form-control" value="#{userManager.password}" id="userPassword" />
                 </div>
-                <button type="submit" class="btn btn-primary btn-login mt-2">Login</button>
-            </form>
+                <h:commandLink id="link" action="#{userManager.login}"
+                               value="click"/>
+            </h:form>
             <!--Sign In Form End-->
         </div>
         <!--Centered Form End-->

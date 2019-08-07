@@ -5,8 +5,9 @@ import com.supinfo.suppictures.Daos.UserDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.io.Console;
 
-public class JpaUserDao implements UserDao {
+public class JpaUserDaoImpl implements UserDao {
 
     private EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 
@@ -46,23 +47,19 @@ public class JpaUserDao implements UserDao {
     }
 
 
+
     @Override
-    public Boolean verifyUser(User user) {
+    public User verifyUser(String username, String password) {
 
-        User userEntity = entityManager.find(User.class,user.getUsername());
+        User userEntity = entityManager.find(User.class,username);
 
-        if (userEntity == null){
-            return false;
-        }
-        else{
-            if(userEntity.getPassword().equals(user.getPassword())){
-                return true;
-            }
-            else {
-                return false;
+        if(userEntity != null){
+            if(!(userEntity.getPassword().equals(password))){
+                return null;
             }
         }
 
+        return userEntity;
     }
 
 
