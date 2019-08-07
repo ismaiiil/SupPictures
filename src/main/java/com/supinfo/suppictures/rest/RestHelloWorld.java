@@ -4,12 +4,14 @@ import com.supinfo.suppictures.Core.Utils.JPAUtil;
 import com.supinfo.suppictures.Core.ValueObjects.JpaUserDaoImpl;
 import com.supinfo.suppictures.Core.ValueObjects.User;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.RollbackException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -22,7 +24,7 @@ public class RestHelloWorld
     @Produces("text/html")
     public Response getStartingPage()
     {
-        //create("Tom","Riddle", "TRiddle323", "password1234");
+        create("Tom","Riddle", "TRiddle323", "password1234");
         String output = "<h1>Hello World!<h1>" +
                 "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser());
         return Response.status(200).entity(output).build();
@@ -36,7 +38,13 @@ public class RestHelloWorld
 
         user.setPassword(password);
 
-        JPAUtil.getJpaUserDaoImpl().createUser(user);
+        try {
+            JPAUtil.getJpaUserDaoImpl().createUser(user);
+        } catch (RollbackException e) {
+            System.out.println("Rollback Exception");
+        } catch (Exception e) {
+            System.out.println("General Exception");
+        }
     }
 
     public static User verifyUser(){
@@ -81,3 +89,5 @@ public class RestHelloWorld
         return userToString;
     }
 }
+
+// TODO - Create Image, List Image, SearchByName, SearchByCategory
