@@ -1,6 +1,7 @@
 package com.supinfo.suppictures.rest;
 
 import com.supinfo.suppictures.Core.Utils.JPAUtil;
+import com.supinfo.suppictures.Core.ValueObjects.Category;
 import com.supinfo.suppictures.Core.ValueObjects.JpaUserDaoImpl;
 import com.supinfo.suppictures.Core.ValueObjects.Picture;
 import com.supinfo.suppictures.Core.ValueObjects.User;
@@ -26,12 +27,25 @@ public class RestHelloWorld
     public Response getStartingPage()
     {
         //create("Tom","Riddle", "TRiddle323", "password1234");
-        createPicture("Pic 37","Zafr la feu");
+        createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
+        createPicture("klnverbr","nprlgtnth",Category.NATURE);
+        createPicture("earegvb","npdvarerb",Category.AUTOMOBILE);
+        createPicture("abtrn","nperfth",Category.NATURE);
+        createPicture("kaerfer","nrgbnttnth",Category.NATURE);
+        createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE);
         printPictureList();
         searchByName("Pic");
+        searchByCategory(Category.NATURE);
         String output = "<h1>Hello World!<h1>" +
                 "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser());
         return Response.status(200).entity(output).build();
+    }
+
+    private void searchByCategory(Category category) {
+        List<Picture> pictureList = JPAUtil.getJpaPictureDaoImpl().searchPictureByCategory(category);
+        for(Picture p:pictureList){
+            System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
+        }
     }
 
     public static void create(String firstName,String lastName, String username,String password) {
@@ -51,10 +65,11 @@ public class RestHelloWorld
         }
     }
 
-    public static void createPicture(String name, String description){
+    public static void createPicture(String name, String description, Category category){
         Picture picture = new Picture();
         picture.setName(name);
         picture.setDescription(description);
+        picture.setCategory(category);
 
         try {
             JPAUtil.getJpaPictureDaoImpl().createPicture(picture);

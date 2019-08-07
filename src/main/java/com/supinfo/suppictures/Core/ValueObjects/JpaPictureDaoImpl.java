@@ -44,4 +44,11 @@ public class JpaPictureDaoImpl implements PictureDao {
         List<Picture> pictureList = query.getResultList();
         return pictureList;
     }
+
+    public List<Picture> searchPictureByCategory(Category category){
+        Query query = entityManager.createQuery("SELECT p from Picture p WHERE p.category = ?1");
+        query.setParameter(1,category);
+        List<Picture> pictureList = query.getResultList();
+        return pictureList;
+    }
 }
