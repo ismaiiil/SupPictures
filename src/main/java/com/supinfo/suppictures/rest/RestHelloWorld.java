@@ -26,7 +26,9 @@ public class RestHelloWorld
     public Response getStartingPage()
     {
         //create("Tom","Riddle", "TRiddle323", "password1234");
-        createPicture("Pic 1","Zafr la feu");
+        createPicture("Pic 37","Zafr la feu");
+        printPictureList();
+        searchByName("Pic");
         String output = "<h1>Hello World!<h1>" +
                 "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser());
         return Response.status(200).entity(output).build();
@@ -64,6 +66,19 @@ public class RestHelloWorld
     public static User verifyUser(){
         return JPAUtil.getJpaUserDaoImpl().verifyUser("Tiddle","password1234");
     }
+
+    public void printPictureList(){
+        List<Picture> pictureList = JPAUtil.getJpaPictureDaoImpl().listPictures();
+        for(Picture p:pictureList){
+            System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
+        }
+    }
+
+    public void searchByName(String name){
+        List<Picture> pictureList = JPAUtil.getJpaPictureDaoImpl().searchPictureByName(name);
+        for(Picture p:pictureList){
+            System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
+        }    }
 
     public static ArrayList readAll() {
 

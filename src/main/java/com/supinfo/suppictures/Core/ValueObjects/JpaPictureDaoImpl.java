@@ -5,7 +5,9 @@ import com.supinfo.suppictures.Daos.PictureDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.RollbackException;
+import java.util.List;
 
 public class JpaPictureDaoImpl implements PictureDao {
 
@@ -28,5 +30,18 @@ public class JpaPictureDaoImpl implements PictureDao {
         entityManager.persist(picture);
 
         transaction.commit();
+    }
+
+
+    public List<Picture> listPictures(){
+        Query query = entityManager.createQuery("SELECT p FROM Picture p ");
+        List<Picture> pictureList = query.getResultList();
+        return pictureList;
+    }
+
+    public List<Picture> searchPictureByName(String name){
+        Query query = entityManager.createQuery("SELECT p FROM Picture p WHERE p.name LIKE '%"+ name + "%'");
+        List<Picture> pictureList = query.getResultList();
+        return pictureList;
     }
 }
