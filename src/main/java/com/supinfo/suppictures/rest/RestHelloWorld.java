@@ -22,7 +22,7 @@ public class RestHelloWorld
     @Produces("text/html")
     public Response getStartingPage()
     {
-        //create("Tom","Riddle", "TRiddle323", "password1234");
+        create("Tom","Riddle", "TRiddle", "password1234");
         String output = "<h1>Hello World!<h1>" +
                 "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser());
         return Response.status(200).entity(output).build();
@@ -72,7 +72,7 @@ public class RestHelloWorld
             ex.printStackTrace();
         } finally {
             // Close the EntityManager
-            manager.close();
+           // manager.close();
         }
         ArrayList<String> userToString = new ArrayList<>();
         for (Object u:users) {
