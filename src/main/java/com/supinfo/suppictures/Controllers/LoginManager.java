@@ -1,15 +1,11 @@
 package com.supinfo.suppictures.Controllers;
 
-import com.supinfo.suppictures.Core.ValueObjects.JpaUserDao;
-import com.supinfo.suppictures.Core.ValueObjects.User;
+import com.supinfo.suppictures.Core.ValueObjects.JpaUserDaoImpl;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @ManagedBean
@@ -38,9 +34,9 @@ public class LoginManager {
     public void login() throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 //        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        JpaUserDao dao = new JpaUserDao();
+        JpaUserDaoImpl dao = new JpaUserDaoImpl();
 
-        if(dao.verifyUser(username,password)){
+        /*if(dao.verifyUser(username,password)){
             externalContext.getSessionMap().put("user", username);
             externalContext.redirect("/");
         }else{
@@ -48,7 +44,7 @@ public class LoginManager {
             externalContext.getSessionMap().put("user", username);
             externalContext.redirect("/");
 
-        }
+        }*/
 
     }
 }

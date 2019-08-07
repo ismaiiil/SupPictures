@@ -7,6 +7,6 @@ public interface UserDao {
     void createUser(User user);
 
 
-    Boolean verifyUser(String username, String password );
+    User verifyUser(String username, String password );
 
 }
