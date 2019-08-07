@@ -29,21 +29,25 @@
                 <input class="form-control w-75 mr-1" type="search" placeholder="Search for free photos and pictures" aria-label="Search"/>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-
-            <ul class="navbar-nav w-25">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">User's Name</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Log in<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Up</a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><img src="resources/images/user.png" alt="" style="width: 20px;"/></a>
-                </li>
-            </ul>
+            <h:form>
+                <ul class="navbar-nav w-25">
+                    <li class="nav-item">
+                        <h:outputText class="nav-link"  rendered="#{userManager.userLoggedIn}" value="Hello #{userManager.currentUser.firstName}"/>
+                    </li>
+                    <li class="nav-item">
+                        <h:commandLink class="nav-link" action="signIn" rendered="#{!userManager.userLoggedIn}" value="Log in" />
+                    </li>
+                    <li class="nav-item">
+                        <h:commandLink class="nav-link" action="signUp" rendered="#{!userManager.userLoggedIn}" value ="Sign Up"/>
+                    </li>
+                    <li class="nav-item">
+                        <h:commandLink class="nav-link" action="#{userManager.logout}" rendered="#{userManager.userLoggedIn}" value ="Log Out"/>
+                    </li>
+                    <li class="nav-item">
+                        <h:commandLink class="nav-link" rendered="#{userManager.userLoggedIn}" action="userProfile"><img src="resources/images/user.png" alt="" style="width: 20px;"/></h:commandLink>
+                    </li>
+                </ul>
+             </h:form>
         </div>
     </nav>
     <!--Navbar End-->
