@@ -5,7 +5,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-
 <h:head>
     <title>SupPictures Home</title>
     <h:outputStylesheet library = "css" name="main.css"/>
@@ -13,28 +12,39 @@
 </h:head>
 
 <h:body>
-    <div class="container-fluid p-0 position-relative" style="height: 100vh;">
-        <!--Navbar-->
+    <!--Main Container-->
+    <div class="container-fluid p-0">
+        <!--Header-->
         <ui:insert name="header">
             <ui:include src="templates/navbar.xhtml" />
         </ui:insert>
-        <!--Navbar End-->
+        <!--Header End-->
 
-        <!--Search Title-->
-        <div class="d-flex  justify-content-around align-content-center flex-column">
-            <div class="results-text mt-5 mb-5">
-                <h1>Photography Results</h1>
-                <h5>3 photography pictures</h5>
+        <!--Profile Jumbotron-->
+        <div class="jumbotron">
+            <div class="d-flex justify-content-center flex-column align-items-center ">
+                <h1 class="display-4">John Doe</h1>
+                <p class="lead">Upload and share photos and pictures</p>
+                <p class="lead">
+                    <span><button class="btn btn-outline-primary" type="submit">Edit Profile</button></span>
+                </p>
             </div>
         </div>
-        <!--Search Title End-->
+        <!--Profile Jumbotron End-->
 
-        <!--Search Results Image Gallery-->
-        <div class="d-flex  justify-content-around align-items-start">
+        <!--User Image Gallery Title-->
+        <div class="d-flex  justify-content-around align-items-center p-2">
+            <h2>My Gallery</h2>
+        </div>
+        <!--User Image Gallery Title End-->
+
+        <!--Image Gallery-->
+        <div class="d-flex  justify-content-around align-items-center">
             <div class="d-flex flex-wrap justify-content-center align-items-center">
                 <c:forEach var = "i" begin="1" end="3">
-                    <div class="col-4 d-flex justify-content-center image-container ">
-                        <h:graphicImage class="image-shadow img-grid-item  img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
+                    <!-- Grid column -->
+                    <div class="mb-3 mr-3  image-container ">
+                        <h:graphicImage class="image-shadow img-grid-item img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
                         <div class="image-overlay" data-toggle="modal" data-target="#myModal" >
                             <div class="d-flex align-items-center justify-content-between image-info  h-25">
                                 <div class="d-flex align-items-center justify-content-center p-1 pl-2">
@@ -49,7 +59,9 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Picture Modal -->
+                    <h:form>
                     <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
                             <div class="modal-content">
@@ -58,7 +70,7 @@
                                         <img class="image-user-icon" src="resources/images/image-user.png" alt=""/>
                                         <p class="image-info-user ml-2 m-0">Username</p>
                                     </div>
-                                    <h5 class="modal-title w-50 text-center" id="myModalTitle">Image Title</h5>
+                                    <input class=" form-control modal-title w-50 text-center" id="myModalTitle" value="Image Title"/>
                                     <div class="w-25">
                                         <button type="button" class="close close-modal m-0" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -66,28 +78,43 @@
                                     </div>
                                 </div>
                                 <div class="modal-body pb-0">
+                                    <div class="modal-image-container position-relative">
                                     <h:graphicImage class="img-modal img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
-                                    <p class="lead pt-3 pb-3">This is the image desciption</p>
+                                    <div class="modal-image-overlay d-flex justify-content-center align-items-center">
+                                        <button class=" btn btn-outline-success modal-image-upload-btn" type="button">Upload Another Image</button>
+                                    </div>
+
+                                    </div>
+                                    <div class="form-group pt-2">
+                                        <textarea class="form-control" id="descriptionTextArea1" rows="3"> this is a description</textarea>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer justify-content-between">
+                                    <div>
+                                        <button type="button" class="btn btn-danger modal-delete-button">Delete</button>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center">
                                     <div class="d-flex align-items-center justify-content-center p-1 pr-2">
                                         <img class="image-user-icon" src="resources/images/eye.png" alt=""/>
                                         <p class="view-count-text ml-1 m-0  ">40</p>
                                     </div>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                    <button type="button" class="btn btn-secondary mr-1 " data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </h:form>
                     <!-- Picture Modal End -->
                 </c:forEach>
-
             </div>
         </div>
-        <!--Search Results Image Gallery End-->
-
-
+        <!--Image Gallery End-->
     </div>
+    <!--Main Container End-->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="application/javascript"></script>
