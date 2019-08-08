@@ -6,7 +6,9 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
+    <title>SupPictures Home</title>
     <h:outputStylesheet library = "css" name="main.css"/>
+    <h:outputStylesheet library="scss" name="_variables.scss"/>
     <h:outputStylesheet name="css/bootstrap.css"/>
 </h:head>
 
@@ -15,7 +17,7 @@
     <div class="d-flex align-content-center justify-content-center hgt-100">
         <div class="col-4 h-100 p-0">
             <img class="sign-up-bgd position-relative" src="resources/images/signUpBgd.jpg" alt=""/>
-            <a class="text-center sign-up-logo position-absolute" href="#"><img class="sign-up-logo " src="resources/images/icon.png" alt="SupPictures logo"/></a>
+           <h:form> <h:link class="text-center sign-up-logo position-absolute" outcome="/index.xhtml"><img class="sign-up-logo " src="resources/images/icon.png" alt="SupPictures logo"/></h:link></h:form>
             <h1 class="font-weight-bold sign-up-memo position-absolute">Start Your Creative Journey</h1>
             <h2 class="sign-up-memo-sm position-absolute">Access numerous free, high-resolution photos you can’t find anywhere else</h2>
         </div>
@@ -69,19 +71,19 @@
                         <div class="form-group col-md-6">
                             <label for="password">Password</label>
                             <!--<input type="password" class="form-control" id="password"/>-->
-                            <h:inputSecret id="password" value="#{userManager.password}" required="true" requiredMessage="Please enter your password" />
+                            <h:inputSecret styleClass="form-control" id="password" value="#{userManager.password}" required="true" requiredMessage="Please enter your password" />
                             <h:message for="password"/>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="retypePassword">Retype Password</label>
                             <!--<input type="password" class="form-control" id="retypePassword"/>-->
-                            <h:inputSecret id="retypePassword" value="#{userManager.passConfirm}" required="true" requiredMessage="Please confirm your password" />
+                            <h:inputSecret  styleClass="form-control"  id="retypePassword" value="#{userManager.passConfirm}" required="true" requiredMessage="Please confirm your password" />
                             <h:message for="retypePassword"/>
 
                         </div>
                     </div>
                     <!--<button type="submit" class="btn btn-primary w-100 mt-2">Sign Up</button>-->
-                    <h:commandButton value="Sign Up" type="submit"  action="#{userManager.signUp}" />
+                    <h:commandButton styleClass="btn btn-primary w-100 mt-2" value="Sign Up" type="submit"  action="#{userManager.signUp}" />
 
                 </h:form>
 
