@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.persistence.RollbackException;
 import java.io.IOException;
 
 @ManagedBean
@@ -19,8 +20,20 @@ public class UserManager {
     private String firstName;
     private String lastName;
     private String email;
-    private String tel;
+    // todo: change to string once User data type has been modified
+    private Integer tel;
     private String passConfirm;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String addr) {
+        this.address = addr;
+    }
+
+
 
     public String getFirstName() {
         return firstName;
@@ -46,11 +59,14 @@ public class UserManager {
         this.email = email;
     }
 
-    public String getTel() {
+    public Integer getTel() {
         return tel;
     }
 
     public void setTel(String tel) {
+        this.tel = Integer.parseInt(tel);
+    }
+    public  void setTel(Integer tel){
         this.tel = tel;
     }
 
@@ -105,6 +121,8 @@ public class UserManager {
         if(currUser != null){
             externalContext.getSessionMap().put("user", currUser);
             externalContext.redirect("/");
+        }else{
+            showUIMsg("Sorry, we couldn't find an account with those credentials. Please check you username and password and try again!");
         }
 
 
@@ -153,9 +171,28 @@ public class UserManager {
 
     public void signUp(){
         if(!password.equals(passConfirm)){
-            FacesMessage msg = new FacesMessage("The entered passwords do not match!");
-            FacesContext.getCurrentInstance().addMessage(null,msg);
+            showUIMsg("The entered passwords do not match!");
             return;
+        }
+
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmailAddress(email);
+        user.setPhoneNumber(tel);
+        user.setPostalAddress(address);
+
+        try {
+            JPAUtil.getJpaUserDaoImpl().createUser(user);
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            externalContext.getSessionMap().put("user", user);
+            externalContext.redirect("/");
+        } catch (RollbackException e) {
+            showUIMsg("Sorry, this username is already taken!");
+        } catch (Exception e) {
+            showUIMsg("Sorry, an error occurred while registering! Please try again");
         }
 //        User user = new User();
 //        user.setFirstName(firstName);
@@ -166,5 +203,10 @@ public class UserManager {
 
 
 
+    }
+
+    public void showUIMsg(String content){
+        FacesMessage msg = new FacesMessage(content);
+        FacesContext.getCurrentInstance().addMessage(null,msg);
     }
 }

@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
     <title>SupPictures Home</title>
@@ -34,12 +35,12 @@
                                             <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                 <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                     <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">User's Name</h4>
-                                                    <p class="mb-0">Username</p>
+                                                    <p class="mb-0"><h:outputText value="#{userManager.currentUser.username}"/></p>
 
                                                 </div>
-                                                <div class="text-center text-sm-right">
+                                                <h:panelGroup styleClass="text-center text-sm-right" rendered="#{userManager.currentUser.administrator}">
                                                     <span class="badge badge-secondary">administrator</span>
-                                                </div>
+                                                </h:panelGroup>
                                             </div>
                                         </div>
                                         <ul class="nav nav-tabs">
@@ -47,20 +48,25 @@
                                         </ul>
                                         <div class="tab-content pt-3">
                                             <div class="tab-pane active">
-                                                <h:form class="form">
+                                                <h:form class="form" a:autocomplete="off">
+
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>First Name</label>
-                                                                        <input class="form-control" type="text" name="firstName" placeholder="Yoyo" value="Yoyo"/>
+                                                                        <!--<input class="form-control" type="text" name="firstName" placeholder="Yoyo" value="Yoyo"/>-->
+                                                                        <h:inputText class="form-control" id="firstName" value="#{userManager.currentUser.firstName}" required="true" requiredMessage="Please enter your first name" />
+                                                                        <h:message styleClass="text-danger" for="firstName" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>Last Name</label>
-                                                                        <input class="form-control" type="text" name="lastName" placeholder="yaya" value="Yaya"/>
+                                                                        <!--<input class="form-control" type="text" name="lastName" placeholder="yaya" value="Yaya"/>-->
+                                                                        <h:inputText class="form-control" id="lastName" value="#{userManager.currentUser.lastName}" required="true" requiredMessage="Please enter your last name" />
+                                                                        <h:message styleClass="text-danger" for="lastName"/>
                                                                     </div>
                                                                 </div>
 
@@ -69,7 +75,9 @@
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>Email</label>
-                                                                        <input class="form-control" type="text" placeholder="user@example.com"/>
+                                                                        <!--<input class="form-control" type="text" placeholder="user@example.com"/>-->
+                                                                        <h:inputText a:autocomplete="off" class="form-control" id="emailAddress" a:type="email" value="#{userManager.currentUser.emailAddress}" required="true" requiredMessage="Please enter your email id" />
+                                                                        <h:message styleClass="text-danger" for="emailAddress"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -83,7 +91,9 @@
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>New Password</label>
-                                                                        <input class="form-control" type="password" placeholder="••••••"/>
+                                                                        <!--<input class="form-control" type="password" placeholder="••••••"/>-->
+                                                                        <h:inputSecret a:autocomplete="off" autocomplete="false" styleClass="form-control" id="password" value="#{userManager.password}" required="true" requiredMessage="Please enter a new password" />
+                                                                        <h:message styleClass="text-danger" for="password"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -91,14 +101,18 @@
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                                                        <input class="form-control" type="password" placeholder="••••••"/></div>
+                                                                        <!--<input class="form-control" type="password" placeholder="••••••"/></div>-->
+                                                                        <h:inputSecret a:autocomplete="off"  styleClass="form-control"  id="retypePassword" value="#{userManager.passConfirm}" required="true" requiredMessage="Please confirm your password" />
+                                                                        <h:message styleClass="text-danger" for="retypePassword"/>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col d-flex justify-content-center w-50">
-                                                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                                                            <!--<button class="btn btn-primary" type="submit">Save Changes</button>-->
+                                                            <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link" value="Save Changes"/>
                                                         </div>
                                                     </div>
                                                 </h:form>

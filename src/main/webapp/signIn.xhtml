@@ -23,15 +23,19 @@
                     <h3 class="text-center mt-2">Login</h3>
                     <small class="text-center mt-2">Welcome Back.</small>
                 </div>
+
                 <div class="form-group">
+                    <h:messages styleClass="text-danger" globalOnly="true"/>
                     <label for="userName">Username</label>
-                    <h:inputText type="text" class="form-control" value="#{userManager.username}" id="userName" aria-describedby="username" />
+                    <h:inputText type="text" required="true" requiredMessage="Please enter your username" class="form-control" value="#{userManager.username}" id="userName" aria-describedby="username" />
+                    <h:message styleClass="text-danger" for="userName"/>
                 </div>
                 <div class="form-group">
                     <label for="userPassword">Password</label>
-                    <h:inputText type="password" class="form-control" value="#{userManager.password}" id="userPassword" />
+                    <h:inputSecret required="true" requiredMessage="Please enter your password" class="form-control" value="#{userManager.password}" id="userPassword" />
+                    <h:message styleClass="text-danger" for="userPassword"/>
                 </div>
-                <h:commandLink styleClass="btn btn-primary w-100" id="link" action="#{userManager.login}"
+                <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link" action="#{userManager.login}"
                                value="Sign in"/>
             </h:form>
             <!--Sign In Form End-->

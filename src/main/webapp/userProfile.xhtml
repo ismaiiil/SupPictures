@@ -23,7 +23,7 @@
         <!--Profile Jumbotron-->
         <div class="jumbotron">
             <div class="d-flex justify-content-center flex-column align-items-center pt-5">
-                <h1 class="display-4">John Doe</h1>
+                <h1 class="display-4"><h:outputText value="#{userManager.currentUser.firstName} #{userManager.currentUser.lastName}"/></h1>
                 <p class="lead">Upload and share photos and pictures</p>
                 <p class="lead">
                     <h:form><h:link outcome="/editProfile.xhtml" styleClass="btn btn-outline-primary"  value="Edit Profile"></h:link></h:form>
