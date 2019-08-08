@@ -6,9 +6,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <title>SupPictures Home</title>
-    <h:outputStylesheet library="scss" name="_variables.scss"/>
-    <h:outputStylesheet library = "css" name="main.css"/>
-    <h:outputStylesheet name="css/bootstrap.css"/>
 </h:head>
 
 <h:body>
@@ -20,11 +17,11 @@
         </ui:insert>
         <!--Header End-->
 
-    <div class="container-fluid">
+    <div class="container-fluid p-0 ">
 
         <!--Jumbotron-->
-        <div class="jumbotron  d-flex justify-content-center flex-column align-items-center pl-0 pr-0">
-            <div class=" w-100 d-flex justify-content-center flex-row align-content-around pl-0 pr-0">
+        <div class="image-shadow jumbotron  d-flex justify-content-center flex-column align-items-center pl-0 pr-0">
+            <div class=" w-100 d-flex justify-content-center flex-row align-content-around pl-0 pr-0 pt-5">
                 <div class="pr-5 pb-3">
                     <h1 class="display-4">SupPictures</h1>
                     <p class="lead">The internet’s source to share pictures</p>
@@ -107,6 +104,7 @@
                     </c:forEach>
             </div>
         </div>
+    </div>
         <!--Image Gallery End-->
 
         <!--Footer-->
