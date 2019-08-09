@@ -6,32 +6,37 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>SupPictures Home</title>
+
+</h:head>
+<h:body>
     <h:outputStylesheet library = "css" name="main.css"/>
     <h:outputStylesheet library="scss" name="_variables.scss"/>
     <h:outputStylesheet name="css/bootstrap.css"/>
-</h:head>
-<h:body>
     <!--Main Container-->
     <div class="container-fluid hgt-100">
         <!--Centered Form-->
         <div class="sign-in-center d-flex justify-content-center align-content-center">
             <!--Sign In Form-->
 
-            <h:form class="h-50 sign-in-form">
+            <h:form styleClass="h-50 sign-in-form">
                 <div class="form-group d-flex justify-content-around flex-column">
-                  <h:link class="text-center" outcome="/index.xhtml"><img class="sign-in-logo mt-5 " src="resources/images/icon.png" alt="SupPictures logo"/></h:link>
+                  <h:link styleClass="text-center" outcome="/index.xhtml"><img class="sign-in-logo mt-5 " src="resources/images/icon.png" alt="SupPictures logo"/></h:link>
                     <h3 class="text-center mt-2">Login</h3>
                     <small class="text-center mt-2">Welcome Back.</small>
                 </div>
+
                 <div class="form-group">
+                    <h:messages styleClass="text-danger" globalOnly="true"/>
                     <label for="userName">Username</label>
-                    <h:inputText type="text" class="form-control" value="#{userManager.username}" id="userName" aria-describedby="username" />
+                    <h:inputText type="text" required="true" requiredMessage="Please enter your username" styleClass="form-control" value="#{userManager.username}" id="userName" aria-describedby="username" />
+                    <h:message styleClass="text-danger" for="userName"/>
                 </div>
                 <div class="form-group">
                     <label for="userPassword">Password</label>
-                    <h:inputText type="password" class="form-control" value="#{userManager.password}" id="userPassword" />
+                    <h:inputSecret required="true" requiredMessage="Please enter your password" styleClass="form-control" value="#{userManager.password}" id="userPassword" />
+                    <h:message styleClass="text-danger" for="userPassword"/>
                 </div>
-                <h:commandLink styleClass="btn btn-primary w-100" id="link" action="#{userManager.login}"
+                <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link" action="#{userManager.login}"
                                value="Sign in"/>
             </h:form>
             <!--Sign In Form End-->
