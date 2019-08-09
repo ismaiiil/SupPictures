@@ -9,11 +9,12 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
     <title>SupPictures Home</title>
-    <h:outputStylesheet library = "css" name="main.css"/>
-    <h:outputStylesheet name="css/bootstrap.css"/>
+    
 </h:head>
 
 <h:body>
+    <h:outputStylesheet library = "css" name="main.css"/>
+    <h:outputStylesheet name="css/bootstrap.css"/>
     <div class="container-fluid p-0 edit-page-wrapper">
         <!--Navbar-->
         <ui:insert name="header">
@@ -48,7 +49,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                         </ul>
                                         <div class="tab-content pt-3">
                                             <div class="tab-pane active">
-                                                <h:form class="form" a:autocomplete="off">
+                                                <h:form styleClass="form" a:autocomplete="off">
 
                                                     <div class="row">
                                                         <div class="col">
@@ -57,7 +58,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                                     <div class="form-group">
                                                                         <label>First Name</label>
                                                                         <!--<input class="form-control" type="text" name="firstName" placeholder="Yoyo" value="Yoyo"/>-->
-                                                                        <h:inputText class="form-control" id="firstName" value="#{userManager.currentUser.firstName}" required="true" requiredMessage="Please enter your first name" />
+                                                                        <h:inputText styleClass="form-control" id="firstName" value="#{userManager.currentUser.firstName}" required="true" requiredMessage="Please enter your first name" />
                                                                         <h:message styleClass="text-danger" for="firstName" />
                                                                     </div>
                                                                 </div>
@@ -65,7 +66,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                                     <div class="form-group">
                                                                         <label>Last Name</label>
                                                                         <!--<input class="form-control" type="text" name="lastName" placeholder="yaya" value="Yaya"/>-->
-                                                                        <h:inputText class="form-control" id="lastName" value="#{userManager.currentUser.lastName}" required="true" requiredMessage="Please enter your last name" />
+                                                                        <h:inputText styleClass="form-control" id="lastName" value="#{userManager.currentUser.lastName}" required="true" requiredMessage="Please enter your last name" />
                                                                         <h:message styleClass="text-danger" for="lastName"/>
                                                                     </div>
                                                                 </div>
@@ -76,7 +77,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                                     <div class="form-group">
                                                                         <label>Email</label>
                                                                         <!--<input class="form-control" type="text" placeholder="user@example.com"/>-->
-                                                                        <h:inputText a:autocomplete="off" class="form-control" id="emailAddress" a:type="email" value="#{userManager.currentUser.emailAddress}" required="true" requiredMessage="Please enter your email id" />
+                                                                        <h:inputText a:autocomplete="off" styleClass="form-control" id="emailAddress" a:type="email" value="#{userManager.currentUser.emailAddress}" required="true" requiredMessage="Please enter your email id" />
                                                                         <h:message styleClass="text-danger" for="emailAddress"/>
                                                                     </div>
                                                                 </div>
