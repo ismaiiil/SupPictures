@@ -7,12 +7,13 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <title>SupPictures Home</title>
-    <h:outputStylesheet library = "css" name="main.css"/>
-    <h:outputStylesheet library="scss" name="_variables.scss"/>
-    <h:outputStylesheet name="css/bootstrap.css"/>
+
 </h:head>
 
 <h:body>
+    <h:outputStylesheet library = "css" name="main.css"/>
+    <h:outputStylesheet library="scss" name="_variables.scss"/>
+    <h:outputStylesheet name="css/bootstrap.css"/>
     <!--Main Container-->
     <div class="d-flex align-content-center justify-content-center hgt-100">
         <div class="col-4 h-100 p-0">
@@ -37,20 +38,20 @@
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name</label>
                             <!--<input type="text" class="form-control" id="firstName" value=""/>-->
-                            <h:inputText class="form-control" id="firstName" value="#{userManager.firstName}" required="true" requiredMessage="Please enter your first name" />
+                            <h:inputText styleClass="form-control" id="firstName" value="#{userManager.firstName}" required="true" requiredMessage="Please enter your first name" />
                             <h:message styleClass="text-danger" for="firstName" />
                         </div>
                         <div class="form-group col-md-6">
                             <label for="lastName">Last Name</label>
                             <!--<input type="text" class="form-control" id="lastName" value=""/>-->
-                            <h:inputText class="form-control" id="lastName" value="#{userManager.lastName}" required="true" requiredMessage="Please enter your last name" />
+                            <h:inputText styleClass="form-control" id="lastName" value="#{userManager.lastName}" required="true" requiredMessage="Please enter your last name" />
                             <h:message styleClass="text-danger" for="lastName"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="userName">Username</label>
                         <!--<input type="text" class="form-control" id="userNamer"/>-->
-                        <h:inputText class="form-control" id="userName" value="#{userManager.username}" required="true" requiredMessage="Please enter a username" />
+                        <h:inputText styleClass="form-control" id="userName" value="#{userManager.username}" required="true" requiredMessage="Please enter a username" />
                         <h:message styleClass="text-danger" for="userName"/>
 
 
@@ -58,20 +59,20 @@
                     <div class="form-group">
                         <label for="emailAddress">Email</label>
                         <!--<input type="email" class="form-control" id="emailAddress"/>-->
-                        <h:inputText class="form-control" id="emailAddress" a:type="email" value="#{userManager.email}" required="true" requiredMessage="Please enter your email id" />
+                        <h:inputText styleClass="form-control" id="emailAddress" a:type="email" value="#{userManager.email}" required="true" requiredMessage="Please enter your email id" />
                         <h:message styleClass="text-danger" for="emailAddress"/>
 
                     </div>
                     <div class="form-group">
                         <label for="phoneNumber">Phone Number</label>
                         <!--<input type="tel" class="form-control" id="phoneNumber"/>-->
-                        <h:inputText a:type="number" class="form-control" id="phoneNumber" value="#{userManager.tel}" required="true" requiredMessage="Please enter your phone number" />
+                        <h:inputText a:type="number" styleClass="form-control" id="phoneNumber" value="#{userManager.tel}" required="true" requiredMessage="Please enter your phone number" />
                         <h:message styleClass="text-danger" for="phoneNumber"/>
                     </div>
                     <div class="form-group">
                         <label for="phoneNumber">Postal Address</label>
                         <!--<input type="tel" class="form-control" id="phoneNumber"/>-->
-                        <h:inputText class="form-control" id="addr" value="#{userManager.address}" required="true" requiredMessage="Please enter your postal address" />
+                        <h:inputText styleClass="form-control" id="addr" value="#{userManager.address}" required="true" requiredMessage="Please enter your postal address" />
                         <h:message styleClass="text-danger" for="addr"/>
                     </div>
                     <div class="form-row">
