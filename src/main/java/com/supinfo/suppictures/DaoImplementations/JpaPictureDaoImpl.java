@@ -1,5 +1,7 @@
-package com.supinfo.suppictures.Core.ValueObjects;
+package com.supinfo.suppictures.DaoImplementations;
 
+import com.supinfo.suppictures.Enums.Category;
+import com.supinfo.suppictures.Models.Picture;
 import com.supinfo.suppictures.Core.Utils.JPAUtil;
 import com.supinfo.suppictures.Daos.PictureDao;
 

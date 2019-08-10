@@ -1,9 +1,9 @@
 $(function(){
 
-    $(".dropdown-menu a").click(function(){
+    $("#dropdownCategoryMenu a").click(function(){
 
-        $(".btn:first-child").text($(this).text());
-        $(".btn:first-child").val($(this).text());
+        $(".btn-category").text($(this).text());
+        $(".btn-category").val($(this).text());
         console.log("wazaa");
     });
 

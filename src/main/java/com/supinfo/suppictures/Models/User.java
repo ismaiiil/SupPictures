@@ -1,4 +1,4 @@
-package com.supinfo.suppictures.Core.ValueObjects;
+package com.supinfo.suppictures.Models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -43,13 +43,13 @@ public class User implements Serializable {
     }
 
 
-    private Integer phoneNumber;
+    private String phoneNumber;
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
