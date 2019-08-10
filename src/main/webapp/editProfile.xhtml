@@ -44,13 +44,17 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                 </h:panelGroup>
                                             </div>
                                         </div>
-                                        <ul class="nav nav-tabs">
-                                            <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                                        <ul class="nav nav-tabs" id="userSettingsTab" role="tablist">
+                                            <li class="nav-item">
+                                                <a  class="nav-link active" id="profile-details-tab" data-toggle="tab" href="#profile-details" role="tab" aria-controls="profile-details" aria-selected="true">Profile Details</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a  class="nav-link" id="security-tab" data-toggle="tab" href="#security" role="tab" aria-controls="security" aria-selected="false">Security</a>
+                                            </li>
                                         </ul>
-                                        <div class="tab-content pt-3">
-                                            <div class="tab-pane active">
+                                        <div class="tab-content pt-3" id="userSettingsTabContent">
+                                            <div class="tab-pane fade show active" id="profile-details" role="tabpanel" aria-labelledby="profile-details-tab">
                                                 <h:form styleClass="form" a:autocomplete="off">
-
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="row">
@@ -84,6 +88,17 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="row">
+                                                        <div class="col d-flex justify-content-center w-50">
+                                                            <!--<button class="btn btn-primary" type="submit">Save Changes</button>-->
+                                                            <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link" value="Save Changes"/>
+                                                        </div>
+                                                    </div>
+                                                </h:form>
+                                            </div>
+                                            <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+                                                <h:form>
                                                     <div class="row">
                                                         <div class="col-12 mb-3">
                                                             <div class="mb-2"><b>Change Password</b></div>
@@ -117,7 +132,6 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                         </div>
                                                     </div>
                                                 </h:form>
-
                                             </div>
                                         </div>
                                     </div>
@@ -131,6 +145,10 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
         </div>
 
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="application/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="application/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="application/javascript"></script>
 </h:body>
 
 </html>
