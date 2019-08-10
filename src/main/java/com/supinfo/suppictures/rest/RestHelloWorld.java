@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.RollbackException;
@@ -28,21 +29,29 @@ public class RestHelloWorld
     {
 
         //create("Tom","Riddle", "TRiddle323", "password1234");
+
+        /*createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
+
         createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
+
         createPicture("klnverbr","nprlgtnth",Category.NATURE);
         createPicture("earegvb","npdvarerb",Category.AUTOMOBILE);
         createPicture("abtrn","nperfth",Category.NATURE);
         createPicture("kaerfer","nrgbnttnth",Category.NATURE);
         createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE);
+        printPictureList();*/
         printPictureList();
         searchByName("Pic");
         searchByCategory(Category.NATURE);
 
         create("Tom","Riddle", "TRiddle", "password1234");
-
         String output = "<h1>Hello World!<h1>" +
-                "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser());
+                "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser()) + String.valueOf(userCount());
         return Response.status(200).entity(output).build();
+    }
+
+    private Long userCount() {
+        return JPAUtil.getJpaUserDaoImpl().countUsers();
     }
 
     private void searchByCategory(Category category) {
@@ -84,6 +93,13 @@ public class RestHelloWorld
 
     public static User verifyUser(){
         return JPAUtil.getJpaUserDaoImpl().verifyUser("Tiddle","password1234");
+    }
+
+    public static void listUsers(){
+        List<User> userList = JPAUtil.getJpaUserDaoImpl().listUsers();
+        for(User u:userList){
+            System.out.println(u.getUsername() + "," + u.getFirstName() + "," + u.getLastName());
+        }
     }
 
     public void printPictureList(){
