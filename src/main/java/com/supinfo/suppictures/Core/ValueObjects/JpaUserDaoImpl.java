@@ -5,9 +5,11 @@ import com.supinfo.suppictures.Daos.UserDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import java.io.Console;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 public class JpaUserDaoImpl implements UserDao {
 
@@ -51,5 +53,17 @@ public class JpaUserDaoImpl implements UserDao {
         return userEntity;
     }
 
+    @Override
+    public List<User> listUsers() {
+        Query query = entityManager.createQuery("SELECT u FROM User u");
+        List<User> userList = query.getResultList();
+        return userList;
+    }
 
+    @Override
+    public Long countUsers() {
+        Query query = entityManager.createQuery("SELECT COUNT(u.username) FROM User u");
+        Long userCount = (Long) query.getSingleResult();
+        return userCount;
+    }
 }
