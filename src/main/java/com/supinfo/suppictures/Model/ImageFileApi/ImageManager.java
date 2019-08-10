@@ -18,6 +18,7 @@ public class ImageManager {
     private static List<String> allowedExtensions = Arrays.asList("png","jpg","bmp","jpeg","gif");
     private static long maxSize = 10000000;
     private static String UPLOAD_PATH = System.getenv("UPLOAD_PATH");
+    public static final String IMAGE_UPLOADS_ROOT = "/supuploads/";
 
     /**
      * @return generates a random string based on time and a random alphanum string
@@ -71,7 +72,7 @@ public class ImageManager {
         }
         outputStream.close();
         inputStream.close();
-        return fileName;
+        return ImageManager.IMAGE_UPLOADS_ROOT + fileName;
     }
 
     public static List<String> getAllowedExtensions() {

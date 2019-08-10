@@ -41,7 +41,7 @@ public class UploadController {
         if(verifiedStatus == VerifyStatus.VALID){
             try{
                 String path = ImageManager.savePartAs(file1,filename);
-                setMessage("/supuploads/" + path);
+                setMessage(path);
             }catch (IOException e){
                 setMessage("an exception has occured");
             }
