@@ -66,7 +66,7 @@ public class JpaUserDaoImpl implements UserDao {
     }
 
     @Override
-    public void DeleteUsers(String username) throws RollbackException, Exception{
+    public void deleteUser(String username) throws RollbackException, Exception{
         transaction = entityManager.getTransaction();
 
         // Begin the transaction
@@ -75,6 +75,30 @@ public class JpaUserDaoImpl implements UserDao {
         // Find and delete the User object
         User user = entityManager.find(User.class,username);
         entityManager.remove(user);
+
+        // Commit the transaction
+        transaction.commit();
+    }
+
+    @Override
+    public void updateUser(User updatedUser) throws RollbackException, Exception {
+        transaction = entityManager.getTransaction();
+
+        // Begin the transaction
+        transaction.begin();
+
+        User existingUser = entityManager.find(User.class, updatedUser.getUsername());
+
+
+        existingUser.setFirstName(updatedUser.getFirstName());
+        existingUser.setLastName(updatedUser.getLastName());
+        existingUser.setAdministrator(updatedUser.getAdministrator());
+        existingUser.setPassword(updatedUser.getPassword());
+        existingUser.setEmailAddress(updatedUser.getEmailAddress());
+        existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
+        existingUser.setPostalAddress(updatedUser.getPostalAddress());
+
+        entityManager.flush();
 
         // Commit the transaction
         transaction.commit();

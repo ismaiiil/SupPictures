@@ -17,6 +17,8 @@ public interface UserDao {
 
     Long countUsers();
 
-    void DeleteUsers(String username) throws RollbackException,Exception;
+    void deleteUser(String username) throws RollbackException,Exception;
+
+    void updateUser(User updatedUser) throws RollbackException,Exception;
 
 }
