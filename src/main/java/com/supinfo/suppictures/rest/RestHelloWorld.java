@@ -27,6 +27,7 @@ public class RestHelloWorld
     @Produces("text/html")
     public Response getStartingPage()
     {
+
         //create("Tom","Riddle", "TRiddle323", "password1234");
         /*createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
         createPicture("klnverbr","nprlgtnth",Category.NATURE);
@@ -137,7 +138,7 @@ public class RestHelloWorld
             ex.printStackTrace();
         } finally {
             // Close the EntityManager
-            manager.close();
+           // manager.close();
         }
         ArrayList<String> userToString = new ArrayList<>();
         for (Object u:users) {
