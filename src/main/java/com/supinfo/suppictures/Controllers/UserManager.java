@@ -2,6 +2,7 @@ package com.supinfo.suppictures.Controllers;
 
 import com.supinfo.suppictures.Core.Utils.JPAUtil;
 import com.supinfo.suppictures.DaoImplementations.JpaUserDaoImpl;
+import com.supinfo.suppictures.Helper.Util;
 import com.supinfo.suppictures.Models.User;
 
 import javax.faces.application.FacesMessage;
@@ -122,7 +123,7 @@ public class UserManager {
             externalContext.getSessionMap().put("user", currUser);
             externalContext.redirect("/");
         }else{
-            showUIMsg("Sorry, we couldn't find an account with those credentials. Please check you username and password and try again!");
+            Util.showUIMsg("Sorry, we couldn't find an account with those credentials. Please check you username and password and try again!");
         }
 
 
@@ -171,7 +172,7 @@ public class UserManager {
 
     public void signUp(){
         if(!password.equals(passConfirm)){
-            showUIMsg("The entered passwords do not match!");
+            Util.showUIMsg("The entered passwords do not match!");
             return;
         }
 
@@ -190,9 +191,9 @@ public class UserManager {
             externalContext.getSessionMap().put("user", user);
             externalContext.redirect("/");
         } catch (RollbackException e) {
-            showUIMsg("Sorry, this username is already taken!");
+            Util.showUIMsg("Sorry, this username is already taken!");
         } catch (Exception e) {
-            showUIMsg("Sorry, an error occurred while registering! Please try again");
+            Util.showUIMsg("Sorry, an error occurred while registering! Please try again");
         }
 //        User user = new User();
 //        user.setFirstName(firstName);
@@ -205,8 +206,5 @@ public class UserManager {
 
     }
 
-    public void showUIMsg(String content){
-        FacesMessage msg = new FacesMessage(content);
-        FacesContext.getCurrentInstance().addMessage(null,msg);
-    }
+
 }
