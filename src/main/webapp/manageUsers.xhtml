@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    <title>SupPictures Home</title>
+</h:head>
+
+<h:body>
+    <!--Main Container-->
+    <div class="container-fluid p-0">
+    <!--Header-->
+    <ui:insert name="header">
+        <ui:include src="templates/navbar.xhtml" />
+    </ui:insert>
+    <!--Header End-->
+
+
+
+        <!--Admin Jumbotron-->
+        <div class="jumbotron">
+            <div class="d-flex justify-content-center flex-column align-items-center pt-5">
+                <h1 class="display-4 mb-5">Admin Management</h1>
+                <!-- Nav tabs -->
+                <ul class="nav nav-pills w-50 d-flex justify-content-center align-items-center" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#manage-users" role="tab" aria-controls="manage-users" aria-selected="true">Manage Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#manage-photos" role="tab" aria-controls="manage-photos" aria-selected="false">Manage Photos</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!--Admin Jumbotron End-->
+    <div class="d-flex justify-content-center p-0  w-100 align-items-center flex-column">
+
+
+        <!-- Tab panes -->
+        <div class="tab-content w-50">
+            <!--Manage Users Tab Content-->
+            <div class="tab-pane active " id="manage-users" role="tabpanel" aria-labelledby="manage-users-tab">
+                <table class="table border p-2">
+                    <thead class="text-center">
+                    <tr>
+                        <th scope="col" >#</th>
+                        <th scope="col" class="w-25">Username</th>
+                        <th scope="col" class="w-25" >Email</th>
+                        <th scope="col">Photo's count</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    <c:forEach var="i" begin="1" end="10">
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>@username</td>
+                            <td>email@you.com</td>
+                            <td class="text-center">5</td>
+                            <td>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <button class=" btn btn-outline-info mr-1" type="button"><i class="fa fa-save"></i></button>
+                                    <button class=" btn btn-outline-danger" type="button"><i class="fa fa-user-times"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <!--Manage Users Tab Content End-->
+
+            <!--Manage Photos tab Content-->
+            <div class="tab-pane" id="manage-photos" role="tabpanel" aria-labelledby="manage-photos-tab">
+                <!--Image Gallery-->
+                <div class="d-flex  justify-content-around align-items-center pt-5">
+                    <div class="d-flex flex-wrap justify-content-center align-items-center">
+                        <c:forEach var = "i" begin="1" end="15">
+                            <!-- Grid column -->
+                            <div class="mb-3 mr-3  image-container ">
+                                <h:graphicImage class="image-shadow img-grid-item-admin img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
+                                <div class="image-overlay-admin" data-toggle="modal" data-target="#myModal" >
+                                    <div class="d-flex align-items-center justify-content-between image-info  h-25">
+                                        <div class="d-flex align-items-center justify-content-center p-1 pl-2">
+                                            <img class="image-user-icon-admin" src="resources/images/image-user.png" alt=""/>
+                                            <p class="image-info-user-admin ml-1 m-0 ">Username</p>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-center p-1 pr-2">
+                                            <img class="image-user-icon-admin" src="resources/images/eye.png" alt=""/>
+                                            <p class="view-count-text-admin ml-1 m-0  ">40</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Picture Modal -->
+                            <h:form>
+                                <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header align-items-center">
+                                                <div class="d-flex align-items-center justify-content-start w-25">
+                                                    <img class="image-user-icon" src="resources/images/image-user.png" alt=""/>
+                                                    <p class="image-info-user ml-2 m-0">Username</p>
+                                                </div>
+                                                <input class=" form-control modal-title w-50 text-center" id="myModalTitle" value="Image Title"/>
+
+                                                <div class="w-25">
+                                                    <div class="d-flex align-items-center justify-content-center p-1 pr-2">
+                                                        <img class="image-user-icon" src="resources/images/eye.png" alt=""/>
+                                                        <p class="view-count-text ml-1 m-0  ">40</p>
+                                                    </div>
+                                                    <button type="button" class="close close-modal m-0" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="modal-body pb-0">
+                                                <div class="modal-image-container position-relative">
+                                                    <h:graphicImage class="img-modal img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
+                                                    <div class="modal-image-overlay d-flex justify-content-center align-items-center">
+                                                        <button class=" btn btn-outline-success modal-image-upload-btn" type="button">Upload Another Image</button>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group pt-2">
+                                                    <textarea class="form-control" id="descriptionTextArea1" rows="3"> this is a description</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <div>
+                                                    <button type="button" class="btn btn-danger modal-delete-button">Delete</button>
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-center">
+
+
+                                                    <button type="button" class="btn btn-secondary mr-1 " data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                            <!-- Picture Modal End -->
+                        </c:forEach>
+                    </div>
+                </div>
+                <!--Image Gallery End-->
+            </div>
+            <!--Manage Photos tab Content-->
+
+        </div>
+    </div>
+
+    </div>
+    <!--Main Container End-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="application/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="application/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="application/javascript"></script>
+</h:body>
+</html>

@@ -2,132 +2,123 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <title>SupPictures Home</title>
-    <h:outputStylesheet library = "css" name="index.css"/>
-    <h:outputStylesheet name="css/bootstrap.css"/>
 </h:head>
 
 <h:body>
     <!--Main Container-->
-    <div class="container-fluid">
-        <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a href="#"><img class="index-logo" src="resources/images/icon.png" alt="SupPictures logo"/></a>
-            <a class="navbar-brand" href="#">SupPictures</a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Explore</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Hot</a>
-                    </li>
-                </ul>
-                <form class="form-inline w-75">
-                    <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search"/>
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Log in<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--Navbar End-->
+    <div class="container-fluid p-0"/>
+        <!--Header-->
+        <ui:insert name="header">
+            <ui:include src="templates/navbar.xhtml" />
+        </ui:insert>
+        <!--Header End-->
+
+    <div class="container-fluid p-0 ">
+
         <!--Jumbotron-->
-        <div class="jumbotron  d-flex justify-content-center flex-column align-items-center">
-            <h1 class="display-4">SupPictures</h1>
-            <p class="lead">The internet’s source of freely useable images. </p>
-            <p>Powered by creators everywhere.</p>
+        <div class="image-shadow jumbotron  d-flex justify-content-center flex-column align-items-center pl-0 pr-0">
+            <div class=" w-100 d-flex justify-content-center flex-row align-content-around pl-0 pr-0 pt-5">
+                <div class="pr-5 pb-3">
+                    <h1 class="display-4">SupPictures</h1>
+                    <p class="lead">The internet’s source to share pictures</p>
+                </div>
+                <div class="pr-5">
+                    <h2 class="display-4 text-center">3</h2>
+                    <p class="lead text-center">Users</p>
+                </div>
+                <div class="pr-5">
+                    <h2 class="display-4 text-center">5500</h2>
+                    <p class="lead text-center">Pictures</p>
+                </div>
+            </div>
             <form class="form-inline w-75 d-flex justify-content-center">
-                <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search"/>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control w-75 h-50-px  mr-1" type="search" placeholder="Search for free photos and pictures" aria-label="Search"/>
+                <button class="btn btn-outline-success my-2 my-sm-0 h-48-px w-50-px" type="submit"><i class="fa fa-search"></i></button>
             </form>
+            <p class="lead pt-2"> You can search by categories or/and by word</p>
+            <div class="category-buttons d-flex justify-content-around">
+                <span><button class="btn btn-outline-dark" type="submit">Nature</button></span>
+                <span><button class="btn btn-outline-dark" type="submit">Automobile</button></span>
+                <span><button class="btn btn-outline-dark" type="submit">Animal</button></span>
+
+            </div>
         </div>
         <!--Jumbotron End-->
         <!--Image Gallery-->
         <div class="d-flex  justify-content-around align-items-center">
             <div class="d-flex flex-wrap justify-content-center align-items-center">
-                <c:forEach var = "i" begin="1" end="15">
-                    <div class="col-4 d-flex justify-content-center ">
-                        <h:graphicImage class="img-grid-item" value = "https://images.pexels.com/photos/1124092/pexels-photo-1124092.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500" />
-                    </div>
-                </c:forEach>
+                    <c:forEach var = "i" begin="1" end="15">
+                        <!-- Grid column -->
+                        <div class="mb-3 mr-3  image-container ">
+                            <h:graphicImage class="image-shadow img-grid-item img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
+                            <div class="image-overlay" data-toggle="modal" data-target="#myModal" >
+                                <div class="d-flex align-items-center justify-content-between image-info  h-25">
+                                    <div class="d-flex align-items-center justify-content-center p-1 pl-2">
+                                        <img class="image-user-icon " src="resources/images/image-user.png" alt=""/>
+                                        <p class="image-info-user ml-1 m-0 ">Username</p>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center p-1 pr-2">
+                                        <img class="image-user-icon" src="resources/images/eye.png" alt=""/>
+                                        <p class="view-count-text ml-1 m-0  ">40</p>
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Picture Modal -->
+                        <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header align-items-center">
+                                        <div class="d-flex align-items-center justify-content-start w-25">
+                                            <img class="image-user-icon" src="resources/images/image-user.png" alt=""/>
+                                            <p class="image-info-user ml-2 m-0">Username</p>
+                                        </div>
+                                        <h5 class="modal-title w-50 text-center" id="myModalTitle">Image Title</h5>
+                                        <div class="w-25">
+                                        <button type="button" class="close close-modal m-0" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body pb-0">
+                                            <h:graphicImage class="img-modal img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
+                                        <p class="lead pt-3 pb-3">This is the image desciption</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="d-flex align-items-center justify-content-center p-1 pr-2">
+                                            <img class="image-user-icon" src="resources/images/eye.png" alt=""/>
+                                            <p class="view-count-text ml-1 m-0  ">40</p>
+                                        </div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Picture Modal End -->
+                    </c:forEach>
             </div>
         </div>
-        <!--Image Gallery End-->
-        <!-- Footer -->
-        <footer class="page-footer font-small cyan darken-3">
-
-            <!-- Footer Elements -->
-            <div class="container">
-
-                <!-- Grid row-->
-                <div class="row">
-
-                    <!-- Grid column -->
-                    <div class="col-md-12 py-5">
-                        <div class="mb-5 flex-center">
-
-                            <!-- Facebook -->
-                            <a class="fb-ic">
-                                <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                            </a>
-                            <!-- Twitter -->
-                            <a class="tw-ic">
-                                <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                            </a>
-                            <!-- Google +-->
-                            <a class="gplus-ic">
-                                <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                            </a>
-                            <!--Linkedin -->
-                            <a class="li-ic">
-                                <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                            </a>
-                            <!--Instagram-->
-                            <a class="ins-ic">
-                                <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                            </a>
-                            <!--Pinterest-->
-                            <a class="pin-ic">
-                                <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Grid column -->
-
-                </div>
-                <!-- Grid row-->
-
-            </div>
-            <!-- Footer Elements -->
-
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2018 Copyright:
-                <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-            </div>
-            <!-- Copyright -->
-
-        </footer>
-        <!-- Footer End -->
-
     </div>
+        <!--Image Gallery End-->
+
+        <!--Footer-->
+        <ui:insert name="footer">
+            <ui:include src="templates/footer.xhtml" />
+        </ui:insert>
+        <!--Footer End-->
+
     <!--Main Container End -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="application/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="application/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="application/javascript"></script>
+
 
 </h:body>
 </html>

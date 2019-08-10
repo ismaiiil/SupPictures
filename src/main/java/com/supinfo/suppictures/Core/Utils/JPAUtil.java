@@ -1,11 +1,16 @@
 package com.supinfo.suppictures.Core.Utils;
 
+import com.supinfo.suppictures.Core.ValueObjects.JpaPictureDaoImpl;
+import com.supinfo.suppictures.Core.ValueObjects.JpaUserDaoImpl;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JPAUtil {
     private static final String PERSISTENCE_UNIT_NAME = "supPersistenceUnit";
     private static EntityManagerFactory factory;
+    private static JpaUserDaoImpl jpaUserDaoImpl;
+    private static JpaPictureDaoImpl jpaPictureDaoImpl;
 
     public static EntityManagerFactory getEntityManagerFactory() {
         if (factory == null) {
@@ -18,5 +23,19 @@ public class JPAUtil {
         if (factory != null) {
             factory.close();
         }
+    }
+
+    public static JpaUserDaoImpl getJpaUserDaoImpl(){
+        if(jpaUserDaoImpl == null){
+            jpaUserDaoImpl = new JpaUserDaoImpl();
+        }
+        return jpaUserDaoImpl;
+    }
+
+    public static JpaPictureDaoImpl getJpaPictureDaoImpl(){
+        if(jpaPictureDaoImpl == null){
+            jpaPictureDaoImpl = new JpaPictureDaoImpl();
+        }
+        return jpaPictureDaoImpl;
     }
 }
