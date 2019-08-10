@@ -60,7 +60,7 @@ public class ImageManager {
         InputStream inputStream = null;
         OutputStream outputStream = null;
 
-        String fileName = generateFileName()+title+"."+FilenameUtils.getExtension(part.getSubmittedFileName());
+        String fileName = generateFileName()+"_"+title+"."+FilenameUtils.getExtension(part.getSubmittedFileName());
         File outputFile = new File(UPLOAD_PATH +  File.separator + fileName);
         inputStream = part.getInputStream();
         outputStream = new FileOutputStream(outputFile);

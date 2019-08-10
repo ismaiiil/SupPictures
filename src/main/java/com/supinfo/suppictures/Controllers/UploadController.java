@@ -14,9 +14,9 @@ import java.io.*;
 @ManagedBean
 @ViewScoped
 public class UploadController {
-    private static final long serialVersionUID = 123456789L;
     private String message;
     private Part file1;
+    private String filename;
     public Part getFile1() {
         return file1;
     }
@@ -26,16 +26,21 @@ public class UploadController {
     public String getMessage() {
         return message;
     }
-
     public void setMessage(String message) {
         this.message = message;
+    }
+    public String getFilename() {
+        return filename;
+    }
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public void uploadFile(){
         VerifyStatus verifiedStatus = ImageManager.verify(file1);
         if(verifiedStatus == VerifyStatus.VALID){
             try{
-                String path = ImageManager.savePartAs(file1,"defaulttitle");
+                String path = ImageManager.savePartAs(file1,filename);
                 setMessage("/supuploads/" + path);
             }catch (IOException e){
                 setMessage("an exception has occured");
