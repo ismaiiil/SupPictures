@@ -19,57 +19,57 @@
     </ui:insert>
     <!--Header End-->
 
-        <!--Admin Page Title-->
-        <div class="d-flex  justify-content-around align-items-center pt-5 pb-0">
-            <h2 class="pt-5 pb-2">Admin Management</h2>
+
+
+        <!--Admin Jumbotron-->
+        <div class="jumbotron">
+            <div class="d-flex justify-content-center flex-column align-items-center pt-5">
+                <h1 class="display-4 mb-5">Admin Management</h1>
+                <!-- Nav tabs -->
+                <ul class="nav nav-pills w-50 d-flex justify-content-center align-items-center" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#manage-users" role="tab" aria-controls="manage-users" aria-selected="true">Manage Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#manage-photos" role="tab" aria-controls="manage-photos" aria-selected="false">Manage Photos</a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
-        <!--Admin Page Title-->
-
-
+        <!--Admin Jumbotron End-->
     <div class="d-flex justify-content-center p-0  w-100 align-items-center flex-column">
-        <!-- Nav tabs -->
-        <ul class="nav nav-pills w-50 d-flex justify-content-center align-items-center" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#manage-users" role="tab" aria-controls="manage-users" aria-selected="true">Manage Users</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#manage-photos" role="tab" aria-controls="manage-photos" aria-selected="false">Manage Photos</a>
-            </li>
 
-        </ul>
 
         <!-- Tab panes -->
         <div class="tab-content w-50">
             <!--Manage Users Tab Content-->
             <div class="tab-pane active " id="manage-users" role="tabpanel" aria-labelledby="manage-users-tab">
-                <table class="table mt-5">
-                    <thead>
+                <table class="table border p-2">
+                    <thead class="text-center">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col" >#</th>
+                        <th scope="col" class="w-25">Username</th>
+                        <th scope="col" class="w-25" >Email</th>
+                        <th scope="col">Photo's count</th>
+                        <th scope="col" class="text-center">Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    <tbody class="text-center">
+                    <c:forEach var="i" begin="1" end="10">
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>@username</td>
+                            <td>email@you.com</td>
+                            <td class="text-center">5</td>
+                            <td>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <button class=" btn btn-outline-info mr-1" type="button"><i class="fa fa-save"></i></button>
+                                    <button class=" btn btn-outline-danger" type="button"><i class="fa fa-user-times"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
