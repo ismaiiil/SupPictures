@@ -1,3 +1,6 @@
+body{
+    font-family: 'Fredoka One', cursive;
+}
 /*Index page*/
 .img-grid-item{
     width: 500px;
@@ -5,6 +8,10 @@
     transition: .5s ease;
     border-radius: 7px;
     cursor: pointer;
+}
+
+.border-image{
+    border-radius: 7px;
 }
 .h-50-px{
     height: 50px;
@@ -217,8 +224,16 @@ body {
     border-radius: 7px;
 }
 
+
 .view-count-text-admin{
     font-size: 10px;
     opacity: 1;
 
+}
+
+
+/*Preview Picture Page*/
+
+.bg-img{
+    background: white;
 }
