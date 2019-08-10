@@ -65,6 +65,7 @@ public class JpaUserDaoImpl implements UserDao {
         return userCount;
     }
 
+
     @Override
     public void deleteUser(String username) throws RollbackException, Exception{
         transaction = entityManager.getTransaction();
