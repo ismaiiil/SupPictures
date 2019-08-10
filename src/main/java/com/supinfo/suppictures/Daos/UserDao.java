@@ -1,6 +1,6 @@
 package com.supinfo.suppictures.Daos;
 
-import com.supinfo.suppictures.Core.ValueObjects.User;
+import com.supinfo.suppictures.Models.User;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;

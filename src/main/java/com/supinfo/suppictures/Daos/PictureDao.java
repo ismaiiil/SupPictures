@@ -1,7 +1,7 @@
 package com.supinfo.suppictures.Daos;
 
-import com.supinfo.suppictures.Core.ValueObjects.Category;
-import com.supinfo.suppictures.Core.ValueObjects.Picture;
+import com.supinfo.suppictures.Enums.Category;
+import com.supinfo.suppictures.Models.Picture;
 
 import java.util.List;
 

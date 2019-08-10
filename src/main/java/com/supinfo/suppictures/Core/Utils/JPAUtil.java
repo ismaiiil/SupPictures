@@ -1,7 +1,7 @@
 package com.supinfo.suppictures.Core.Utils;
 
-import com.supinfo.suppictures.Core.ValueObjects.JpaPictureDaoImpl;
-import com.supinfo.suppictures.Core.ValueObjects.JpaUserDaoImpl;
+import com.supinfo.suppictures.DaoImplementations.JpaPictureDaoImpl;
+import com.supinfo.suppictures.DaoImplementations.JpaUserDaoImpl;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
