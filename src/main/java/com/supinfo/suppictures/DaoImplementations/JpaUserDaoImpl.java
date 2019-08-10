@@ -1,13 +1,12 @@
-package com.supinfo.suppictures.Core.ValueObjects;
+package com.supinfo.suppictures.DaoImplementations;
 
+import com.supinfo.suppictures.Models.User;
 import com.supinfo.suppictures.Core.Utils.JPAUtil;
 import com.supinfo.suppictures.Daos.UserDao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
-import java.io.Console;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public class JpaUserDaoImpl implements UserDao {

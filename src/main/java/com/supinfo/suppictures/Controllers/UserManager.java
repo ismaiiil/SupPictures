@@ -1,8 +1,8 @@
 package com.supinfo.suppictures.Controllers;
 
 import com.supinfo.suppictures.Core.Utils.JPAUtil;
-import com.supinfo.suppictures.Core.ValueObjects.JpaUserDaoImpl;
-import com.supinfo.suppictures.Core.ValueObjects.User;
+import com.supinfo.suppictures.DaoImplementations.JpaUserDaoImpl;
+import com.supinfo.suppictures.Models.User;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;

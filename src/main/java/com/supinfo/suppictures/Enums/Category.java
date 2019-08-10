@@ -1,7 +1,8 @@
-package com.supinfo.suppictures.Core.ValueObjects;
+package com.supinfo.suppictures.Enums;
 
 public enum Category {
     NATURE,
     AUTOMOBILE,
-    ANIMAL
+    ANIMAL,
+    NONE
 }

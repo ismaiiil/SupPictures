@@ -1,17 +1,14 @@
 package com.supinfo.suppictures.rest;
 
 import com.supinfo.suppictures.Core.Utils.JPAUtil;
-import com.supinfo.suppictures.Core.ValueObjects.Category;
-import com.supinfo.suppictures.Core.ValueObjects.JpaUserDaoImpl;
-import com.supinfo.suppictures.Core.ValueObjects.Picture;
-import com.supinfo.suppictures.Core.ValueObjects.User;
+import com.supinfo.suppictures.Enums.Category;
+import com.supinfo.suppictures.Models.Picture;
+import com.supinfo.suppictures.Models.User;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.RollbackException;
