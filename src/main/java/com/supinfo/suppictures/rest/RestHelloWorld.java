@@ -29,16 +29,22 @@ public class RestHelloWorld
     {
 
         //create("Tom","Riddle", "TRiddle323", "password1234");
+
         /*createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
+
+        createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
+
         createPicture("klnverbr","nprlgtnth",Category.NATURE);
         createPicture("earegvb","npdvarerb",Category.AUTOMOBILE);
         createPicture("abtrn","nperfth",Category.NATURE);
         createPicture("kaerfer","nrgbnttnth",Category.NATURE);
         createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE);
         printPictureList();*/
+        printPictureList();
         searchByName("Pic");
         searchByCategory(Category.NATURE);
-        listUsers();
+
+        create("Tom","Riddle", "TRiddle", "password1234");
         String output = "<h1>Hello World!<h1>" +
                 "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser()) + String.valueOf(userCount());
         return Response.status(200).entity(output).build();

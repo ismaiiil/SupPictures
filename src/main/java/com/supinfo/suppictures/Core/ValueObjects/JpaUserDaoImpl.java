@@ -2,7 +2,6 @@ package com.supinfo.suppictures.Core.ValueObjects;
 
 import com.supinfo.suppictures.Core.Utils.JPAUtil;
 import com.supinfo.suppictures.Daos.UserDao;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;

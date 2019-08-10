@@ -5,6 +5,7 @@ import com.supinfo.suppictures.Core.ValueObjects.User;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
+
 public interface UserDao {
 
     void createUser(User user) throws SQLIntegrityConstraintViolationException, Exception;
