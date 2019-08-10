@@ -181,7 +181,7 @@ public class UserManager {
         user.setUsername(username);
         user.setPassword(password);
         user.setEmailAddress(email);
-        user.setPhoneNumber(tel);
+        user.setPhoneNumber(String.valueOf(tel));
         user.setPostalAddress(address);
 
         try {

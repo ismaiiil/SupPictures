@@ -64,4 +64,19 @@ public class JpaUserDaoImpl implements UserDao {
         Long userCount = (Long) query.getSingleResult();
         return userCount;
     }
+
+    @Override
+    public void DeleteUsers(String username) throws RollbackException, Exception{
+        transaction = entityManager.getTransaction();
+
+        // Begin the transaction
+        transaction.begin();
+
+        // Find and delete the User object
+        User user = entityManager.find(User.class,username);
+        entityManager.remove(user);
+
+        // Commit the transaction
+        transaction.commit();
+    }
 }

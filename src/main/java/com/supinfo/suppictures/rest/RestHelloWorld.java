@@ -40,6 +40,7 @@ public class RestHelloWorld
         printPictureList();
         searchByName("Pic");
         searchByCategory(Category.NATURE);
+        deleteUser("TRiddle3");
 
         create("Tom","Riddle", "TRiddle", "password1234");
         String output = "<h1>Hello World!<h1>" +
@@ -49,6 +50,14 @@ public class RestHelloWorld
 
     private Long userCount() {
         return JPAUtil.getJpaUserDaoImpl().countUsers();
+    }
+
+    private void deleteUser(String username){
+        try {
+            JPAUtil.getJpaUserDaoImpl().DeleteUsers(username);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void searchByCategory(Category category) {
