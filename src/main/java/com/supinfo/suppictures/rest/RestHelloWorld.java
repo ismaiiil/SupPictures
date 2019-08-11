@@ -37,10 +37,10 @@ public class RestHelloWorld
         createPicture("kaerfer","nrgbnttnth",Category.NATURE);
         createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE);
         printPictureList();*/
-        printPictureList();
+        /*printPictureList();
         searchByName("Pic");
-        searchByCategory(Category.NATURE);
-        updateUser();
+        searchByCategory(Category.NATURE);*/
+        //updateUser();
         //deleteUser("TRiddle3");
 
         create("Tom","Riddle", "TRiddle", "password1234");
