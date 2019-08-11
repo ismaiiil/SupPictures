@@ -55,7 +55,9 @@
                         <!-- Grid column -->
                         <div class="mb-3 mr-3  image-container ">
                             <h:graphicImage class="image-shadow img-grid-item img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
-                            <div class="image-overlay" data-toggle="modal" data-target="#myModal" >
+                            <div class="image-overlay">
+                                <h:form><h:link styleClass="image-overlay" outcome="/picturePreview.xhtml"></h:link></h:form>
+
                                 <div class="d-flex align-items-center justify-content-between image-info  h-25">
                                     <div class="d-flex align-items-center justify-content-center p-1 pl-2">
                                         <img class="image-user-icon " src="resources/images/image-user.png" alt=""/>
@@ -70,7 +72,7 @@
                             </div>
                         </div>
 
-                        <!-- Picture Modal -->
+                         <!-- Picture Modal --><!--
                         <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
                                 <div class="modal-content">
@@ -100,7 +102,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Picture Modal End -->
+                          --><!-- Picture Modal End -->
+
                     </c:forEach>
             </div>
         </div>

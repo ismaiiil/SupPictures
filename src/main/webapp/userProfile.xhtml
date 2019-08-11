@@ -26,7 +26,10 @@
                 <h1 class="display-4"><h:outputText value="#{userManager.currentUser.firstName} #{userManager.currentUser.lastName}"/></h1>
                 <p class="lead">Upload and share photos and pictures</p>
                 <p class="lead">
-                    <h:form><h:link outcome="/editProfile.xhtml" styleClass="btn btn-outline-primary"  value="Edit Profile"></h:link></h:form>
+                    <h:form>
+                        <h:link  outcome="/addPicture.xhtml" styleClass="btn btn-outline-success mr-1"  value="Add Photo/Image"/>
+                        <h:link outcome="/editProfile.xhtml" styleClass="btn btn-outline-primary"  value="Edit Profile"/>
+                    </h:form>
                 </p>
             </div>
         </div>
