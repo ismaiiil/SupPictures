@@ -29,22 +29,27 @@ public class RestHelloWorld
 
         /*createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
 
-        createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
+        createPicture("Pic 38","Zafr la feu",Category.ANIMAL);*/
 
-        createPicture("klnverbr","nprlgtnth",Category.NATURE);
-        createPicture("earegvb","npdvarerb",Category.AUTOMOBILE);
-        createPicture("abtrn","nperfth",Category.NATURE);
-        createPicture("kaerfer","nrgbnttnth",Category.NATURE);
-        createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE);
-        printPictureList();*/
+        /*createPicture("klnverbr","nprlgtnth",Category.NATURE,null);
+        createPicture("earegvb","npdvarerb",Category.AUTOMOBILE,null);*/
+
+        //printPictureList();
+        //updateUser();
         /*printPictureList();
         searchByName("Pic");
 
         searchByCategory(Category.NATURE);*/
         //updateUser();
         //deleteUser("TRiddle3");
+        System.out.println(JPAFactory.getJpaPictureDaoImpl().countPictures());
 
-        create("Tom","Riddle", "TRiddle", "password1234");
+        //create("Tom","Riddle", "TRiddle", "password1234");
+        try {
+            JPAFactory.getJpaPictureDaoImpl().deletePicture(28);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String output = "<h1>Hello World!<h1>" +
                 "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser()) + String.valueOf(userCount());
         return Response.status(200).entity(output).build();
@@ -74,6 +79,16 @@ public class RestHelloWorld
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        createPicture("abtrn","nperfth",Category.NATURE,user);
+        createPicture("kaerfer","nrgbnttnth",Category.NATURE,user);
+        createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE,user);
+
+        List<Picture> pictureList = JPAFactory.getJpaPictureDaoImpl().findPictureByUser(user);
+        for(Picture p:pictureList){
+            System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
+        }
+
     }
 
     private void searchByCategory(Category category) {
@@ -100,14 +115,22 @@ public class RestHelloWorld
         }
     }
 
-    public static void createPicture(String name, String description, Category category){
+    public static void createPicture(String name, String description, Category category, User user){
         Picture picture = new Picture();
         picture.setName(name);
         picture.setDescription(description);
         picture.setCategory(category);
+        picture.setUser(user);
 
         try {
             JPAFactory.getJpaPictureDaoImpl().createPicture(picture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        picture.setCategory(Category.NONE);
+        try {
+            JPAFactory.getJpaPictureDaoImpl().updatePicture(picture);
         } catch (Exception e) {
             e.printStackTrace();
         }
