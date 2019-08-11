@@ -1,10 +1,18 @@
-package com.supinfo.suppictures.Model.rest;
+package com.supinfo.suppictures.Model.rest.Resources;
 
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
 import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
 import com.supinfo.suppictures.Model.Database.Enums.Category;
 import com.supinfo.suppictures.Model.Database.ValueObjects.Picture;
 import com.supinfo.suppictures.Model.Database.ValueObjects.User;
+import com.supinfo.suppictures.Model.rest.ResponseInfo.RestStatus;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,47 +20,49 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.RollbackException;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/sayhello")
-public class RestHelloWorld
+@Path("/pictures")
+public class PicturesResources
 {
+    /**
+     * A route to search by a query String and a category, JPA will handle the matching search to
+     * the proper title,description,locality
+     * @param query search string
+     * @param category search category
+     * @return returns a JSON list with the Pictures and its associated User
+     */
     @GET
-    @Produces("text/html")
-    public Response getStartingPage()
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchByQueryAndCategory(@QueryParam("query") @DefaultValue("") String query,@QueryParam("category") @DefaultValue("NONE") Category category)
     {
-
-        //create("Tom","Riddle", "TRiddle323", "password1234");
-
-        /*createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
-
-        createPicture("Pic 38","Zafr la feu",Category.ANIMAL);*/
-
-        /*createPicture("klnverbr","nprlgtnth",Category.NATURE,null);
-        createPicture("earegvb","npdvarerb",Category.AUTOMOBILE,null);*/
-
-        //printPictureList();
-        //updateUser();
-        /*printPictureList();
-        searchByName("Pic");
-
-        searchByCategory(Category.NATURE);*/
-        //updateUser();
-        //deleteUser("TRiddle3");
-        System.out.println(JPAFactory.getJpaPictureDaoImpl().countPictures());
-
-        //create("Tom","Riddle", "TRiddle", "password1234");
-        try {
-            JPAFactory.getJpaPictureDaoImpl().deletePicture(28);
-        } catch (Exception e) {
+        List<Picture> searched ;
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        Type listType = new TypeToken<List<Picture>>() {}.getType();
+        try{
+            searched = searchByAll(query,category);
+            //throw new Exception(); //used to test error 500
+        }catch (Exception e){
             e.printStackTrace();
+            return Response.status(500).entity(gson.toJson(new RestStatus(500,"An Internal Server Error has occurred, Try again later!"))).build();
         }
-        String output = "<h1>Hello World!<h1>" +
-                "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser()) + String.valueOf(userCount());
-        return Response.status(200).entity(output).build();
+
+        if(searched == null || searched.isEmpty()){
+            return Response.status(404).entity(gson.toJson(new RestStatus(404,"Could not find what you are looking for"))).build();
+        }
+        String json = gson.toJson(searched,listType);
+
+        return Response.status(200).entity(json).build();
+    }
+
+    /**
+     *  search using {@link JPAFactory#getJpaUserDaoImpl()#searchByAll(String, Category)}helper to make code cleaner
+     */
+    private List<Picture> searchByAll(String query,Category category) {
+        return JPAFactory.getJpaPictureDaoImpl().searchByAll(query,category);
     }
 
     private Long userCount() {
@@ -198,5 +208,3 @@ public class RestHelloWorld
         return userToString;
     }
 }
-
-// TODO - Create Image, List Image, SearchByName, SearchByCategory

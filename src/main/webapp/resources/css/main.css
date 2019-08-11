@@ -1,5 +1,11 @@
 body{
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Varela Round', sans-serif !important;
+}
+
+.oops-text{
+    font-family: 'Comfortaa', cursive !important;
+    font-weight: bolder;
+    font-size: 100px;
 }
 /*Index page*/
 .img-grid-item{
