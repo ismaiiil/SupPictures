@@ -21,4 +21,6 @@ public interface UserDao {
 
     void updateUser(User updatedUser) throws RollbackException,Exception;
 
+    User findUserByUsername(String username) throws Exception;
+
 }
