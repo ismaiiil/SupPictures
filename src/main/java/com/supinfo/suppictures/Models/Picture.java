@@ -3,7 +3,7 @@ package com.supinfo.suppictures.Models;
 import com.supinfo.suppictures.Enums.Category;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name="Pictures")
@@ -19,7 +19,6 @@ public class Picture {
 
     private String path;
 
-    private Date datePublished;
 
     private Category category;
 
@@ -55,14 +54,27 @@ public class Picture {
         this.path = path;
     }
 
-    public Date getDatePublished() {
-        return datePublished;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setDatePublished(Date datePublished) {
-        this.datePublished = datePublished;
+    private Date created;
+
+    public Date getUpdated() {
+        return updated;
     }
 
+    private Date updated;
+
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new Date();
+    }
     public Category getCategory() {
         return category;
     }

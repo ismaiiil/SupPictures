@@ -3,9 +3,10 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:h1="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>SupPictures Home</title>
 </h:head>
@@ -26,48 +27,48 @@
         </div>
     </div>
     <!--Upload Picture Jumbotron End-->
-
+    <h:form prependid="false" enctype="multipart/form-data">
+        <div class="d-flex justify-content-center align-items-center text-capitalize alert alert-danger mx-5" role="alert">
+            <h:messages styleClass="text-center" globalOnly="true"/>
+        </div>
     <div class="container d-flex flex-row w-50">
-
         <div class="col-6 d-flex flex-column">
-            <h:form>
+
                 <div class="form-group mt-3">
                     <label for="imageTitle">Image Title</label>
-                    <h:inputText styleClass="form-control" id="imageTitle" value="" required="true" requiredMessage="Please enter a title" />
+                    <h:inputText styleClass="form-control" id="imageTitle" value="#{uploadController.filename}" required="true" requiredMessage="Please enter a title" />
                     <h:message styleClass="text-danger" for="imageTitle" />
                 </div>
                 <div class="form-group">
                     <label for="imageDescription">Image Description</label>
-                    <textarea class="form-control" id="imageDescription" rows="4" cols="30"></textarea>
+                    <h:inputTextarea styleClass="form-control" value="#{uploadController.description}" required="true" id="imageDescription" rows="4" cols="30"/>
                 </div>
                 <div class="form-group">
                     <label for="dropdownCategory">Select Image Category</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle w-100 btn-category" type="button" id="dropdownCategory" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            General
-                        </button>
-                        <div class="dropdown-menu w-100 text-center" id="dropdownCategoryMenu" aria-labelledby="dropdownCategory">
-                            <a class="dropdown-item" href="#">Nature</a>
-                            <a class="dropdown-item" href="#">Automobile</a>
-                            <a class="dropdown-item" href="#">Animal</a>
-                        </div>
-                    </div>
+                    <h:selectOneMenu id="dropdownCategory"  styleClass="btn btn-secondary dropdown-toggle w-100 btn-category" value="#{uploadController.category}" >
+                        <f:selectItems value="#{uploadController.categories}" />
+                    </h:selectOneMenu>
+
+
                 </div>
 
                 <div class="form-group">
-                    <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link" value="Add Picture To Gallery"/>
+                    <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link"  action="#{uploadController.uploadFile()}" value="Add Picture To Gallery"/>
                 </div>
 
-            </h:form>
+
         </div>
 
         <div class="col-6 d-flex flex-column align-items-center">
-            <img class="w-75 mt-1" src="resources/images/img-placeholder.jpg" alt="image placeholder"/>
-            <h:commandButton type="submit" styleClass="btn btn-primary mt-3 w-75" id="uploadBtn" value="Upload Picture"/>
+
+            <img id="uploadImage" class="w-75 mt-1" src="#{uploadController.message?uploadController.message:'resources/images/img-placeholder.jpg'}" alt="image placeholder"/>
+            <h1:inputFile required="true" styleClass="btn btn-success mt-3 w-75" id="inputImage" mode="simple"
+                          a:accept="image/*" value="#{uploadController.file1}" onchange="readURL(this);"
+            />
 
         </div>
-
     </div>
+    </h:form>
 
 
     </div>
@@ -76,5 +77,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="application/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="application/javascript"></script>
     <h:outputScript library="js" name="dropdownBtn.js"></h:outputScript>
+    <script type="application/javascript">
+        function readURL(input) {
+            if (input.files &amp;&amp; input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#uploadImage').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
 </h:body>
 </html>
