@@ -1,6 +1,10 @@
 package com.supinfo.suppictures.Model.rest.Resources;
 
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
 import com.supinfo.suppictures.Model.Database.Enums.Category;
@@ -30,6 +34,17 @@ public class PicturesResources
     {
         List<Picture> searched ;
         Gson gson = new Gson();
+        gson = new GsonBuilder().new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                return f.getName().toLowerCase().contains("fieldName");
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> aClass) {
+                return false;
+            }
+        }).create();
         Type listType = new TypeToken<List<Picture>>() {}.getType();
         try{
             searched = searchByAll(query,category);
@@ -42,7 +57,9 @@ public class PicturesResources
         if(searched == null || searched.isEmpty()){
             return Response.status(404).entity(gson.toJson(new RestStatus(404,"Could not find what you are looking for"))).build();
         }
-        return Response.status(200).entity(gson.toJson(searched,listType)).build();
+        String json = gson.toJson(searched,listType);
+
+        return Response.status(200).entity(json).build();
     }
 
     private List<Picture> searchByAll(String query,Category category) {
