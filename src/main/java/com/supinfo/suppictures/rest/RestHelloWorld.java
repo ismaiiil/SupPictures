@@ -39,6 +39,7 @@ public class RestHelloWorld
         printPictureList();*/
         /*printPictureList();
         searchByName("Pic");
+
         searchByCategory(Category.NATURE);*/
         //updateUser();
         //deleteUser("TRiddle3");
