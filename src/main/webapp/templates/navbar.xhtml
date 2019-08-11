@@ -50,7 +50,10 @@
                         <h:link class="nav-link" outcome="/signUp.xhtml" rendered="#{!userManager.userLoggedIn}" value ="Sign Up"/>
                     </li>
                     <li class="nav-item">
-                        <h:link class="nav-link" rendered="#{userManager.userLoggedIn}" outcome="/userProfile.xhtml"><img src="resources/images/user.png" alt="" style="width: 20px;"/></h:link>
+                        <h:link class="nav-link" title="Profile" rendered="#{userManager.userLoggedIn}" outcome="/userProfile.xhtml"><img src="resources/images/user.png" alt="" style="width: 20px;"/></h:link>
+                    </li>
+                    <li class="nav-item">
+                        <h:link class="nav-link" title="Admin" rendered="#{userManager.currentUser.administrator}" outcome="/manageUsers.xhtml"><img src="resources/images/user.png" alt="" style="width: 20px;"/></h:link>
                     </li>
                     <li class="nav-item">
                         <h:commandLink class="nav-link" action="#{userManager.logout}" rendered="#{userManager.userLoggedIn}" value ="Log Out"/>

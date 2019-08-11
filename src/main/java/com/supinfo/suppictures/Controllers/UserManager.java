@@ -269,6 +269,9 @@ public class UserManager {
     private void update(User user) {
         try {
             getDao().updateUser(user);
+            if(user.getUsername().equals(getCurrentUser().getUsername())){
+                UIHelpers.getContext().getSessionMap().put("user",user);
+            }
             //todo: redirect to previous page
             UIHelpers.getContext().redirect("/editProfile.xhtml");
         } catch (RollbackException e){
