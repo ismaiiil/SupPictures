@@ -46,25 +46,39 @@
                 <table class="table border p-2">
                     <thead class="text-center">
                     <tr>
-                        <th scope="col" >#</th>
+
                         <th scope="col" class="w-25">Username</th>
                         <th scope="col" class="w-25" >Email</th>
-                        <th scope="col">Photo's count</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Admin</th>
                         <th scope="col" class="text-center">Actions</th>
                     </tr>
                     </thead>
                     <tbody class="text-center">
-                    <c:forEach var="i" begin="1" end="10">
+                    <c:forEach var="user" items="#{userManager.allUsers}">
                         <tr>
-                            <th scope="row">1</th>
-                            <td>@username</td>
-                            <td>email@you.com</td>
-                            <td class="text-center">5</td>
+
+                            <td>#{user.username}</td>
+                            <td>#{user.emailAddress}</td>
+                            <td class="text-center">#{user.firstName}</td>
+                            <td class="text-center">#{user.lastName}</td>
+                            <td class="text-center">#{user.administrator? "Yes" : "No"}</td>
                             <td>
+                                <h:form>
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <button class=" btn btn-outline-info mr-1" type="button"><i class="fa fa-save"></i></button>
-                                    <button class=" btn btn-outline-danger" type="button"><i class="fa fa-user-times"></i></button>
+
+                                        <!--<h:outputLink value="/editProfile/#{user.username}" styleClass="btn btn-outline-info mr-1" type="button"><i class="fa fa-pencil-square-o"></i></h:outputLink>-->
+
+                                        <h:commandButton styleClass="btn btn-outline-info mr-1" action="#{userManager.editUserRecord(user.username)}"  value="Edit"></h:commandButton>
+
+
+                                        <button class=" btn btn-outline-danger" type="button"><i class="fa fa-user-times"></i></button>
+
+
+
                                 </div>
+                                </h:form>
                             </td>
                         </tr>
                     </c:forEach>
