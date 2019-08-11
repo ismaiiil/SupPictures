@@ -1,6 +1,6 @@
-package com.supinfo.suppictures.Models;
+package com.supinfo.suppictures.Model.Database.ValueObjects;
 
-import com.supinfo.suppictures.Enums.Category;
+import com.supinfo.suppictures.Model.Database.Enums.Category;
 
 import javax.persistence.*;
 import java.util.Date;

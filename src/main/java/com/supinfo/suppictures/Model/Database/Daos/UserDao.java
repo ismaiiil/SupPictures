@@ -1,6 +1,6 @@
-package com.supinfo.suppictures.Daos;
+package com.supinfo.suppictures.Model.Database.Daos;
 
-import com.supinfo.suppictures.Models.User;
+import com.supinfo.suppictures.Model.Database.ValueObjects.User;
 
 import javax.persistence.RollbackException;
 import java.util.List;

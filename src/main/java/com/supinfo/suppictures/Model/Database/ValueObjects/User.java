@@ -1,8 +1,7 @@
-package com.supinfo.suppictures.Models;
+package com.supinfo.suppictures.Model.Database.ValueObjects;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.xml.soap.Name;
 import java.io.Serializable;
 
 @Entity

@@ -1,11 +1,10 @@
 package com.supinfo.suppictures.Controllers;
 
-import com.supinfo.suppictures.Core.Utils.JPAUtil;
-import com.supinfo.suppictures.DaoImplementations.JpaUserDaoImpl;
-import com.supinfo.suppictures.Helper.Util;
-import com.supinfo.suppictures.Models.User;
+import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
+import com.supinfo.suppictures.Model.Database.DaoImplementations.JpaUserDaoImpl;
+import com.supinfo.suppictures.Controllers.Utils.UIHelpers;
+import com.supinfo.suppictures.Model.Database.ValueObjects.User;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
@@ -123,7 +122,7 @@ public class UserManager {
             externalContext.getSessionMap().put("user", currUser);
             externalContext.redirect("/");
         }else{
-            Util.showUIMsg("Sorry, we couldn't find an account with those credentials. Please check you username and password and try again!");
+            UIHelpers.showUIMsg("Sorry, we couldn't find an account with those credentials. Please check you username and password and try again!");
         }
 
 
@@ -172,7 +171,7 @@ public class UserManager {
 
     public void signUp(){
         if(!password.equals(passConfirm)){
-            Util.showUIMsg("The entered passwords do not match!");
+            UIHelpers.showUIMsg("The entered passwords do not match!");
             return;
         }
 
@@ -186,14 +185,14 @@ public class UserManager {
         user.setPostalAddress(address);
 
         try {
-            JPAUtil.getJpaUserDaoImpl().createUser(user);
+            JPAFactory.getJpaUserDaoImpl().createUser(user);
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             externalContext.getSessionMap().put("user", user);
             externalContext.redirect("/");
         } catch (RollbackException e) {
-            Util.showUIMsg("Sorry, this username is already taken!");
+            UIHelpers.showUIMsg("Sorry, this username is already taken!");
         } catch (Exception e) {
-            Util.showUIMsg("Sorry, an error occurred while registering! Please try again");
+            UIHelpers.showUIMsg("Sorry, an error occurred while registering! Please try again");
         }
 //        User user = new User();
 //        user.setFirstName(firstName);
