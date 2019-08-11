@@ -13,8 +13,12 @@ public class UIHelpers {
     }
 
     public static User getLoggedInUser(){
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        return (User) externalContext.getSessionMap().get("user");
+
+        return (User) getContext().getSessionMap().get("user");
+    }
+
+    public static ExternalContext getContext(){
+        return FacesContext.getCurrentInstance().getExternalContext();
     }
 
 }

@@ -10,7 +10,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.RollbackException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 @ManagedBean
 @ViewScoped
@@ -20,10 +22,22 @@ public class UserManager {
     private String firstName;
     private String lastName;
     private String email;
-    // todo: change to string once User data type has been modified
-    private Integer tel;
+    private String tel;
     private String passConfirm;
     private String address;
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public JpaUserDaoImpl getDao() {
+        return dao;
+    }
+
+    private JpaUserDaoImpl dao = new JpaUserDaoImpl();
 
     public String getAddress() {
         return address;
@@ -59,17 +73,6 @@ public class UserManager {
         this.email = email;
     }
 
-    public Integer getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = Integer.parseInt(tel);
-    }
-    public  void setTel(Integer tel){
-        this.tel = tel;
-    }
-
     public String getPassConfirm() {
         return passConfirm;
     }
@@ -103,9 +106,8 @@ public class UserManager {
      * @throws IOException
      */
     public void login() throws IOException {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
 //        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        JpaUserDaoImpl dao = new JpaUserDaoImpl();
 
         /*if(dao.verifyUser(username,password)){
             externalContext.getSessionMap().put("user", username);
@@ -117,10 +119,10 @@ public class UserManager {
 
         }*/
 
-        User currUser = dao.verifyUser(username,password);
+        User currUser = getDao().verifyUser(username,password);
         if(currUser != null){
-            externalContext.getSessionMap().put("user", currUser);
-            externalContext.redirect("/");
+            UIHelpers.getContext().getSessionMap().put("user", currUser);
+            UIHelpers.getContext().redirect("/");
         }else{
             UIHelpers.showUIMsg("Sorry, we couldn't find an account with those credentials. Please check you username and password and try again!");
         }
@@ -174,14 +176,7 @@ public class UserManager {
             return;
         }
 
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmailAddress(email);
-        user.setPhoneNumber(String.valueOf(tel));
-        user.setPostalAddress(address);
+        User user = createUser();
 
         try {
             JPAFactory.getJpaUserDaoImpl().createUser(user);
@@ -193,15 +188,95 @@ public class UserManager {
         } catch (Exception e) {
             UIHelpers.showUIMsg("Sorry, an error occurred while registering! Please try again");
         }
-//        User user = new User();
-//        user.setFirstName(firstName);
-//        user.setLastName(lastName);
-//        user.setUsername(username);
-//        user.setPassword(password);
-//        JPAUtil.getJpaUserDaoImpl().createUser(user);
 
 
+    }
 
+    /**
+     * Creates a user with the current set details
+     * @return User
+     */
+    private User createUser() {
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmailAddress(email);
+        user.setPhoneNumber(tel);
+        user.setPostalAddress(address);
+        return user;
+    }
+
+    /**
+     * Get a list of all users
+     * @return a list of all users
+     */
+    public List<User> getAllUsers(){
+        return getDao().listUsers();
+    }
+
+    public String editUserRecord(String username){
+        try {
+            User userToEdit = getDao().findUserByUsername(username);
+            UIHelpers.getContext().getSessionMap().put("editUser",userToEdit);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "/editProfile.xhtml?faces-redirect=true";
+    }
+
+    /**
+     * Get user from session
+     * @return User to be edited
+     */
+    public User getEditUserDetails(){
+        return (User) UIHelpers.getContext().getSessionMap().get("editUser");
+    }
+
+    /**
+     * update user details
+     */
+    public void updateUser(){
+
+        User user = getEditUserDetails();
+        update(user);
+
+    }
+
+    /**
+     * Change the user password
+     */
+    public void updateUserPassword(){
+        if(!password.equals(passConfirm)){
+            UIHelpers.showUIMsg("The entered passwords do not match!");
+            return;
+        }
+
+        User user = getEditUserDetails();
+
+        user.setPassword(password);
+
+        update(user);
+
+
+    }
+
+    /**
+     * Helper update method
+     * @param user
+     */
+    private void update(User user) {
+        try {
+            getDao().updateUser(user);
+            //todo: redirect to previous page
+            UIHelpers.getContext().redirect("/editProfile.xhtml");
+        } catch (RollbackException e){
+            UIHelpers.showUIMsg("Could not save changes!");
+        }
+        catch (Exception e) {
+            UIHelpers.showUIMsg("An error occurred while saving changes!");
+        }
     }
 
 

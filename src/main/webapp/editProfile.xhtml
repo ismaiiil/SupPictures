@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <title>SupPictures Home</title>
@@ -15,6 +16,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:body>
     <h:outputStylesheet library = "css" name="main.css"/>
     <h:outputStylesheet name="css/bootstrap.css"/>
+
     <div class="container-fluid p-0 edit-page-wrapper">
         <!--Navbar-->
         <ui:insert name="header">
@@ -23,9 +25,11 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
         <!--Navbar End-->
 
         <div class="container pt-5 d-flex flex-column justify-content-center align-content-center w-50">
+
             <div class="pt-5 row flex-lg-nowrap">
 
                 <div class="col">
+                    <h:messages styleClass="text-danger" globalOnly="true"/>
                     <div class="row">
                         <div class="col mb-3">
                             <div>
@@ -36,10 +40,10 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                             <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                 <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                     <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">User's Name</h4>
-                                                    <p class="mb-0"><h:outputText value="#{userManager.currentUser.username}"/></p>
+                                                    <p class="mb-0"><h:outputText value="#{userManager.editUserDetails.username}"/></p>
 
                                                 </div>
-                                                <h:panelGroup styleClass="text-center text-sm-right" rendered="#{userManager.currentUser.administrator}">
+                                                <h:panelGroup styleClass="text-center text-sm-right" rendered="#{userManager.editUserDetails.administrator}">
                                                     <span class="badge badge-secondary">administrator</span>
                                                 </h:panelGroup>
                                             </div>
@@ -62,7 +66,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                                     <div class="form-group">
                                                                         <label>First Name</label>
                                                                         <!--<input class="form-control" type="text" name="firstName" placeholder="Yoyo" value="Yoyo"/>-->
-                                                                        <h:inputText styleClass="form-control" id="firstName" value="#{userManager.currentUser.firstName}" required="true" requiredMessage="Please enter your first name" />
+                                                                        <h:inputText styleClass="form-control" id="firstName" value="#{userManager.editUserDetails.firstName}" required="true" requiredMessage="Please enter your first name" />
                                                                         <h:message styleClass="text-danger" for="firstName" />
                                                                     </div>
                                                                 </div>
@@ -70,7 +74,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                                     <div class="form-group">
                                                                         <label>Last Name</label>
                                                                         <!--<input class="form-control" type="text" name="lastName" placeholder="yaya" value="Yaya"/>-->
-                                                                        <h:inputText styleClass="form-control" id="lastName" value="#{userManager.currentUser.lastName}" required="true" requiredMessage="Please enter your last name" />
+                                                                        <h:inputText styleClass="form-control" id="lastName" value="#{userManager.editUserDetails.lastName}" required="true" requiredMessage="Please enter your last name" />
                                                                         <h:message styleClass="text-danger" for="lastName"/>
                                                                     </div>
                                                                 </div>
@@ -81,18 +85,52 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                                     <div class="form-group">
                                                                         <label>Email</label>
                                                                         <!--<input class="form-control" type="text" placeholder="user@example.com"/>-->
-                                                                        <h:inputText a:autocomplete="off" styleClass="form-control" id="emailAddress" a:type="email" value="#{userManager.currentUser.emailAddress}" required="true" requiredMessage="Please enter your email id" />
+                                                                        <h:inputText a:autocomplete="off" styleClass="form-control" id="emailAddress" a:type="email" value="#{userManager.editUserDetails.emailAddress}" required="true" requiredMessage="Please enter your email id" />
                                                                         <h:message styleClass="text-danger" for="emailAddress"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <div class="form-group">
+                                                                        <label>Phone Number</label>
+                                                                        <!--<input class="form-control" type="text" placeholder="user@example.com"/>-->
+                                                                        <h:inputText a:autocomplete="off" styleClass="form-control" id="tel" a:type="tel" value="#{userManager.editUserDetails.phoneNumber}" required="true" requiredMessage="Please enter a phone number" />
+                                                                        <h:message styleClass="text-danger" for="tel"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <div class="form-group">
+                                                                        <label>City/Locality</label>
+                                                                        <!--<input class="form-control" type="text" placeholder="user@example.com"/>-->
+                                                                        <h:inputText a:autocomplete="off" styleClass="form-control" id="postal"  value="#{userManager.editUserDetails.postalAddress}" required="true" requiredMessage="Please enter an address" />
+                                                                        <h:message styleClass="text-danger" for="postal"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <h:panelGroup layout="block" styleClass="row" rendered="#{userManager.currentUser.administrator}">
+                                                                <div class="col mb-3">
+                                                                    <div class="form-group">
+                                                                        <label>Administrator</label>
+                                                                        <h:selectOneMenu id="dropdownCategory"  styleClass="btn btn-secondary dropdown-toggle w-100 btn-category" value="#{userManager.editUserDetails.administrator}" >
+                                                                            <f:selectItem itemValue="true" itemLabel="Yes"/>
+                                                                            <f:selectItem itemValue="false" itemLabel="No"/>
+                                                                        </h:selectOneMenu>
+                                                                    </div>
+                                                                </div>
+
+                                                            </h:panelGroup>
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col d-flex justify-content-center w-50">
                                                             <!--<button class="btn btn-primary" type="submit">Save Changes</button>-->
-                                                            <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link" value="Save Changes"/>
+                                                            <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="updateUserlink" action="#{userManager.updateUser}" value="Save Changes"/>
                                                         </div>
                                                     </div>
                                                 </h:form>
@@ -128,7 +166,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
                                                     <div class="row">
                                                         <div class="col d-flex justify-content-center w-50">
                                                             <!--<button class="btn btn-primary" type="submit">Save Changes</button>-->
-                                                            <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link" value="Save Changes"/>
+                                                            <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link" action="#{userManager.updateUserPassword}" value="Save Changes"/>
                                                         </div>
                                                     </div>
                                                 </h:form>
