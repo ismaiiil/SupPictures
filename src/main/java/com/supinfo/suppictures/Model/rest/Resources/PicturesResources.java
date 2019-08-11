@@ -27,6 +27,13 @@ import javax.ws.rs.core.Response;
 @Path("/pictures")
 public class PicturesResources
 {
+    /**
+     * A route to search by a query String and a category, JPA will handle the matching search to
+     * the proper title,description,locality
+     * @param query search string
+     * @param category search category
+     * @return returns a JSON list with the Pictures and its associated User
+     */
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,6 +58,9 @@ public class PicturesResources
         return Response.status(200).entity(json).build();
     }
 
+    /**
+     *  search using {@link JPAFactory#getJpaUserDaoImpl()#searchByAll(String, Category)}helper to make code cleaner
+     */
     private List<Picture> searchByAll(String query,Category category) {
         return JPAFactory.getJpaPictureDaoImpl().searchByAll(query,category);
     }
