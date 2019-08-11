@@ -75,6 +75,7 @@ public class UploadController {
                 pic.setDescription(description);
                 pic.setCategory(category);
                 pic.setPath(path);
+                pic.setUser(UIHelpers.getLoggedInUser());
                 JPAFactory.getJpaPictureDaoImpl().createPicture(pic);
                 ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
                 externalContext.redirect("/userProfile.xhtml");
