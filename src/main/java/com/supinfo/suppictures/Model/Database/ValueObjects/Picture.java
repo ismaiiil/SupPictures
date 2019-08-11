@@ -24,7 +24,7 @@ public class Picture {
 
     private Integer visitorsCount;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "username")
     private User user;
 
@@ -98,6 +98,7 @@ public class Picture {
     protected void onUpdate() {
         updated = new Date();
     }
+
     public Category getCategory() {
         return category;
     }

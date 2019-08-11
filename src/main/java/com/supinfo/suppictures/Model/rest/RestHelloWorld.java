@@ -29,19 +29,18 @@ public class RestHelloWorld
 
         /*createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
 
-        createPicture("Pic 38","Zafr la feu",Category.ANIMAL);
+        createPicture("Pic 38","Zafr la feu",Category.ANIMAL);*/
 
-        createPicture("klnverbr","nprlgtnth",Category.NATURE);
-        createPicture("earegvb","npdvarerb",Category.AUTOMOBILE);
-        createPicture("abtrn","nperfth",Category.NATURE);
-        createPicture("kaerfer","nrgbnttnth",Category.NATURE);
-        createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE);
-        printPictureList();*/
+        createPicture("klnverbr","nprlgtnth",Category.NATURE,null);
+        createPicture("earegvb","npdvarerb",Category.AUTOMOBILE,null);
+
+        printPictureList();
+        //updateUser();
         /*printPictureList();
         searchByName("Pic");
 
         searchByCategory(Category.NATURE);*/
-        //updateUser();
+        updateUser();
         //deleteUser("TRiddle3");
 
         create("Tom","Riddle", "TRiddle", "password1234");
@@ -74,6 +73,16 @@ public class RestHelloWorld
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        createPicture("abtrn","nperfth",Category.NATURE,user);
+        createPicture("kaerfer","nrgbnttnth",Category.NATURE,user);
+        createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE,user);
+
+        List<Picture> pictureList = JPAFactory.getJpaPictureDaoImpl().findPictureByUser(user);
+        for(Picture p:pictureList){
+            System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
+        }
+
     }
 
     private void searchByCategory(Category category) {
@@ -100,11 +109,12 @@ public class RestHelloWorld
         }
     }
 
-    public static void createPicture(String name, String description, Category category){
+    public static void createPicture(String name, String description, Category category, User user){
         Picture picture = new Picture();
         picture.setName(name);
         picture.setDescription(description);
         picture.setCategory(category);
+        picture.setUser(user);
 
         try {
             JPAFactory.getJpaPictureDaoImpl().createPicture(picture);

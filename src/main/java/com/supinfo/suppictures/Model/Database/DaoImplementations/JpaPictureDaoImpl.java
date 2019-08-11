@@ -4,6 +4,7 @@ import com.supinfo.suppictures.Model.Database.Enums.Category;
 import com.supinfo.suppictures.Model.Database.ValueObjects.Picture;
 import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
 import com.supinfo.suppictures.Model.Database.Daos.PictureDao;
+import com.supinfo.suppictures.Model.Database.ValueObjects.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -53,4 +54,12 @@ public class JpaPictureDaoImpl implements PictureDao {
         List<Picture> pictureList = query.getResultList();
         return pictureList;
     }
+
+    public List<Picture> findPictureByUser(User user){
+        Query query = entityManager.createQuery("SELECT p FROM Picture p WHERE p.user = ?1");
+        query.setParameter(1,user);
+        List<Picture> picturesList = query.getResultList();
+        return picturesList;
+    }
+
 }
