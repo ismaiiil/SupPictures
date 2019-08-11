@@ -73,6 +73,16 @@ public class PicturesResources
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        createPicture("abtrn","nperfth",Category.NATURE,user);
+        createPicture("kaerfer","nrgbnttnth",Category.NATURE,user);
+        createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE,user);
+
+        List<Picture> pictureList = JPAFactory.getJpaPictureDaoImpl().findPictureByUser(user);
+        for(Picture p:pictureList){
+            System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
+        }
+
     }
 
     private void searchByCategory(Category category) {
@@ -99,14 +109,22 @@ public class PicturesResources
         }
     }
 
-    public static void createPicture(String name, String description, Category category){
+    public static void createPicture(String name, String description, Category category, User user){
         Picture picture = new Picture();
         picture.setName(name);
         picture.setDescription(description);
         picture.setCategory(category);
+        picture.setUser(user);
 
         try {
             JPAFactory.getJpaPictureDaoImpl().createPicture(picture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        picture.setCategory(Category.NONE);
+        try {
+            JPAFactory.getJpaPictureDaoImpl().updatePicture(picture);
         } catch (Exception e) {
             e.printStackTrace();
         }

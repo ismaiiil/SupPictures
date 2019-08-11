@@ -98,6 +98,7 @@ public class Picture {
     protected void onUpdate() {
         updated = new Date();
     }
+
     public Category getCategory() {
         return category;
     }
