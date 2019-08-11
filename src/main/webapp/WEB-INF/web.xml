@@ -50,5 +50,14 @@
     <servlet-name>jersey-servlet</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error-pages/404.xhtml</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error-pages/50X.xhtml</location>
+  </error-page>
+
 
 </web-app>
