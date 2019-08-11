@@ -42,7 +42,7 @@
       <!-- Define the ResourceConfig class -->
       <init-param>
           <param-name>javax.ws.rs.Application</param-name>
-          <param-value>com.supinfo.suppictures.Model.rest.HelloWorldApplication</param-value>
+          <param-value>com.supinfo.suppictures.Model.rest.RestConfig.SupPicturesApplication</param-value>
       </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

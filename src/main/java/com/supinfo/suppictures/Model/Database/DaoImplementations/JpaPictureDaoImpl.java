@@ -55,6 +55,19 @@ public class JpaPictureDaoImpl implements PictureDao {
         return pictureList;
     }
 
+    //TODO UPDATE THIS TO THE CORRECT SQL @vashist8
+    /**
+     * will return a search based on the searchQuery, will match the search query
+     * based on {@link Picture#getName()} and {@link Picture#getDescription()} and
+     * {@link Picture#getLocality()}
+     * @param searchQuery is the search query
+     * @param category category supplied by user
+     * @return returns a list of pictures
+     */
+    public List<Picture> searchByAll(String searchQuery, Category category){
+        return listPictures();
+    }
+
     public List<Picture> findPictureByUser(User user){
         Query query = entityManager.createQuery("SELECT p FROM Picture p WHERE p.user = ?1");
         query.setParameter(1,user);
