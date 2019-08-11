@@ -153,8 +153,7 @@ public class UserManager {
      */
 
     public User getCurrentUser(){
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        return (User) externalContext.getSessionMap().get("user");
+        return UIHelpers.getLoggedInUser();
 
     }
 
