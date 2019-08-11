@@ -33,18 +33,7 @@ public class PicturesResources
     public Response searchByQueryAndCategory(@QueryParam("query") @DefaultValue("") String query,@QueryParam("category") @DefaultValue("NONE") Category category)
     {
         List<Picture> searched ;
-        Gson gson = new Gson();
-        gson = new GsonBuilder().new ExclusionStrategy() {
-            @Override
-            public boolean shouldSkipField(FieldAttributes f) {
-                return f.getName().toLowerCase().contains("fieldName");
-            }
-
-            @Override
-            public boolean shouldSkipClass(Class<?> aClass) {
-                return false;
-            }
-        }).create();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         Type listType = new TypeToken<List<Picture>>() {}.getType();
         try{
             searched = searchByAll(query,category);

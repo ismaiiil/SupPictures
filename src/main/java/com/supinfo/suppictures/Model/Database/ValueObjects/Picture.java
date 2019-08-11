@@ -1,5 +1,6 @@
 package com.supinfo.suppictures.Model.Database.ValueObjects;
 
+import com.google.gson.annotations.Expose;
 import com.supinfo.suppictures.Model.Database.Enums.Category;
 
 import javax.persistence.*;
@@ -8,22 +9,27 @@ import java.util.Date;
 @Entity
 @Table(name="Pictures")
 public class Picture {
-
+    @Expose
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
+    @Expose
     private String name;
 
+    @Expose
     private String description;
 
+    @Expose
     private String path;
 
-
+    @Expose
     private Category category;
 
+    @Expose
     private Integer visitorsCount;
 
+    @Expose
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "username")
     private User user;
@@ -81,12 +87,14 @@ public class Picture {
         return created;
     }
 
+    @Expose
     private Date created;
 
     public Date getUpdated() {
         return updated;
     }
 
+    @Expose
     private Date updated;
 
     @PrePersist

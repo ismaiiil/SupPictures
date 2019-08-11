@@ -1,5 +1,7 @@
 package com.supinfo.suppictures.Model.Database.ValueObjects;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
@@ -8,6 +10,7 @@ import java.io.Serializable;
 @Table(name="Users")
 public class User implements Serializable {
 
+    @Expose
     @Id
     private String username;
 
@@ -19,7 +22,7 @@ public class User implements Serializable {
         this.username = username;
     }
 
-
+    @Expose
     private String firstName;
 
     public String getFirstName() {
@@ -30,7 +33,7 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
-
+    @Expose
     private String lastName;
 
     public String getLastName() {
@@ -41,7 +44,7 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-
+    @Expose
     private String phoneNumber;
 
     public String getPhoneNumber() {
@@ -52,7 +55,7 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-
+    @Expose
     @Email
     private String emailAddress;
 
@@ -64,7 +67,7 @@ public class User implements Serializable {
         this.emailAddress = emailAddress;
     }
 
-
+    @Expose(serialize = false)
     private String password;
 
     public String getPassword() {
@@ -75,7 +78,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-
+    @Expose
     private String postalAddress;
 
     public String getPostalAddress() {
@@ -86,7 +89,7 @@ public class User implements Serializable {
         this.postalAddress = postalAddress;
     }
 
-
+    @Expose
     private Boolean administrator;
 
     public Boolean getAdministrator() {
