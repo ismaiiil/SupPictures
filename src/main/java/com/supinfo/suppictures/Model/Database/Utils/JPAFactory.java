@@ -1,12 +1,12 @@
-package com.supinfo.suppictures.Core.Utils;
+package com.supinfo.suppictures.Model.Database.Utils;
 
-import com.supinfo.suppictures.DaoImplementations.JpaPictureDaoImpl;
-import com.supinfo.suppictures.DaoImplementations.JpaUserDaoImpl;
+import com.supinfo.suppictures.Model.Database.DaoImplementations.JpaPictureDaoImpl;
+import com.supinfo.suppictures.Model.Database.DaoImplementations.JpaUserDaoImpl;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class JPAUtil {
+public class JPAFactory {
     private static final String PERSISTENCE_UNIT_NAME = "supPersistenceUnit";
     private static EntityManagerFactory factory;
     private static JpaUserDaoImpl jpaUserDaoImpl;

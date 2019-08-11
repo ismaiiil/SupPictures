@@ -1,9 +1,9 @@
-package com.supinfo.suppictures.DaoImplementations;
+package com.supinfo.suppictures.Model.Database.DaoImplementations;
 
-import com.supinfo.suppictures.Enums.Category;
-import com.supinfo.suppictures.Models.Picture;
-import com.supinfo.suppictures.Core.Utils.JPAUtil;
-import com.supinfo.suppictures.Daos.PictureDao;
+import com.supinfo.suppictures.Model.Database.Enums.Category;
+import com.supinfo.suppictures.Model.Database.ValueObjects.Picture;
+import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
+import com.supinfo.suppictures.Model.Database.Daos.PictureDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class JpaPictureDaoImpl implements PictureDao {
 
-    private EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+    private EntityManager entityManager = JPAFactory.getEntityManagerFactory().createEntityManager();
 
     public EntityTransaction transaction = null;
 

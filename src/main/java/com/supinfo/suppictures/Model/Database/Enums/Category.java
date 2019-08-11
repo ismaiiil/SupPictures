@@ -1,4 +1,4 @@
-package com.supinfo.suppictures.Enums;
+package com.supinfo.suppictures.Model.Database.Enums;
 
 public enum Category {
     NONE,

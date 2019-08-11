@@ -1,8 +1,8 @@
-package com.supinfo.suppictures.DaoImplementations;
+package com.supinfo.suppictures.Model.Database.DaoImplementations;
 
-import com.supinfo.suppictures.Models.User;
-import com.supinfo.suppictures.Core.Utils.JPAUtil;
-import com.supinfo.suppictures.Daos.UserDao;
+import com.supinfo.suppictures.Model.Database.ValueObjects.User;
+import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
+import com.supinfo.suppictures.Model.Database.Daos.UserDao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class JpaUserDaoImpl implements UserDao {
 
-    private EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+    private EntityManager entityManager = JPAFactory.getEntityManagerFactory().createEntityManager();
 
     public EntityTransaction transaction = null;
 

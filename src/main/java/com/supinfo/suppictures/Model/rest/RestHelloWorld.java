@@ -1,9 +1,9 @@
-package com.supinfo.suppictures.rest;
+package com.supinfo.suppictures.Model.rest;
 
-import com.supinfo.suppictures.Core.Utils.JPAUtil;
-import com.supinfo.suppictures.Enums.Category;
-import com.supinfo.suppictures.Models.Picture;
-import com.supinfo.suppictures.Models.User;
+import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
+import com.supinfo.suppictures.Model.Database.Enums.Category;
+import com.supinfo.suppictures.Model.Database.ValueObjects.Picture;
+import com.supinfo.suppictures.Model.Database.ValueObjects.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,12 +51,12 @@ public class RestHelloWorld
     }
 
     private Long userCount() {
-        return JPAUtil.getJpaUserDaoImpl().countUsers();
+        return JPAFactory.getJpaUserDaoImpl().countUsers();
     }
 
     private void deleteUser(String username){
         try {
-            JPAUtil.getJpaUserDaoImpl().deleteUser(username);
+            JPAFactory.getJpaUserDaoImpl().deleteUser(username);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,14 +70,14 @@ public class RestHelloWorld
         user.setEmailAddress("t.riddle@gmail.com");
 
         try {
-            JPAUtil.getJpaUserDaoImpl().updateUser(user);
+            JPAFactory.getJpaUserDaoImpl().updateUser(user);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void searchByCategory(Category category) {
-        List<Picture> pictureList = JPAUtil.getJpaPictureDaoImpl().searchPictureByCategory(category);
+        List<Picture> pictureList = JPAFactory.getJpaPictureDaoImpl().searchPictureByCategory(category);
         for(Picture p:pictureList){
             System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
         }
@@ -92,7 +92,7 @@ public class RestHelloWorld
         user.setPassword(password);
 
         try {
-            JPAUtil.getJpaUserDaoImpl().createUser(user);
+            JPAFactory.getJpaUserDaoImpl().createUser(user);
         } catch (RollbackException e) {
             System.out.println("Rollback Exception");
         } catch (Exception e) {
@@ -107,32 +107,32 @@ public class RestHelloWorld
         picture.setCategory(category);
 
         try {
-            JPAUtil.getJpaPictureDaoImpl().createPicture(picture);
+            JPAFactory.getJpaPictureDaoImpl().createPicture(picture);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static User verifyUser(){
-        return JPAUtil.getJpaUserDaoImpl().verifyUser("Tiddle","password1234");
+        return JPAFactory.getJpaUserDaoImpl().verifyUser("Tiddle","password1234");
     }
 
     public static void listUsers(){
-        List<User> userList = JPAUtil.getJpaUserDaoImpl().listUsers();
+        List<User> userList = JPAFactory.getJpaUserDaoImpl().listUsers();
         for(User u:userList){
             System.out.println(u.getUsername() + "," + u.getFirstName() + "," + u.getLastName());
         }
     }
 
     public void printPictureList(){
-        List<Picture> pictureList = JPAUtil.getJpaPictureDaoImpl().listPictures();
+        List<Picture> pictureList = JPAFactory.getJpaPictureDaoImpl().listPictures();
         for(Picture p:pictureList){
             System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
         }
     }
 
     public void searchByName(String name){
-        List<Picture> pictureList = JPAUtil.getJpaPictureDaoImpl().searchPictureByName(name);
+        List<Picture> pictureList = JPAFactory.getJpaPictureDaoImpl().searchPictureByName(name);
         for(Picture p:pictureList){
             System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
         }    }
@@ -142,7 +142,7 @@ public class RestHelloWorld
         List users = null;
 
         // Create an EntityManager
-        EntityManager manager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager manager = JPAFactory.getEntityManagerFactory().createEntityManager();
         EntityTransaction transaction = null;
 
         try {
