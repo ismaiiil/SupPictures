@@ -92,19 +92,25 @@
                 <!--Image Gallery-->
                 <div class="d-flex  justify-content-around align-items-center pt-5">
                     <div class="d-flex flex-wrap justify-content-center align-items-center">
-                        <c:forEach var = "i" begin="1" end="15">
+                        <c:forEach var="pic" items="#{pictureController.allPictures}">
                             <!-- Grid column -->
                             <div class="mb-3 mr-3  image-container ">
-                                <h:graphicImage class="image-shadow img-grid-item-admin img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
-                                <div class="image-overlay-admin" data-toggle="modal" data-target="#myModal" >
+                                <h:graphicImage class="image-shadow img-grid-item-admin img-fluid" value = "#{pic.path}" />
+                                <div class="image-overlay-admin">
                                     <div class="d-flex align-items-center justify-content-between image-info  h-25">
                                         <div class="d-flex align-items-center justify-content-center p-1 pl-2">
                                             <img class="image-user-icon-admin" src="resources/images/image-user.png" alt=""/>
-                                            <p class="image-info-user-admin ml-1 m-0 ">Username</p>
+                                            <p class="image-info-user-admin ml-1 m-0 ">#{pic.user.username}</p>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center p-1 pr-2">
                                             <img class="image-user-icon-admin" src="resources/images/eye.png" alt=""/>
-                                            <p class="view-count-text-admin ml-1 m-0  ">40</p>
+                                            <p class="view-count-text-admin ml-1 m-0  ">#{pic.visitorsCount? pic.visitorsCount : 0}</p>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-center p-1 pl-2">
+                                            <h:form>
+                                                <h:commandButton value="Edit" styleClass="btn btn-success mr-1" action="#{pictureController.storeEditPicture(pic)}"/>
+                                                <h:commandButton value="Delete" styleClass="btn btn-danger" action="#{pictureController.deletePicture(pic.id)}"/>
+                                            </h:form>
                                         </div>
 
                                     </div>
@@ -112,55 +118,55 @@
                             </div>
 
                             <!-- Picture Modal -->
-                            <h:form>
-                                <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header align-items-center">
-                                                <div class="d-flex align-items-center justify-content-start w-25">
-                                                    <img class="image-user-icon" src="resources/images/image-user.png" alt=""/>
-                                                    <p class="image-info-user ml-2 m-0">Username</p>
-                                                </div>
-                                                <input class=" form-control modal-title w-50 text-center" id="myModalTitle" value="Image Title"/>
+                            <!--<h:form>-->
+                                <!--<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+                                    <!--<div class="modal-dialog modal-dialog-centered  modal-lg" role="document">-->
+                                        <!--<div class="modal-content">-->
+                                            <!--<div class="modal-header align-items-center">-->
+                                                <!--<div class="d-flex align-items-center justify-content-start w-25">-->
+                                                    <!--<img class="image-user-icon" src="resources/images/image-user.png" alt=""/>-->
+                                                    <!--<p class="image-info-user ml-2 m-0">Username</p>-->
+                                                <!--</div>-->
+                                                <!--<input class=" form-control modal-title w-50 text-center" id="myModalTitle" value="Image Title"/>-->
 
-                                                <div class="w-25">
-                                                    <div class="d-flex align-items-center justify-content-center p-1 pr-2">
-                                                        <img class="image-user-icon" src="resources/images/eye.png" alt=""/>
-                                                        <p class="view-count-text ml-1 m-0  ">40</p>
-                                                    </div>
-                                                    <button type="button" class="close close-modal m-0" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="modal-body pb-0">
-                                                <div class="modal-image-container position-relative">
-                                                    <h:graphicImage class="img-modal img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
-                                                    <div class="modal-image-overlay d-flex justify-content-center align-items-center">
-                                                        <button class=" btn btn-outline-success modal-image-upload-btn" type="button">Upload Another Image</button>
-                                                    </div>
+                                                <!--<div class="w-25">-->
+                                                    <!--<div class="d-flex align-items-center justify-content-center p-1 pr-2">-->
+                                                        <!--<img class="image-user-icon" src="resources/images/eye.png" alt=""/>-->
+                                                        <!--<p class="view-count-text ml-1 m-0  ">40</p>-->
+                                                    <!--</div>-->
+                                                    <!--<button type="button" class="close close-modal m-0" data-dismiss="modal" aria-label="Close">-->
+                                                        <!--<span aria-hidden="true">&times;</span>-->
+                                                    <!--</button>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="modal-body pb-0">-->
+                                                <!--<div class="modal-image-container position-relative">-->
+                                                    <!--<h:graphicImage class="img-modal img-fluid" value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />-->
+                                                    <!--<div class="modal-image-overlay d-flex justify-content-center align-items-center">-->
+                                                        <!--<button class=" btn btn-outline-success modal-image-upload-btn" type="button">Upload Another Image</button>-->
+                                                    <!--</div>-->
 
-                                                </div>
-                                                <div class="form-group pt-2">
-                                                    <textarea class="form-control" id="descriptionTextArea1" rows="3"> this is a description</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <div>
-                                                    <button type="button" class="btn btn-danger modal-delete-button">Delete</button>
-                                                </div>
-                                                <div class="d-flex align-items-center justify-content-center">
+                                                <!--</div>-->
+                                                <!--<div class="form-group pt-2">-->
+                                                    <!--<textarea class="form-control" id="descriptionTextArea1" rows="3"> this is a description</textarea>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="modal-footer justify-content-between">-->
+                                                <!--<div>-->
+                                                    <!--<button type="button" class="btn btn-danger modal-delete-button">Delete</button>-->
+                                                <!--</div>-->
+                                                <!--<div class="d-flex align-items-center justify-content-center">-->
 
 
-                                                    <button type="button" class="btn btn-secondary mr-1 " data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
+                                                    <!--<button type="button" class="btn btn-secondary mr-1 " data-dismiss="modal">Close</button>-->
+                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                <!--</div>-->
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </h:form>
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</h:form>-->
                             <!-- Picture Modal End -->
                         </c:forEach>
                     </div>

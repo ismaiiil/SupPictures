@@ -77,4 +77,8 @@ public class PictureController {
         }
     }
 
+    public List<Picture> getAllPictures(){
+        return getPicDao().listPictures();
+    }
+
 }
