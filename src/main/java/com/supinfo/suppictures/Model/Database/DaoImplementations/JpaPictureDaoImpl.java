@@ -62,4 +62,51 @@ public class JpaPictureDaoImpl implements PictureDao {
         return picturesList;
     }
 
+    @Override
+    public Long countPictures() {
+        Query query = entityManager.createQuery("SELECT COUNT(p.id) FROM Picture p");
+        Long pictureCount = (Long) query.getSingleResult();
+        return pictureCount;
+    }
+
+    @Override
+    public void updatePicture(Picture updatedPicture) throws RollbackException,Exception {
+        transaction = entityManager.getTransaction();
+
+        // Begin the transaction
+        transaction.begin();
+
+        Picture existingPicture = entityManager.find(Picture.class, updatedPicture.getId());
+
+
+        existingPicture.setUser(updatedPicture.getUser());
+        existingPicture.setCategory(updatedPicture.getCategory());
+        existingPicture.setDescription(updatedPicture.getDescription());
+        existingPicture.setName(updatedPicture.getName());
+        existingPicture.setPath(updatedPicture.getPath());
+        existingPicture.setId(updatedPicture.getId());
+        existingPicture.setVisitorsCount(updatedPicture.getVisitorsCount());
+
+        entityManager.flush();
+
+        // Commit the transaction
+        transaction.commit();
+    }
+
+    @Override
+    public void deletePicture(Integer id) throws RollbackException,Exception {
+        transaction = entityManager.getTransaction();
+
+        // Begin the transaction
+        transaction.begin();
+
+        // Find and delete the User object
+        Picture picture = entityManager.find(Picture.class,id);
+        entityManager.remove(picture);
+
+        // Commit the transaction
+        transaction.commit();
+    }
+
+
 }

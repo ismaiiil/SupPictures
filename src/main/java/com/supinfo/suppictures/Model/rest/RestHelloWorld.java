@@ -31,19 +31,25 @@ public class RestHelloWorld
 
         createPicture("Pic 38","Zafr la feu",Category.ANIMAL);*/
 
-        createPicture("klnverbr","nprlgtnth",Category.NATURE,null);
-        createPicture("earegvb","npdvarerb",Category.AUTOMOBILE,null);
+        /*createPicture("klnverbr","nprlgtnth",Category.NATURE,null);
+        createPicture("earegvb","npdvarerb",Category.AUTOMOBILE,null);*/
 
-        printPictureList();
+        //printPictureList();
         //updateUser();
         /*printPictureList();
         searchByName("Pic");
 
         searchByCategory(Category.NATURE);*/
-        updateUser();
+        //updateUser();
         //deleteUser("TRiddle3");
+        System.out.println(JPAFactory.getJpaPictureDaoImpl().countPictures());
 
-        create("Tom","Riddle", "TRiddle", "password1234");
+        //create("Tom","Riddle", "TRiddle", "password1234");
+        try {
+            JPAFactory.getJpaPictureDaoImpl().deletePicture(28);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String output = "<h1>Hello World!<h1>" +
                 "<p>RESTful Service is running ... <br>Ping @ " + new Date().toString() + "</p<br>" + String.valueOf(verifyUser()) + String.valueOf(userCount());
         return Response.status(200).entity(output).build();
@@ -118,6 +124,13 @@ public class RestHelloWorld
 
         try {
             JPAFactory.getJpaPictureDaoImpl().createPicture(picture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        picture.setCategory(Category.NONE);
+        try {
+            JPAFactory.getJpaPictureDaoImpl().updatePicture(picture);
         } catch (Exception e) {
             e.printStackTrace();
         }
