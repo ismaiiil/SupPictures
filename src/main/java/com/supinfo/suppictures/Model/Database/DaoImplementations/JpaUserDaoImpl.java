@@ -104,4 +104,10 @@ public class JpaUserDaoImpl implements UserDao {
         // Commit the transaction
         transaction.commit();
     }
+
+    @Override
+    public User findUserByUsername(String username) throws Exception {
+        User userEntity = entityManager.find(User.class,username);
+        return userEntity;
+    }
 }
