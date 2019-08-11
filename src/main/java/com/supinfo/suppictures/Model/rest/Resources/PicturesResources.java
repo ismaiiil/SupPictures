@@ -6,6 +6,7 @@ import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
 import com.supinfo.suppictures.Model.Database.Enums.Category;
 import com.supinfo.suppictures.Model.Database.ValueObjects.Picture;
 import com.supinfo.suppictures.Model.Database.ValueObjects.User;
+import com.supinfo.suppictures.Model.rest.ResponseInfo.RestStatus;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -27,11 +28,19 @@ public class PicturesResources
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchByQueryAndCategory(@QueryParam("query") @DefaultValue("") String query,@QueryParam("category") @DefaultValue("NONE") Category category)
     {
+        List<Picture> searched ;
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Picture>>() {}.getType();
-        List<Picture> searched = searchByAll(query,category);
+        try{
+            searched = searchByAll(query,category);
+            //throw new Exception(); //used to test error 500
+        }catch (Exception e){
+            e.printStackTrace();
+            return Response.status(500).entity(gson.toJson(new RestStatus(500,"An Internal Server Error has occurred, Try again later!"))).build();
+        }
+
         if(searched == null || searched.isEmpty()){
-            return Response.status(404).entity(gson.toJson("Couldnt find what your are looking for")).build();
+            return Response.status(404).entity(gson.toJson(new RestStatus(404,"Could not find what you are looking for"))).build();
         }
         return Response.status(200).entity(gson.toJson(searched,listType)).build();
     }
