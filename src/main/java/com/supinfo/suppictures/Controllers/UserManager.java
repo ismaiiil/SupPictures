@@ -5,18 +5,16 @@ import com.supinfo.suppictures.Model.Database.DaoImplementations.JpaUserDaoImpl;
 import com.supinfo.suppictures.Controllers.Utils.UIHelpers;
 import com.supinfo.suppictures.Model.Database.ValueObjects.User;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.RollbackException;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class UserManager {
     private String username;
     private String password;
@@ -26,6 +24,16 @@ public class UserManager {
     private String tel;
     private String passConfirm;
     private String address;
+
+    public String getSourcePage() {
+        return sourcePage;
+    }
+
+    public void setSourcePage(String sourcePage) {
+        this.sourcePage = sourcePage;
+    }
+
+    private String sourcePage;
     public String getTel() {
         return tel;
     }
@@ -195,13 +203,13 @@ public class UserManager {
 
     public String editUserRecord(String username){
         try {
-            UIHelpers.storeSourcePage();
+
             User userToEdit = getDao().findUserByUsername(username);
             UIHelpers.putCookie("editUser",userToEdit);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/editProfile.xhtml?faces-redirect=true";
+        return "/editProfile.xhtml?faces-redirect=true&includeViewParams=true&source="+FacesContext.getCurrentInstance().getViewRoot().getViewId();
     }
 
     /**
@@ -245,7 +253,9 @@ public class UserManager {
 
 
             }
-            UIHelpers.goback();
+
+            UIHelpers.getContext().redirect(getSourcePage());
+
         } catch (RollbackException e){
             UIHelpers.showUIMsg("Could not save changes!");
         }

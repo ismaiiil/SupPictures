@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>SupPictures Home</title>
 </h:head>
@@ -70,7 +71,9 @@
 
                                         <!--<h:outputLink value="/editProfile/#{user.username}" styleClass="btn btn-outline-info mr-1" type="button"><i class="fa fa-pencil-square-o"></i></h:outputLink>-->
 
-                                        <h:commandButton styleClass="btn btn-outline-info mr-1" action="#{userManager.editUserRecord(user.username)}"  value="Edit"></h:commandButton>
+                                        <h:commandButton styleClass="btn btn-outline-info mr-1" action="#{userManager.editUserRecord(user.username)}"  value="Edit">
+
+                                        </h:commandButton>
 
 
                                         <button class=" btn btn-outline-danger" type="button"><i class="fa fa-user-times"></i></button>

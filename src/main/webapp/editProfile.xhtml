@@ -12,7 +12,9 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
     <title>SupPictures Home</title>
     
 </h:head>
-
+<f:metadata>
+    <f:viewParam name="source" value="#{userManager.sourcePage}" />
+</f:metadata>
 <h:body>
     <h:outputStylesheet library = "css" name="main.css"/>
     <h:outputStylesheet name="css/bootstrap.css"/>

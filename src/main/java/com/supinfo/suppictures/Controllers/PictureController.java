@@ -6,12 +6,24 @@ import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
 import com.supinfo.suppictures.Model.Database.ValueObjects.Picture;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.util.List;
 
 
 @ManagedBean
+@RequestScoped
 public class PictureController {
+    public String getSourcePage() {
+        return sourcePage;
+    }
+
+    public void setSourcePage(String sourcePage) {
+        this.sourcePage = sourcePage;
+    }
+
+    private String sourcePage;
     private JpaPictureDaoImpl picDao = JPAFactory.getJpaPictureDaoImpl();
     private UserManager userManager = new UserManager();
 
@@ -37,14 +49,12 @@ public class PictureController {
      *
      * @param pic
      */
-    public void storeEditPicture(Picture pic) {
-        UIHelpers.storeSourcePage();
+    public String storeEditPicture(Picture pic) {
+
         UIHelpers.putCookie("pic", pic);
-        try {
-            UIHelpers.getContext().redirect("/editPicture.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        return "/editPicture.xhtml?faces-redirect=true&includeViewParams=true&source="+ FacesContext.getCurrentInstance().getViewRoot().getViewId();
+
 
     }
 
@@ -63,7 +73,8 @@ public class PictureController {
     public void updatePicture() {
         try {
             getPicDao().updatePicture(getEditPicture());
-            UIHelpers.goback();
+            UIHelpers.getContext().redirect(getSourcePage());
+
         } catch (Exception e) {
             //todo: show msg on ui
             e.printStackTrace();
