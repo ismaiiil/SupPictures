@@ -18,6 +18,8 @@ public class JpaPictureDaoImpl implements PictureDao {
 
     public EntityTransaction transaction = null;
 
+    private Integer numOfPictures = 15;
+
     private void rollbackTransaction(EntityTransaction transaction){
         if (transaction != null) {
             transaction.rollback();
@@ -42,8 +44,8 @@ public class JpaPictureDaoImpl implements PictureDao {
 
 
     public List<Picture> listPictures(){
-        Query query = entityManager.createQuery("SELECT p FROM Picture p ");
-        List<Picture> pictureList = query.getResultList();
+        Query query = entityManager.createQuery("SELECT p FROM Picture p ORDER BY p.created DESC");
+        List<Picture> pictureList = query.setMaxResults(numOfPictures).getResultList();
         return pictureList;
     }
 
@@ -122,7 +124,20 @@ public class JpaPictureDaoImpl implements PictureDao {
      * @param category category supplied by user
      * @return returns a list of pictures
      */
-    public List<Picture> searchByAll(String searchQuery, Category category){
-        return listPictures();
+    public List<Picture> searchByAll(String searchQuery, Category category) throws Exception{
+        List<Picture> pictureList = null;
+        if(category == Category.NONE){
+            Query query = entityManager.createQuery("SELECT p from Picture p JOIN User u on p.user.username = u.username WHERE p.name LIKE '%" + searchQuery +"%' OR p.description LIKE '%" + searchQuery +"%' OR p.user.username = (SELECT u.username FROM User u WHERE u.postalAddress LIKE '%" + searchQuery + "%')");
+            //query.setParameter(1,category);
+            pictureList = query.getResultList();
+        }else {
+            Query query = entityManager.createQuery("SELECT p from Picture p JOIN User u on p.user.username = u.username WHERE p.category = ?1 AND ( p.name LIKE '%" + searchQuery +"%' OR p.description LIKE '%" + searchQuery +"%' OR p.user.username = (SELECT u.username FROM User u WHERE u.postalAddress LIKE '%" + searchQuery + "%'))");
+            query.setParameter(1,category);
+            pictureList = query.getResultList();
+        }
+
+        return pictureList;
     }
+
+    //172.21.3.21
 }

@@ -61,7 +61,7 @@ public class PicturesResources
     /**
      *  search using {@link JPAFactory#getJpaUserDaoImpl()#searchByAll(String, Category)}helper to make code cleaner
      */
-    private List<Picture> searchByAll(String query,Category category) {
+    private List<Picture> searchByAll(String query,Category category) throws Exception{
         return JPAFactory.getJpaPictureDaoImpl().searchByAll(query,category);
     }
 
@@ -165,5 +165,22 @@ public class PicturesResources
             userToString.add(((User) u).getFirstName());
         }
         return userToString;
+    }
+
+    @GET
+    @Path("/test")
+    @Produces(MediaType.TEXT_HTML)
+    public Response myTestMethod(){
+        /*List<Picture> pictures = null;
+        try {
+            pictures = JPAFactory.getJpaPictureDaoImpl().searchByAll("rf", Category.NONE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for(Picture p:pictures){
+            System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
+        }*/
+        printPictureList();
+        return Response.status(200).entity("<h1>TESTING TESTING<h1>").build();
     }
 }
