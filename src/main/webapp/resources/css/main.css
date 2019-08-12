@@ -2,6 +2,18 @@ body{
     font-family: 'Varela Round', sans-serif !important;
 }
 
+.alert-box{
+    top:80px;
+    right:10px;
+
+}
+
+ul#errorMessages{
+    list-style-type: none;
+    margin: 0;
+
+}
+
 .oops-text{
     font-family: 'Comfortaa', cursive !important;
     font-weight: bolder;
