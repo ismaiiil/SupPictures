@@ -32,7 +32,7 @@ public class PicturesResources
      * the proper title,description,locality
      * @param query search string
      * @param category search category
-     * @return returns a JSON list with the Pictures and its associated User
+     * @return returns a JSON list with the Pictures matching the query
      */
     @GET
     @Path("/search")
@@ -43,27 +43,46 @@ public class PicturesResources
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         Type listType = new TypeToken<List<Picture>>() {}.getType();
         try{
-            searched = searchByAll(query,category);
-            //throw new Exception(); //used to test error 500
+            searched = JPAFactory.getJpaPictureDaoImpl().searchByAll(query,category);
         }catch (Exception e){
             e.printStackTrace();
             return Response.status(500).entity(gson.toJson(new RestStatus(500,"An Internal Server Error has occurred, Try again later!"))).build();
         }
+        return getResponse(searched, gson, listType);
+    }
 
-        if(searched == null || searched.isEmpty()){
-            return Response.status(404).entity(gson.toJson(new RestStatus(404,"Could not find what you are looking for"))).build();
+    /**
+     * A route to get recent pictures
+     * @return returns recent pictures
+     */
+    @GET
+    @Path("/recent")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response recentPictures()
+    {
+        List<Picture> recent ;
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        Type listType = new TypeToken<List<Picture>>() {}.getType();
+        try{
+            recent = JPAFactory.getJpaPictureDaoImpl().listPictures();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Response.status(500).entity(gson.toJson(new RestStatus(500,"An Internal Server Error has occurred, Try again later!"))).build();
         }
-        String json = gson.toJson(searched,listType);
+        return getResponse(recent, gson, listType);
+    }
+
+    private Response getResponse(List<Picture> recent, Gson gson, Type listType) {
+        if (recent == null) {
+            return Response.status(404).entity(gson.toJson(new RestStatus(404, "Error! Could not find what you are looking for!"))).build();
+        } else if (recent.isEmpty()) {
+            return Response.status(204).entity(gson.toJson(new RestStatus(204, "No Results Found"))).build();
+        }
+        String json = gson.toJson(recent,listType);
 
         return Response.status(200).entity(json).build();
     }
 
-    /**
-     *  search using {@link JPAFactory#getJpaUserDaoImpl()#searchByAll(String, Category)}helper to make code cleaner
-     */
-    private List<Picture> searchByAll(String query,Category category) {
-        return JPAFactory.getJpaPictureDaoImpl().searchByAll(query,category);
-    }
 
     private Long userCount() {
         return JPAFactory.getJpaUserDaoImpl().countUsers();
@@ -90,10 +109,6 @@ public class PicturesResources
             e.printStackTrace();
         }
 
-        createPicture("abtrn","nperfth",Category.NATURE,user);
-        createPicture("kaerfer","nrgbnttnth",Category.NATURE,user);
-        createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE,user);
-
         List<Picture> pictureList = JPAFactory.getJpaPictureDaoImpl().findPictureByUser(user);
         for(Picture p:pictureList){
             System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
@@ -108,43 +123,6 @@ public class PicturesResources
         }
     }
 
-    public static void create(String firstName,String lastName, String username,String password) {
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(username);
-
-        user.setPassword(password);
-
-        try {
-            JPAFactory.getJpaUserDaoImpl().createUser(user);
-        } catch (RollbackException e) {
-            System.out.println("Rollback Exception");
-        } catch (Exception e) {
-            System.out.println("General Exception");
-        }
-    }
-
-    public static void createPicture(String name, String description, Category category, User user){
-        Picture picture = new Picture();
-        picture.setName(name);
-        picture.setDescription(description);
-        picture.setCategory(category);
-        picture.setUser(user);
-
-        try {
-            JPAFactory.getJpaPictureDaoImpl().createPicture(picture);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        picture.setCategory(Category.NONE);
-        try {
-            JPAFactory.getJpaPictureDaoImpl().updatePicture(picture);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static User verifyUser(){
         return JPAFactory.getJpaUserDaoImpl().verifyUser("Tiddle","password1234");
@@ -206,5 +184,22 @@ public class PicturesResources
             userToString.add(((User) u).getFirstName());
         }
         return userToString;
+    }
+
+    @GET
+    @Path("/test")
+    @Produces(MediaType.TEXT_HTML)
+    public Response myTestMethod(){
+        /*List<Picture> pictures = null;
+        try {
+            pictures = JPAFactory.getJpaPictureDaoImpl().searchByAll("rf", Category.NONE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for(Picture p:pictures){
+            System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
+        }*/
+        printPictureList();
+        return Response.status(200).entity("<h1>TESTING TESTING<h1>").build();
     }
 }
