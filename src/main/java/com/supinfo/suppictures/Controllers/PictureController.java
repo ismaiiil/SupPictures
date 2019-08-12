@@ -97,4 +97,8 @@ public class PictureController {
     }
 
 
+    public String onload() {
+        System.out.println("THE COUNTER HAS BEEN CALLED");
+        return null;
+    }
 }
