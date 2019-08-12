@@ -37,8 +37,8 @@ public class JpaPictureDaoImpl implements PictureDao {
 
 
     public List<Picture> listPictures(){
-        Query query = entityManager.createQuery("SELECT p FROM Picture p ");
-        List<Picture> pictureList = query.getResultList();
+        Query query = entityManager.createQuery("SELECT p FROM Picture p ORDER BY p.created DESC");
+        List<Picture> pictureList = query.setMaxResults(15).getResultList();
         return pictureList;
     }
 
