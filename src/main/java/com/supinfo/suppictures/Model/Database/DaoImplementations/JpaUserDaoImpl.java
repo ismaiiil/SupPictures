@@ -16,7 +16,8 @@ public class JpaUserDaoImpl implements UserDao {
     public EntityTransaction transaction = null;
 
     @Override
-    public void createUser(User user) throws RollbackException, Exception {
+    public User createUser(String firstName,String lastName,String username,String password, String email,String tel,String address)throws RollbackException, Exception {
+        User user = new User(firstName,lastName,username,password, email,tel,address,false);
         // Get a transaction
         transaction = entityManager.getTransaction();
 
@@ -28,6 +29,7 @@ public class JpaUserDaoImpl implements UserDao {
 
         // Commit the transaction
         transaction.commit();
+        return user;
     }
 
     private void rollbackTransaction(EntityTransaction transaction){

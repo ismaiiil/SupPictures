@@ -10,9 +10,25 @@ import java.io.Serializable;
 @Table(name="Users")
 public class User implements Serializable {
 
+    /**
+     * default constructor for JPA to use
+     */
+    public User(){ }
+
     @Expose
     @Id
     private String username;
+
+    public User(String firstName,String lastName,String username,String password,String email,String tel,String address, Boolean administrator) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = tel;
+        this.emailAddress = email;
+        this.password = password;
+        this.postalAddress = address;
+        this.administrator = administrator;
+    }
 
     public String getUsername() {
         return username;

@@ -10,8 +10,7 @@ import java.util.List;
 
 public interface PictureDao {
 
-    void createPicture(Picture picture) throws Exception;
-
+    Picture createPicture(String name,String description,Category category,String path,User user) throws Exception;
     List<Picture> listPictures();
     List<Picture> searchPictureByName(String name);
     List<Picture> searchPictureByCategory(Category category);

@@ -9,6 +9,22 @@ import java.util.Date;
 @Entity
 @Table(name="Pictures")
 public class Picture {
+    /**
+     * default Constructor for JPA to use
+     */
+    public Picture(){}
+
+    /**
+     * Constructor for client use
+     */
+    public Picture(String name,String description,Category category,String path,User user) {
+        this.name = name;
+        this.description = description;
+        this.path = path;
+        this.category = category;
+        this.user = user;
+    }
+
     @Expose
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -33,6 +49,7 @@ public class Picture {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "username")
     private User user;
+
 
 
     public Integer getVisitorsCount() {

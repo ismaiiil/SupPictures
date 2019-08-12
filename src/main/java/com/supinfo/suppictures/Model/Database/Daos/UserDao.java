@@ -8,8 +8,7 @@ import java.util.List;
 
 public interface UserDao {
 
-    void createUser(User user) throws RollbackException, Exception;
-
+    User createUser(String firstName,String lastName,String username,String password, String email,String tel,String address) throws RollbackException, Exception;
 
     User verifyUser(String username, String password );
 

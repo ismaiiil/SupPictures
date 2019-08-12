@@ -109,10 +109,6 @@ public class PicturesResources
             e.printStackTrace();
         }
 
-        createPicture("abtrn","nperfth",Category.NATURE,user);
-        createPicture("kaerfer","nrgbnttnth",Category.NATURE,user);
-        createPicture("earegvwknlwvbb","aerbtnyvarerb",Category.AUTOMOBILE,user);
-
         List<Picture> pictureList = JPAFactory.getJpaPictureDaoImpl().findPictureByUser(user);
         for(Picture p:pictureList){
             System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
@@ -127,43 +123,6 @@ public class PicturesResources
         }
     }
 
-    public static void create(String firstName,String lastName, String username,String password) {
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(username);
-
-        user.setPassword(password);
-
-        try {
-            JPAFactory.getJpaUserDaoImpl().createUser(user);
-        } catch (RollbackException e) {
-            System.out.println("Rollback Exception");
-        } catch (Exception e) {
-            System.out.println("General Exception");
-        }
-    }
-
-    public static void createPicture(String name, String description, Category category, User user){
-        Picture picture = new Picture();
-        picture.setName(name);
-        picture.setDescription(description);
-        picture.setCategory(category);
-        picture.setUser(user);
-
-        try {
-            JPAFactory.getJpaPictureDaoImpl().createPicture(picture);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        picture.setCategory(Category.NONE);
-        try {
-            JPAFactory.getJpaPictureDaoImpl().updatePicture(picture);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static User verifyUser(){
         return JPAFactory.getJpaUserDaoImpl().verifyUser("Tiddle","password1234");
