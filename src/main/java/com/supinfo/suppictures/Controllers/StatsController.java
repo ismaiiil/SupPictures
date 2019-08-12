@@ -2,22 +2,35 @@ package com.supinfo.suppictures.Controllers;
 
 import com.supinfo.suppictures.Model.Database.DaoImplementations.JpaPictureDaoImpl;
 import com.supinfo.suppictures.Model.Database.DaoImplementations.JpaUserDaoImpl;
+import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean
 @ViewScoped
+@ManagedBean
 public class StatsController {
-    private JpaPictureDaoImpl picDao = new JpaPictureDaoImpl();
-    private JpaUserDaoImpl userDao = new JpaUserDaoImpl();
-    public Long getPicCount(){
-        return getPicDao().countPictures();
+    private JpaPictureDaoImpl picDao;
+    private JpaUserDaoImpl userDao;
+    private long userCount;
+    private long picCount;
 
+    @PostConstruct
+    public void init(){
+        picDao = JPAFactory.getJpaPictureDaoImpl();
+        userDao = JPAFactory.getJpaUserDaoImpl();
+        picCount = picDao.countPictures();
+        userCount = userDao.countUsers();
+    }
+    public Long getPicCount() {
+        return picCount;
     }
 
-    public Long getUsersCount(){
-        return getUserDao().countUsers();
+    public Long getUsersCount() {
+        return userCount;
     }
 
     public JpaPictureDaoImpl getPicDao() {
@@ -27,4 +40,5 @@ public class StatsController {
     public JpaUserDaoImpl getUserDao() {
         return userDao;
     }
+
 }

@@ -25,7 +25,9 @@ public class JpaPictureDaoImpl implements PictureDao {
     }
 
     @Override
-    public void createPicture(Picture picture) throws RollbackException,Exception {
+    public Picture createPicture(String name,String description,Category category,String path,User user) throws RollbackException,Exception {
+        Picture picture = new Picture(name,description,category,path,user);
+
         transaction = entityManager.getTransaction();
 
         transaction.begin();
@@ -33,7 +35,10 @@ public class JpaPictureDaoImpl implements PictureDao {
         entityManager.persist(picture);
 
         transaction.commit();
+        return picture;
     }
+
+
 
 
     public List<Picture> listPictures(){
@@ -66,6 +71,7 @@ public class JpaPictureDaoImpl implements PictureDao {
     public Long countPictures() {
         Query query = entityManager.createQuery("SELECT COUNT(p.id) FROM Picture p");
         Long pictureCount = (Long) query.getSingleResult();
+        System.out.println("RUNNING COUNT");
         return pictureCount;
     }
 
@@ -77,8 +83,6 @@ public class JpaPictureDaoImpl implements PictureDao {
         transaction.begin();
 
         Picture existingPicture = entityManager.find(Picture.class, updatedPicture.getId());
-
-
         existingPicture.setUser(updatedPicture.getUser());
         existingPicture.setCategory(updatedPicture.getCategory());
         existingPicture.setDescription(updatedPicture.getDescription());
@@ -113,7 +117,7 @@ public class JpaPictureDaoImpl implements PictureDao {
     /**
      * will return a search based on the searchQuery, will match the search query
      * based on {@link Picture#getName()} and {@link Picture#getDescription()} and
-     * {@link Picture#getLocality()}
+     * {@link User#getPostalAddress()} ()}
      * @param searchQuery is the search query
      * @param category category supplied by user
      * @return returns a list of pictures

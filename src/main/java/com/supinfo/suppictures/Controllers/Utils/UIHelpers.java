@@ -7,17 +7,17 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 public class UIHelpers {
-    public static void showUIMsg(String content){
+    public static void showUIMsg(String content) {
         FacesMessage msg = new FacesMessage(content);
-        FacesContext.getCurrentInstance().addMessage(null,msg);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public static User getLoggedInUser(){
+    public static User getLoggedInUser() {
 
         return (User) getContext().getSessionMap().get("user");
     }
 
-    public static ExternalContext getContext(){
+    public static ExternalContext getContext() {
         return FacesContext.getCurrentInstance().getExternalContext();
     }
 
