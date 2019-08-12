@@ -212,7 +212,7 @@ public class PicturesResources
     @Path("/test")
     @Produces(MediaType.TEXT_HTML)
     public Response myTestMethod(){
-        List<Picture> pictures = null;
+        /*List<Picture> pictures = null;
         try {
             pictures = JPAFactory.getJpaPictureDaoImpl().searchByAll("rf", Category.NONE);
         } catch (Exception e) {
@@ -220,7 +220,8 @@ public class PicturesResources
         }
         for(Picture p:pictures){
             System.out.println(p.getId() + "," + p.getName() + "," + p.getDescription());
-        }
+        }*/
+        printPictureList();
         return Response.status(200).entity("<h1>TESTING TESTING<h1>").build();
     }
 }
