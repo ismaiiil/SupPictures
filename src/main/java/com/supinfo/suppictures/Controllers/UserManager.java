@@ -116,7 +116,7 @@ public class UserManager {
 
         User currUser = getDao().verifyUser(username,password);
         if(currUser != null){
-            UIHelpers.getContext().getSessionMap().put("user", currUser);
+            UIHelpers.putCookie("user", currUser);
             UIHelpers.getContext().redirect("/");
         }else{
             UIHelpers.showUIMsg("Sorry, we couldn't find an account with those credentials. Please check you username and password and try again!");
@@ -173,9 +173,8 @@ public class UserManager {
 
         try {
             User user = JPAFactory.getJpaUserDaoImpl().createUser(firstName,lastName,username,password,email,tel,address);
-            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-            externalContext.getSessionMap().put("user", user);
-            externalContext.redirect("/");
+            UIHelpers.putCookie("user", user);
+            UIHelpers.getContext().redirect("/");
         } catch (RollbackException e) {
             UIHelpers.showUIMsg("Sorry, this username is already taken!");
         } catch (Exception e) {
@@ -196,8 +195,9 @@ public class UserManager {
 
     public String editUserRecord(String username){
         try {
+            UIHelpers.storeSourcePage();
             User userToEdit = getDao().findUserByUsername(username);
-            UIHelpers.getContext().getSessionMap().put("editUser",userToEdit);
+            UIHelpers.putCookie("editUser",userToEdit);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -241,10 +241,11 @@ public class UserManager {
         try {
             getDao().updateUser(user);
             if(user.getUsername().equals(getCurrentUser().getUsername())){
-                UIHelpers.getContext().getSessionMap().put("user",user);
+                UIHelpers.putCookie("user",user);
+
+
             }
-            //todo: redirect to previous page
-            UIHelpers.getContext().redirect("/editProfile.xhtml");
+            UIHelpers.goback();
         } catch (RollbackException e){
             UIHelpers.showUIMsg("Could not save changes!");
         }
