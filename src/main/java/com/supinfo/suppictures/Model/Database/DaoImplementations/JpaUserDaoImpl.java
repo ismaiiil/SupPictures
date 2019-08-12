@@ -1,5 +1,6 @@
 package com.supinfo.suppictures.Model.Database.DaoImplementations;
 
+import com.google.common.hash.Hashing;
 import com.supinfo.suppictures.Model.Database.ValueObjects.User;
 import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
 import com.supinfo.suppictures.Model.Database.Daos.UserDao;
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class JpaUserDaoImpl implements UserDao {
@@ -17,7 +19,8 @@ public class JpaUserDaoImpl implements UserDao {
 
     @Override
     public User createUser(String firstName,String lastName,String username,String password, String email,String tel,String address)throws RollbackException, Exception {
-        User user = new User(firstName,lastName,username,password, email,tel,address,false);
+        //hash password here before sending to db
+        User user = new User(firstName,lastName,username,hashPassword(password), email,tel,address,false);
         // Get a transaction
         transaction = entityManager.getTransaction();
 
@@ -38,14 +41,20 @@ public class JpaUserDaoImpl implements UserDao {
         }
     }
 
+    private String hashPassword(String password){
+        return Hashing.sha256()
+                .hashString(password, StandardCharsets.UTF_8)
+                .toString();
+    }
+
 
     @Override
     public User verifyUser(String username, String password) {
-
+        //hash password before verifying
         User userEntity = entityManager.find(User.class,username);
 
         if(userEntity != null){
-            if(!(userEntity.getPassword().equals(password))){
+            if(!(userEntity.getPassword().equals(hashPassword(password)))){
                 return null;
             }
         }
@@ -86,21 +95,20 @@ public class JpaUserDaoImpl implements UserDao {
     @Override
     public void updateUser(User updatedUser) throws RollbackException, Exception {
         transaction = entityManager.getTransaction();
-
         // Begin the transaction
         transaction.begin();
-
         User existingUser = entityManager.find(User.class, updatedUser.getUsername());
-
-
         existingUser.setFirstName(updatedUser.getFirstName());
         existingUser.setLastName(updatedUser.getLastName());
         existingUser.setAdministrator(updatedUser.getAdministrator());
+        if(existingUser.getPassword().equals(updatedUser.getPassword())){
+            //hash if the new password is different
+            updatedUser.setPassword(hashPassword(updatedUser.getPassword()));
+        }
         existingUser.setPassword(updatedUser.getPassword());
         existingUser.setEmailAddress(updatedUser.getEmailAddress());
         existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
         existingUser.setPostalAddress(updatedUser.getPostalAddress());
-
         entityManager.flush();
 
         // Commit the transaction
