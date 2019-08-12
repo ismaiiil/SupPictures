@@ -38,8 +38,8 @@ public class PictureController {
      * @param pic
      */
     public void storeEditPicture(Picture pic) {
-
-        UIHelpers.getContext().getSessionMap().put("pic", pic);
+        UIHelpers.storeSourcePage();
+        UIHelpers.putCookie("pic", pic);
         try {
             UIHelpers.getContext().redirect("/editPicture.xhtml");
         } catch (IOException e) {
@@ -54,7 +54,7 @@ public class PictureController {
      * @return Picture
      */
     public Picture getEditPicture() {
-        return (Picture) UIHelpers.getContext().getSessionMap().get("pic");
+        return (Picture) UIHelpers.getCookie("pic");
     }
 
     /**
@@ -63,7 +63,7 @@ public class PictureController {
     public void updatePicture() {
         try {
             getPicDao().updatePicture(getEditPicture());
-            UIHelpers.getContext().redirect("/userProfile.xhtml");
+            UIHelpers.goback();
         } catch (Exception e) {
             //todo: show msg on ui
             e.printStackTrace();
