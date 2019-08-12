@@ -5,6 +5,7 @@ import com.supinfo.suppictures.Model.Database.DaoImplementations.JpaUserDaoImpl;
 import com.supinfo.suppictures.Controllers.Utils.UIHelpers;
 import com.supinfo.suppictures.Model.Database.ValueObjects.User;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
@@ -37,7 +38,7 @@ public class UserManager {
         return dao;
     }
 
-    private JpaUserDaoImpl dao = new JpaUserDaoImpl();
+    private JpaUserDaoImpl dao = JPAFactory.getJpaUserDaoImpl();
 
     public String getAddress() {
         return address;
@@ -46,8 +47,6 @@ public class UserManager {
     public void setAddress(String addr) {
         this.address = addr;
     }
-
-
 
     public String getFirstName() {
         return firstName;
@@ -80,10 +79,6 @@ public class UserManager {
     public void setPassConfirm(String passConfirm) {
         this.passConfirm = passConfirm;
     }
-
-
-
-
 
     public String getUsername() {
         return username;
@@ -176,10 +171,8 @@ public class UserManager {
             return;
         }
 
-        User user = createUser();
-
         try {
-            JPAFactory.getJpaUserDaoImpl().createUser(user);
+            User user = JPAFactory.getJpaUserDaoImpl().createUser(firstName,lastName,username,password,email,tel,address);
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             externalContext.getSessionMap().put("user", user);
             externalContext.redirect("/");
@@ -192,21 +185,6 @@ public class UserManager {
 
     }
 
-    /**
-     * Creates a user with the current set details
-     * @return User
-     */
-    private User createUser() {
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmailAddress(email);
-        user.setPhoneNumber(tel);
-        user.setPostalAddress(address);
-        return user;
-    }
 
     /**
      * Get a list of all users
@@ -238,10 +216,8 @@ public class UserManager {
      * update user details
      */
     public void updateUser(){
-
         User user = getEditUserDetails();
         update(user);
-
     }
 
     /**
@@ -252,14 +228,9 @@ public class UserManager {
             UIHelpers.showUIMsg("The entered passwords do not match!");
             return;
         }
-
         User user = getEditUserDetails();
-
         user.setPassword(password);
-
         update(user);
-
-
     }
 
     /**

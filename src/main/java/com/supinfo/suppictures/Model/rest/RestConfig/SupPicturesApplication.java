@@ -5,6 +5,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class SupPicturesApplication extends ResourceConfig {
     public SupPicturesApplication() {
         // Define the package which contains the service classes.
-        packages("com.supinfo.suppictures.Model.rest");
+        packages("com.supinfo.suppictures.Model.rest.Resources");
     }
 }
