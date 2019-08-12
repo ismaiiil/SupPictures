@@ -49,9 +49,10 @@ public class PicturesResources
             e.printStackTrace();
             return Response.status(500).entity(gson.toJson(new RestStatus(500,"An Internal Server Error has occurred, Try again later!"))).build();
         }
-
-        if(searched == null || searched.isEmpty()){
-            return Response.status(404).entity(gson.toJson(new RestStatus(404,"Could not find what you are looking for"))).build();
+        if (searched == null) {
+            return Response.status(404).entity(gson.toJson(new RestStatus(404, "Error! Could not find what you are looking for!"))).build();
+        } else if (searched.isEmpty()) {
+            return Response.status(204).entity(gson.toJson(new RestStatus(204, "No Results Found"))).build();
         }
         String json = gson.toJson(searched,listType);
 
