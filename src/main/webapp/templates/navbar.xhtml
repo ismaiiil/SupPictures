@@ -29,8 +29,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h:form styleClass="w-25 w-25 d-flex align-items-center">
-            <h:link outcome="/index.xhtml"><img class="index-logo" src="resources/images/icon.png" alt="SupPictures logo"/></h:link>
-            <h:link class="navbar-brand" outcome="/index.xhtml">SupPictures</h:link>
+            <h:link outcome="/public/index.xhtml"><img class="index-logo" src="../resources/images/icon.png" alt="SupPictures logo"/></h:link>
+            <h:link class="navbar-brand" outcome="/public/index.xhtml">SupPictures</h:link>
         </h:form>
         <div class="collapse navbar-collapse w-100" id="navbarTogglerDemo03">
 
@@ -44,16 +44,16 @@
                         <h:outputText rendered="#{userManager.userLoggedIn}" value="Hello #{userManager.currentUser.firstName}"/>
                     </li>
                     <li class="nav-item">
-                        <h:link class="nav-link" outcome="/signIn.xhtml" rendered="#{!userManager.userLoggedIn}" value="Log in" />
+                        <h:link class="nav-link" outcome="/public/signIn.xhtml" rendered="#{!userManager.userLoggedIn}" value="Log in" />
                     </li>
                     <li class="nav-item">
-                        <h:link class="nav-link" outcome="/signUp.xhtml" rendered="#{!userManager.userLoggedIn}" value ="Sign Up"/>
+                        <h:link class="nav-link" outcome="/public/signUp.xhtml" rendered="#{!userManager.userLoggedIn}" value ="Sign Up"/>
                     </li>
                     <li class="nav-item">
-                        <h:link class="nav-link" title="Profile" rendered="#{userManager.userLoggedIn}" outcome="/userProfile.xhtml"><img src="resources/images/user.png" alt="" style="width: 20px;"/></h:link>
+                        <h:link class="nav-link" title="Profile" rendered="#{userManager.userLoggedIn}" outcome="/user/userProfile.xhtml"><img src="../resources/images/user.png" alt="" style="width: 20px;"/></h:link>
                     </li>
                     <li class="nav-item">
-                        <h:link class="nav-link" title="Admin" rendered="#{userManager.currentUser.administrator}" outcome="/manageUsers.xhtml"><img src="resources/images/user.png" alt="" style="width: 20px;"/></h:link>
+                        <h:link class="nav-link" title="Admin" rendered="#{userManager.currentUser.administrator}" outcome="/admin/manageUsers.xhtml"><img src="../resources/images/user.png" alt="" style="width: 20px;"/></h:link>
                     </li>
                     <li class="nav-item">
                         <h:commandLink class="nav-link" action="#{userManager.logout}" rendered="#{userManager.userLoggedIn}" value ="Log Out"/>

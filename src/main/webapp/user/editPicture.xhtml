@@ -12,18 +12,21 @@
 </h:head>
 
 <h:body>
+    <f:metadata>
+        <f:viewParam name="source" value="#{pictureController.sourcePage}" />
+    </f:metadata>
 <!--Main Container-->
 <div class="container-fluid p-0">
 <!--Header-->
 <ui:insert name="header">
-    <ui:include src="templates/navbar.xhtml" />
+    <ui:include src="../templates/navbar.xhtml" />
 </ui:insert>
 <!--Header End-->
 
     <!--Upload Picture Jumbotron-->
     <div class="jumbotron">
         <div class="d-flex justify-content-center flex-column align-items-center pt-5">
-            <h1 class="display-4 mb-5">Upload A Picture</h1>
+            <h1 class="display-4 mb-5">Edit Picture Details</h1>
         </div>
     </div>
     <!--Upload Picture Jumbotron End-->
@@ -32,20 +35,20 @@
             <h:messages styleClass="text-center text-danger" globalOnly="true"/>
         </div>
     <div class="container d-flex flex-row w-50">
-        <div class="col-6 d-flex flex-column">
+        <div class="col-12 d-flex flex-column">
 
                 <div class="form-group mt-3">
                     <label for="imageTitle">Image Title</label>
-                    <h:inputText styleClass="form-control" id="imageTitle" value="#{uploadController.filename}" required="true" requiredMessage="Please enter a title" />
+                    <h:inputText styleClass="form-control" id="imageTitle" value="#{pictureController.editPicture.name}" required="true" requiredMessage="Please enter a title" />
                     <h:message styleClass="text-danger" for="imageTitle" />
                 </div>
                 <div class="form-group">
                     <label for="imageDescription">Image Description</label>
-                    <h:inputTextarea styleClass="form-control" value="#{uploadController.description}" required="true" id="imageDescription" rows="4" cols="30"/>
+                    <h:inputTextarea styleClass="form-control" value="#{pictureController.editPicture.description}" required="true" id="imageDescription" rows="4" cols="30"/>
                 </div>
                 <div class="form-group">
                     <label for="dropdownCategory">Select Image Category</label>
-                    <h:selectOneMenu id="dropdownCategory"  styleClass="btn btn-secondary dropdown-toggle w-100 btn-category" value="#{uploadController.category}" >
+                    <h:selectOneMenu id="dropdownCategory"  styleClass="btn btn-secondary dropdown-toggle w-100 btn-category" value="#{pictureController.editPicture.category}" >
                         <f:selectItems value="#{uploadController.categories}" />
                     </h:selectOneMenu>
 
@@ -53,20 +56,12 @@
                 </div>
 
                 <div class="form-group">
-                    <h:commandButton type="submit" styleClass="btn btn-primary w-100" id="link"  action="#{uploadController.uploadFile()}" value="Add Picture To Gallery"/>
+                    <h:commandButton type="submit" styleClass="btn btn-primary w-50"  action="#{pictureController.updatePicture}" value="Save Changes"/>
                 </div>
 
 
         </div>
 
-        <div class="col-6 d-flex flex-column align-items-center">
-
-            <img id="uploadImage" class="w-75 mt-1" src="#{uploadController.message?uploadController.message:'resources/images/img-placeholder.jpg'}" alt="image placeholder"/>
-            <h1:inputFile required="true" styleClass="btn btn-success mt-3 w-75" id="inputImage" mode="simple"
-                          a:accept="image/*" value="#{uploadController.file1}" onchange="readURL(this);"
-            />
-
-        </div>
     </div>
     </h:form>
 
