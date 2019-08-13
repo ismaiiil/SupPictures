@@ -12,6 +12,9 @@ import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import java.util.List;
 
+/**
+ * An implementation for PictureDao methods based on JPA.
+ */
 public class JpaPictureDaoImpl implements PictureDao {
 
     private EntityManager entityManager = JPAFactory.getEntityManagerFactory().createEntityManager();
@@ -20,6 +23,10 @@ public class JpaPictureDaoImpl implements PictureDao {
 
     private Integer numOfPictures = 15;
 
+    /**
+     * Discards changes made from a transaction if applicable.
+     * @param transaction The transaction made on the database.
+     */
     private void rollbackTransaction(EntityTransaction transaction){
         if (transaction != null) {
             transaction.rollback();
@@ -27,6 +34,9 @@ public class JpaPictureDaoImpl implements PictureDao {
     }
 
     @Override
+    /**
+     * {@link PictureDao#createPicture(String, String, Category, String, User)}
+     */
     public Picture createPicture(String name,String description,Category category,String path,User user) throws RollbackException,Exception {
         Picture picture = new Picture(name,description,category,path,user);
 
@@ -40,21 +50,27 @@ public class JpaPictureDaoImpl implements PictureDao {
         return picture;
     }
 
-
-
-
+    /**
+     * {@link PictureDao#listPictures()}
+     */
     public List<Picture> listPictures(){
         Query query = entityManager.createQuery("SELECT p FROM Picture p ORDER BY p.created DESC");
         List<Picture> pictureList = query.setMaxResults(numOfPictures).getResultList();
         return pictureList;
     }
 
+    /**
+     * {@link PictureDao#searchPictureByName(String)}
+     */
     public List<Picture> searchPictureByName(String name){
         Query query = entityManager.createQuery("SELECT p FROM Picture p WHERE p.name LIKE '%"+ name + "%'");
         List<Picture> pictureList = query.getResultList();
         return pictureList;
     }
 
+    /**
+     * {@link PictureDao#searchPictureByCategory(Category)}
+     */
     public List<Picture> searchPictureByCategory(Category category){
         Query query = entityManager.createQuery("SELECT p from Picture p WHERE p.category = ?1");
         query.setParameter(1,category);
@@ -62,6 +78,9 @@ public class JpaPictureDaoImpl implements PictureDao {
         return pictureList;
     }
 
+    /**
+     * {@link PictureDao#findPictureByUser(User)}
+     */
     public List<Picture> findPictureByUser(User user){
         Query query = entityManager.createQuery("SELECT p FROM Picture p WHERE p.user = ?1");
         query.setParameter(1,user);
@@ -70,6 +89,9 @@ public class JpaPictureDaoImpl implements PictureDao {
     }
 
     @Override
+    /**
+     * {@link PictureDao#countPictures()}
+     */
     public Long countPictures() {
         Query query = entityManager.createQuery("SELECT COUNT(p.id) FROM Picture p");
         Long pictureCount = (Long) query.getSingleResult();
@@ -78,6 +100,9 @@ public class JpaPictureDaoImpl implements PictureDao {
     }
 
     @Override
+    /**
+     * {@link PictureDao#updatePicture(Picture)}
+     */
     public void updatePicture(Picture updatedPicture) throws RollbackException,Exception {
         transaction = entityManager.getTransaction();
 
@@ -100,6 +125,9 @@ public class JpaPictureDaoImpl implements PictureDao {
     }
 
     @Override
+    /**
+     * {@link PictureDao#deletePicture(Integer)}
+     */
     public void deletePicture(Integer id) throws RollbackException,Exception {
         transaction = entityManager.getTransaction();
 
@@ -115,12 +143,7 @@ public class JpaPictureDaoImpl implements PictureDao {
     }
 
     /**
-     * will return a search based on the searchQuery, will match the search query
-     * based on {@link Picture#getName()} and {@link Picture#getDescription()} and
-     * {@link User#getPostalAddress()} ()}
-     * @param searchQuery is the search query
-     * @param category category supplied by user
-     * @return returns a list of pictures
+     * {@link PictureDao#searchByAll(String, Category)}
      */
     public List<Picture> searchByAll(String searchQuery, Category category) throws Exception{
         List<Picture> pictureList = null;

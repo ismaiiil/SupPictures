@@ -11,6 +11,9 @@ import javax.persistence.RollbackException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/**
+ * An implementation for UserDao methods based on JPA.
+ */
 public class JpaUserDaoImpl implements UserDao {
 
     private EntityManager entityManager = JPAFactory.getEntityManagerFactory().createEntityManager();
@@ -18,6 +21,9 @@ public class JpaUserDaoImpl implements UserDao {
     public EntityTransaction transaction = null;
 
     @Override
+    /**
+     * {@link UserDao#createUser(String, String, String, String, String, String, String)}
+     */
     public User createUser(String firstName,String lastName,String username,String password, String email,String tel,String address)throws RollbackException, Exception {
         //hash password here before sending to db
         User user = new User(firstName,lastName,username,hashPassword(password), email,tel,address,false);
@@ -35,12 +41,21 @@ public class JpaUserDaoImpl implements UserDao {
         return user;
     }
 
+    /**
+     * Discards changes made from a transaction if applicable.
+     * @param transaction The transaction made on the database.
+     */
     private void rollbackTransaction(EntityTransaction transaction){
         if (transaction != null) {
             transaction.rollback();
         }
     }
 
+    /**
+     * Encrypts a user's password.
+     * @param password The {@link User#password} to be encrypted.
+     * @return The encypted password.
+     */
     private String hashPassword(String password){
         return Hashing.sha256()
                 .hashString(password, StandardCharsets.UTF_8)
@@ -49,6 +64,9 @@ public class JpaUserDaoImpl implements UserDao {
 
 
     @Override
+    /**
+     * {@link UserDao#verifyUser(String, String)}
+     */
     public User verifyUser(String username, String password) {
         //hash password before verifying
         User userEntity = entityManager.find(User.class,username);
@@ -63,6 +81,9 @@ public class JpaUserDaoImpl implements UserDao {
     }
 
     @Override
+    /**
+     * {@link UserDao#listUsers()}
+     */
     public List<User> listUsers() {
         Query query = entityManager.createQuery("SELECT u FROM User u");
         List<User> userList = query.getResultList();
@@ -70,6 +91,9 @@ public class JpaUserDaoImpl implements UserDao {
     }
 
     @Override
+    /**
+     * {@link UserDao#countUsers()}
+     */
     public Long countUsers() {
         Query query = entityManager.createQuery("SELECT COUNT(u.username) FROM User u");
         Long userCount = (Long) query.getSingleResult();
@@ -78,6 +102,9 @@ public class JpaUserDaoImpl implements UserDao {
 
 
     @Override
+    /**
+     * {@link UserDao#deleteUser(String)}
+     */
     public void deleteUser(String username) throws RollbackException, Exception{
         transaction = entityManager.getTransaction();
 
@@ -93,6 +120,9 @@ public class JpaUserDaoImpl implements UserDao {
     }
 
     @Override
+    /**
+     * {@link UserDao#updateUser(User)}
+     */
     public void updateUser(User updatedUser) throws RollbackException, Exception {
         transaction = entityManager.getTransaction();
         // Begin the transaction
@@ -116,6 +146,9 @@ public class JpaUserDaoImpl implements UserDao {
     }
 
     @Override
+    /**
+     * {@link UserDao#findUserByUsername(String)}
+     */
     public User findUserByUsername(String username) throws Exception {
         User userEntity = entityManager.find(User.class,username);
         return userEntity;
