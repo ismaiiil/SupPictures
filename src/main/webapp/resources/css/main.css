@@ -86,7 +86,7 @@ ul#errorMessages{
 }
 
 .image-overlay{
-    width: 500px;
+
     cursor: pointer;
     position: absolute;
     top: 0;
@@ -98,7 +98,11 @@ ul#errorMessages{
     transition: .5s ease;
     border-radius: 7px;
 }
+.image-wrapper{
+    width: 60%;
+}
 .image-container{
+
     position: relative;
     border-radius: 7px;
 }
