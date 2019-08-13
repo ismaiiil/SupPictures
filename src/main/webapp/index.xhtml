@@ -74,7 +74,7 @@
                                 <h:graphicImage class="image-shadow img-grid-item img-fluid" value = "#{pic.path}"  />
                                 </div>
                                 <div class="image-overlay">
-                                    <h:form><h:link styleClass="image-overlay" outcome="/picturePreview.xhtml"/></h:form>
+                                    <h:commandButton styleClass="image-overlay"  action="#{pictureLoader.previewPicture(pic)}"/>
 
                                     <div class="d-flex align-items-center justify-content-between image-info  h-25">
                                         <div class="d-flex align-items-center justify-content-center p-1 pl-2">
