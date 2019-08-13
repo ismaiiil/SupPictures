@@ -59,8 +59,8 @@ public class PictureLoader {
         String pictures =  response.readEntity(String.class);
         Gson gson=new Gson();
         Type type = new TypeToken<List<Picture>>(){}.getType();
-        this.pictures = gson.fromJson(pictures, type);
-        return this.pictures;
+        List<Picture> result   = gson.fromJson(pictures, type);
+        return result;
     }
 
     public void setPictures(List<Picture> pictures) {
@@ -73,16 +73,18 @@ public class PictureLoader {
     public void setQuery(String query) {
         this.query = query;
     }
-    public int getPictureListSize(){
-        return pictures.size();
+    public boolean getNoImageFound(){
+        return pictures.size() == 0;
     }
 
     public void getPicturesByQueryAndCategory(){
-        pictures.clear();
-        Picture pic = new Picture();
-        pic.setPath("https://images.pexels.com/photos/2208453/pexels-photo-2208453.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500");
-        pictures.add(pic);
-        //pictures =  getPictures("http://localhost:8080/rest/pictures/search/?query="+ query + "&category="+ category);
+        String url = "http://localhost:8080/rest/pictures/search/?query=" + query + "&category=" + category;
+        List<Picture> result  =  getPictures(url);
+        if(result == null){
+            this.pictures.clear();
+            return;
+        }
+        this.pictures = result;
 
     }
 

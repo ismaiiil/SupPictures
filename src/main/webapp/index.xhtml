@@ -10,7 +10,7 @@
 
 <h:body>
     <!--Main Container-->
-    <div class="container-fluid p-0"/>
+    <div class="container-fluid p-0">
         <!--Header-->
         <ui:insert name="header">
             <ui:include src="templates/navbar.xhtml" />
@@ -58,21 +58,23 @@
         </div>
         <!--Jumbotron End-->
 
-
+            <div>
+                <h:outputText rendered="#{pictureLoader.noImageFound}" value="No result found"/>
+            </div>
         <!--Image Gallery-->
 
             <div class="d-flex  justify-content-around align-items-center">
                 <div class="d-flex flex-wrap justify-content-center">
 
 
-                    <h:dataTable id="recenttable" value="#{pictureLoader.pictures}" var="pic">
+                    <h:dataTable id="recenttable" value="#{pictureLoader.pictures}" var="pic" rendered="true">
                         <h:column>
                             <div class="mb-3 mr-3  image-container ">
                                 <div class="image-wrapper">
-                                <h:graphicImage class="image-shadow img-grid-item img-fluid" value = "#{pic.path}" />
+                                <h:graphicImage class="image-shadow img-grid-item img-fluid" value = "#{pic.path}"  />
                                 </div>
                                 <div class="image-overlay">
-                                    <h:form><h:link styleClass="image-overlay" outcome="/picturePreview.xhtml"></h:link></h:form>
+                                    <h:form><h:link styleClass="image-overlay" outcome="/picturePreview.xhtml"/></h:form>
 
                                     <div class="d-flex align-items-center justify-content-between image-info  h-25">
                                         <div class="d-flex align-items-center justify-content-center p-1 pl-2">
@@ -99,7 +101,8 @@
 
             </div>
         </h:form>
-        <!--Image Gallery End-->
+
+            <!--Image Gallery End-->
 
 <!--        &lt;!&ndash;Image Gallery&ndash;&gt;-->
 <!--        <div class="d-flex  justify-content-around align-items-center">-->
@@ -172,7 +175,7 @@
         <!--Footer End-->
 
     <!--Main Container End -->
-
+</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="application/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="application/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="application/javascript"></script>
