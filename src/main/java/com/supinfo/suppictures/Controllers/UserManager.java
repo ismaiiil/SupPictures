@@ -209,7 +209,7 @@ public class UserManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/user/editProfile.xhtml" +FacesContext.getCurrentInstance().getViewRoot().getViewId();
+        return "/user/editProfile.xhtml?faces-redirect=true&includeViewParams=true&source="+FacesContext.getCurrentInstance().getViewRoot().getViewId();
     }
 
     /**

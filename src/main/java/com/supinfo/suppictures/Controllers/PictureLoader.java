@@ -70,7 +70,7 @@ public class PictureLoader {
      * @return a list of pictures
      */
     public List<Picture> getRecentPictures() {
-        return getPictures("http://localhost:8080/rest/pictures/recent");
+        return getPictures("http://localhost:8089/rest/pictures/recent");
     }
 
     private List<Picture> getPictures(String url) {
@@ -96,11 +96,14 @@ public class PictureLoader {
         this.query = query;
     }
     public boolean getNoImageFound(){
-        return pictures.size() == 0;
+        if(pictures != null){
+            return pictures.size() == 0;
+        }
+        return false;
     }
 
     public void getPicturesByQueryAndCategory(){
-        String url = "http://localhost:8080/rest/pictures/search/?query=" + query + "&category=" + category;
+        String url = "http://localhost:8089/rest/pictures/search/?query=" + query + "&category=" + category;
         List<Picture> result  =  getPictures(url);
         if(result == null){
             this.pictures.clear();
@@ -113,7 +116,7 @@ public class PictureLoader {
     public String previewPicture(Picture pic){
         UIHelpers.putCookie("currentPic",null);
         UIHelpers.putCookie("currentPic",pic);
-        return "/picturePreview.xhtml?faces-redirect=true";
+        return "/public/picturePreview.xhtml?faces-redirect=true";
     }
     public void loadCurrentPicture(){
       currentPicture = (Picture) UIHelpers.getCookie("currentPic");
