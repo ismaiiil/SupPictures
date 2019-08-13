@@ -2,12 +2,16 @@ package com.supinfo.suppictures.Controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.supinfo.suppictures.Controllers.Utils.UIHelpers;
 import com.supinfo.suppictures.Model.Database.Enums.Category;
+import com.supinfo.suppictures.Model.Database.Utils.JPAFactory;
 import com.supinfo.suppictures.Model.Database.ValueObjects.Picture;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
@@ -20,6 +24,24 @@ import java.util.List;
 @ManagedBean
 @ViewScoped
 public class PictureLoader {
+    public Picture getCurrentPicture() {
+        return currentPicture;
+    }
+
+    public void setCurrentPicture(Picture currentPicture) {
+        this.currentPicture = currentPicture;
+    }
+
+    private Picture currentPicture;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     public Category category;
     public Category getCategory() {
         return category;
@@ -87,5 +109,16 @@ public class PictureLoader {
         this.pictures = result;
 
     }
+
+    public String previewPicture(Picture pic){
+        UIHelpers.putCookie("currentPic",null);
+        UIHelpers.putCookie("currentPic",pic);
+        return "/picturePreview.xhtml?faces-redirect=true";
+    }
+    public void loadCurrentPicture(){
+      currentPicture = (Picture) UIHelpers.getCookie("currentPic");
+
+    }
+
 
 }
