@@ -89,9 +89,10 @@ public class PictureController {
     public void deletePicture(Integer id) {
         try {
             getPicDao().deletePicture(id);
-            UIHelpers.getContext().redirect("/userProfile.xhtml");
+            //UIHelpers.getContext().redirect("/userProfile.xhtml");
         } catch (Exception e) {
             //todo: show msg on ui
+
             e.printStackTrace();
         }
     }
