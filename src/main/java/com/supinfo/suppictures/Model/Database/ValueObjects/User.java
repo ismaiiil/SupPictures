@@ -6,12 +6,15 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 
+/**
+ * Represents a user entity and is used to create 'Users' table in the corresponding database.
+ */
 @Entity
 @Table(name="Users")
 public class User implements Serializable {
 
     /**
-     * default constructor for JPA to use
+     * Default constructor for the JPA to create a user.
      */
     public User(){ }
 
@@ -19,6 +22,17 @@ public class User implements Serializable {
     @Id
     private String username;
 
+    /**
+     * Creates a user object with the specified details.
+     * @param firstName The first name of the user.
+     * @param lastName The last name of the user.
+     * @param username The username of the user.
+     * @param password The password of the user.
+     * @param email The email address of the user.
+     * @param tel The phone number of the user.
+     * @param address The postal address/locality of the user.
+     * @param administrator Represents whether the user is an administrator.
+     */
     public User(String firstName,String lastName,String username,String password,String email,String tel,String address, Boolean administrator) {
         this.username = username;
         this.firstName = firstName;
@@ -30,10 +44,18 @@ public class User implements Serializable {
         this.administrator = administrator;
     }
 
+    /**
+     * Gets the username of the user.
+     * @return A string representing the username of the user.
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets the username of the user.
+     * @param username A string representing the username of the user.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
@@ -41,10 +63,18 @@ public class User implements Serializable {
     @Expose
     private String firstName;
 
+    /**
+     * Gets the first name of the user.
+     * @return A string representing the first name of the user.
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Set's the first name of the user.
+     * @param firstName A string representing the first name of the user.
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -52,10 +82,18 @@ public class User implements Serializable {
     @Expose
     private String lastName;
 
+    /**
+     * Gets the last name of the user.
+     * @return A string representing the last name of the user.
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Sets the last name of the user.
+     * @param lastName A string representing the last name of the user.
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -63,10 +101,18 @@ public class User implements Serializable {
     @Expose
     private String phoneNumber;
 
+    /**
+     * Gets the phone number of the user.
+     * @return A string representing the phone number of the user.
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * Sets the phone number of the user.
+     * @param phoneNumber A string representing the phone number of the user.
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -75,10 +121,18 @@ public class User implements Serializable {
     @Email
     private String emailAddress;
 
+    /**
+     * Gets the email address of the user.
+     * @return A string representing the email address of the user.
+     */
     public String getEmailAddress() {
         return emailAddress;
     }
 
+    /**
+     * Sets the email address of the user.
+     * @param emailAddress A string representing the email address of the user.
+     */
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
@@ -86,10 +140,18 @@ public class User implements Serializable {
     @Expose(serialize = false)
     private String password;
 
+    /**
+     * Gets the password of the user.
+     * @return A string representing the password of the user.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets the password of the user.
+     * @param password A string representing the password of the user.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
@@ -97,10 +159,18 @@ public class User implements Serializable {
     @Expose
     private String postalAddress;
 
+    /**
+     * Gets the postal address/locality of the user.
+     * @return A string representing the postal address/locality of the user.
+     */
     public String getPostalAddress() {
         return postalAddress;
     }
 
+    /**
+     * Sets the postal address/locality of the user.
+     * @param postalAddress A string representing the postal address/locality of the user.
+     */
     public void setPostalAddress(String postalAddress) {
         this.postalAddress = postalAddress;
     }
@@ -108,10 +178,18 @@ public class User implements Serializable {
     @Expose
     private Boolean administrator;
 
+    /**
+     * Gets whether the user is an administrator.
+     * @return A boolean representing if the user is an administrator.
+     */
     public Boolean getAdministrator() {
         return administrator;
     }
 
+    /**
+     * Sets whether the user is an administrator.
+     * @param administrator A boolean representing if the user is an administrator.
+     */
     public void setAdministrator(Boolean administrator) {
         this.administrator = administrator;
     }
