@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>SupPictures Home</title>
 </h:head>
@@ -48,6 +48,9 @@
             </div>
         </div>
         <!--Jumbotron End-->
+
+
+
         <!--Image Gallery-->
         <div class="d-flex  justify-content-around align-items-center">
             <div class="d-flex flex-wrap justify-content-center align-items-center">
@@ -115,7 +118,18 @@
             <ui:include src="templates/footer.xhtml" />
         </ui:insert>
         <!--Footer End-->
+    <h:form id="theForm">
+        <h:dataTable id="recenttable" value="#{ajaxTest.pictures}" var="pic">
+            <h:column>
+                <h:graphicImage class="image-shadow img-grid-item img-fluid" value = "#{pic.path}" />
+               
+            </h:column>
 
+        </h:dataTable>
+        <h:commandLink value="Save" action="#{ajaxTest.add}">
+            <f:ajax execute="theForm" render="theForm:recenttable" />
+        </h:commandLink>
+    </h:form>
     <!--Main Container End -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="application/javascript"></script>
