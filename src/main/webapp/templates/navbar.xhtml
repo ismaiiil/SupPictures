@@ -12,7 +12,7 @@
     <title>SupPictures Home</title>
 
 </h:head>
-<h:body>
+<h:body styleClass="position-relative">
 <ui:composition>
     <h:outputStylesheet library = "css" name="main.css"/>
     <h:outputStylesheet library="scss" name="_variables.scss"/>
@@ -23,6 +23,12 @@
 
     <script src="https://use.fontawesome.com/244a9c9e4a.js" type="application/javascript"></script>
 
+    <div class="alert alert-danger w-25 alert-dismissible fade show position-absolute alert-box mb-0" role="alert">
+        <span class="m-0">Error: <h:messages styleClass="text-capitalize m-0" id="errorMessages" globalOnly="true"/></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <!--Navbar-->
     <nav class="image-shadow navbar navbar-expand-lg navbar-light bg-light position-fixed w-100 navbar-z-index">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +70,29 @@
         </div>
     </nav>
     <!--Navbar End-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="application/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="application/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="application/javascript"></script>
+    <script type="application/javascript">
+        $(document).ready(function() {
+            var alertTextLength = $('.alert-box #errorMessages li').text().length;
+            $('.alert').alert();
+            $('.alert-box').hide();
+            console.log(alertTextLength);
+            if (alertTextLength > 0) {
+                $('.alert-box').show();
+                setTimeout('$(\'.alert-box\').hide()',15000);
+
+            }
+        });
+        $(function () {
+
+
+        })
+
+
+    </script>
 </ui:composition>
+
 </h:body>
 </html>

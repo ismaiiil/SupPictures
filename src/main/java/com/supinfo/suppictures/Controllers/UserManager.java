@@ -264,5 +264,15 @@ public class UserManager {
         }
     }
 
+    public void deleteUser(String username){
+
+        try {
+            getDao().deleteUser(username);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }

@@ -52,7 +52,7 @@ public class PictureController {
 
         UIHelpers.putCookie("pic", pic);
 
-        return "/user/editPicture.xhtml" + FacesContext.getCurrentInstance().getViewRoot().getViewId();
+        return "/user/editPicture.xhtml?faces-redirect=true&includeViewParams=true&source="+ FacesContext.getCurrentInstance().getViewRoot().getViewId();
 
 
     }
@@ -88,9 +88,8 @@ public class PictureController {
     public void deletePicture(Integer id) {
         try {
             getPicDao().deletePicture(id);
-            UIHelpers.getContext().redirect("/user/userProfile.xhtml");
+            //UIHelpers.getContext().redirect("/userProfile.xhtml");
         } catch (Exception e) {
-            //todo: show msg on ui
             e.printStackTrace();
         }
     }

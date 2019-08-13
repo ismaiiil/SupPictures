@@ -17,7 +17,7 @@
     <div class="container-fluid p-0">
         <!--Header-->
         <ui:insert name="header">
-            <ui:include src="../templates/navbar.xhtml" />
+            <ui:include src="../templates/navbar.xhtml"/>
         </ui:insert>
         <!--Header End-->
 
@@ -29,7 +29,7 @@
                 <p class="lead">
                     <h:form>
                         <h:link  outcome="/user/addPicture.xhtml" styleClass="btn btn-outline-success mr-1"  value="Add Photo/Image"/>
-                        <!--<h:link outcome="/user/editProfile.xhtml" styleClass="btn btn-outline-primary"  value="Edit Profile"/>-->
+                        <!--<h:link outcome="/editProfile.xhtml" styleClass="btn btn-outline-primary"  value="Edit Profile"/>-->
                         <h:commandButton styleClass="btn btn-outline-primary" action="#{userManager.editUserRecord(userManager.currentUser.username)}"  value="Edit Profile">
 
                         </h:commandButton>

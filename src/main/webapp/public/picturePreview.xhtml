@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>SupPictures Home</title>
 </h:head>
@@ -18,6 +18,10 @@
     <ui:include src="../templates/navbar.xhtml" />
 </ui:insert>
 <!--Header End-->
+    <f:metadata>
+        <f:viewParam name="id" value="#{pictureLoader.id}" />
+        <f:viewAction action="#{pictureLoader.loadCurrentPicture}"/>
+    </f:metadata>
 
     <div class="container d-flex flex-row pt-5">
         <div class="col-12 pt-5 pb-5">
@@ -26,18 +30,18 @@
                 <div class="d-flex  justify-content-between w-100 pt-3 pb-3">
                     <div class="d-flex align-items-center  pl-0 pt-1 pb-1 w-25">
                         <img class="image-user-icon " src="../resources/images/image-user.png" alt=""/>
-                        <p class="image-info-user ml-1 m-0 ">Username</p>
+                        <p class="image-info-user ml-1 m-0 "><h:outputText value="#{pictureLoader.currentPicture.user.username}"/></p>
                     </div>
 
-                    <h2 class="text-center w-25">Image Title</h2>
+                    <h2 class="text-center w-25">#{pictureLoader.currentPicture.name}</h2>
 
                     <div class="d-flex align-items-center justify-content-end p-1 pr-2 w-25">
                         <img class="image-user-icon" src="../resources/images/eye.png" alt=""/>
-                        <p class="view-count-text ml-1 m-0  ">40</p>
+                        <p class="view-count-text ml-1 m-0  ">#{pictureLoader.currentPicture.visitorsCount}</p>
                     </div>
                 </div>
-            <h:graphicImage class="w-100 " value = "https://images.pexels.com/photos/808466/pexels-photo-808466.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
-            <p class="pt-3 pb-3 lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci at blanditiis consequuntur, cum error esse expedita iste libero minima necessitatibus, perspiciatis possimus praesentium rerum sequi similique, tempora veritatis voluptatem voluptates.</p>
+            <h:graphicImage class="w-100 " value = "#{pictureLoader.currentPicture.path}" />
+            <p class="pt-3 pb-3 lead">#{pictureLoader.currentPicture.description}</p>
             </div>
         </div>
 

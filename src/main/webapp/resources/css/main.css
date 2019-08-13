@@ -2,6 +2,18 @@ body{
     font-family: 'Varela Round', sans-serif !important;
 }
 
+.alert-box{
+    top:80px;
+    right:10px;
+
+}
+
+ul#errorMessages{
+    list-style-type: none;
+    margin: 0;
+
+}
+
 .oops-text{
     font-family: 'Comfortaa', cursive !important;
     font-weight: bolder;
@@ -74,7 +86,7 @@ body{
 }
 
 .image-overlay{
-    width: 500px;
+
     cursor: pointer;
     position: absolute;
     top: 0;
@@ -86,7 +98,11 @@ body{
     transition: .5s ease;
     border-radius: 7px;
 }
+.image-wrapper{
+    width: 60%;
+}
 .image-container{
+
     position: relative;
     border-radius: 7px;
 }

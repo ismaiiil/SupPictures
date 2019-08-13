@@ -58,6 +58,7 @@
                     </thead>
                     <tbody class="text-center">
                     <c:forEach var="user" items="#{userManager.allUsers}">
+                        <c:if test="#{userManager.currentUser.username != user.username}">
                         <tr>
 
                             <td>#{user.username}</td>
@@ -75,8 +76,9 @@
 
                                         </h:commandButton>
 
+                                    <h:commandButton value="Delete" styleClass="btn btn-outline-danger" action="#{userManager.deleteUser(user.username)}"/>
 
-                                        <button class=" btn btn-outline-danger" type="button"><i class="fa fa-user-times"></i></button>
+<!--                                        <button class=" btn btn-outline-danger" type="button"><i class="fa fa-user-times"></i></button>-->
 
 
 
@@ -84,6 +86,7 @@
                                 </h:form>
                             </td>
                         </tr>
+                        </c:if>
                     </c:forEach>
                     </tbody>
                 </table>
