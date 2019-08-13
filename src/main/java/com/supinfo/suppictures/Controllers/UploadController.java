@@ -79,7 +79,7 @@ public class UploadController {
                 setMessage(path);
                 Picture pic = JPAFactory.getJpaPictureDaoImpl().createPicture(filename,description,category,path,UIHelpers.getLoggedInUser());
                 ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-                externalContext.redirect("/userProfile.xhtml");
+                externalContext.redirect("/user/userProfile.xhtml");
 
             } catch (IOException e) {
                 //setMessage("an exception has occured");

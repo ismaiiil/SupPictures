@@ -8,7 +8,6 @@ import com.supinfo.suppictures.Model.Database.ValueObjects.Picture;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import java.io.IOException;
 import java.util.List;
 
 
@@ -53,7 +52,7 @@ public class PictureController {
 
         UIHelpers.putCookie("pic", pic);
 
-        return "/editPicture.xhtml?faces-redirect=true&includeViewParams=true&source="+ FacesContext.getCurrentInstance().getViewRoot().getViewId();
+        return "/user/editPicture.xhtml?faces-redirect=true&includeViewParams=true&source="+ FacesContext.getCurrentInstance().getViewRoot().getViewId();
 
 
     }
@@ -91,8 +90,6 @@ public class PictureController {
             getPicDao().deletePicture(id);
             //UIHelpers.getContext().redirect("/userProfile.xhtml");
         } catch (Exception e) {
-            //todo: show msg on ui
-
             e.printStackTrace();
         }
     }

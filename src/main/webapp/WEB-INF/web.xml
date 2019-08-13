@@ -10,7 +10,7 @@
          id = "WebApp_ID" version="2.5" >
   <display-name>Archetype Created Web Application</display-name>
   <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>public/index.xhtml</welcome-file>
     <!--<welcome-file>signIn.xhtml</welcome-file>-->
     <!--<welcome-file>signUp.xhtml</welcome-file>-->
     <!--<welcome-file>searchResults.xhtml</welcome-file>-->
@@ -58,6 +58,10 @@
     <error-code>500</error-code>
     <location>/error-pages/50X.xhtml</location>
   </error-page>
+  <mime-mapping>
+    <extension>scss</extension>
+    <mime-type>text/css</mime-type>
+  </mime-mapping>
 
 
 </web-app>

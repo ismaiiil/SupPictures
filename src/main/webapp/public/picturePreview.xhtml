@@ -15,7 +15,7 @@
 <div class="container-fluid p-0">
 <!--Header-->
 <ui:insert name="header">
-    <ui:include src="templates/navbar.xhtml" />
+    <ui:include src="../templates/navbar.xhtml" />
 </ui:insert>
 <!--Header End-->
     <f:metadata>
@@ -29,14 +29,14 @@
             <div class="image-shadow border-image p-3 bg-img ">
                 <div class="d-flex  justify-content-between w-100 pt-3 pb-3">
                     <div class="d-flex align-items-center  pl-0 pt-1 pb-1 w-25">
-                        <img class="image-user-icon " src="resources/images/image-user.png" alt=""/>
+                        <img class="image-user-icon " src="../resources/images/image-user.png" alt=""/>
                         <p class="image-info-user ml-1 m-0 "><h:outputText value="#{pictureLoader.currentPicture.user.username}"/></p>
                     </div>
 
                     <h2 class="text-center w-25">#{pictureLoader.currentPicture.name}</h2>
 
                     <div class="d-flex align-items-center justify-content-end p-1 pr-2 w-25">
-                        <img class="image-user-icon" src="resources/images/eye.png" alt=""/>
+                        <img class="image-user-icon" src="../resources/images/eye.png" alt=""/>
                         <p class="view-count-text ml-1 m-0  ">#{pictureLoader.currentPicture.visitorsCount}</p>
                     </div>
                 </div>

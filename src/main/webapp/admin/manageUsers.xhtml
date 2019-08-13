@@ -16,7 +16,7 @@
     <div class="container-fluid p-0">
     <!--Header-->
     <ui:insert name="header">
-        <ui:include src="templates/navbar.xhtml" />
+        <ui:include src="../templates/navbar.xhtml" />
     </ui:insert>
     <!--Header End-->
 
@@ -105,11 +105,11 @@
                                 <div class="image-overlay-admin">
                                     <div class="d-flex align-items-center justify-content-between image-info  h-25">
                                         <div class="d-flex align-items-center justify-content-center p-1 pl-2">
-                                            <img class="image-user-icon-admin" src="resources/images/image-user.png" alt=""/>
+                                            <img class="image-user-icon-admin" src="../resources/images/image-user.png" alt=""/>
                                             <p class="image-info-user-admin ml-1 m-0 ">#{pic.user.username}</p>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center p-1 pr-2">
-                                            <img class="image-user-icon-admin" src="resources/images/eye.png" alt=""/>
+                                            <img class="image-user-icon-admin" src="../resources/images/eye.png" alt=""/>
                                             <p class="view-count-text-admin ml-1 m-0  ">#{pic.visitorsCount? pic.visitorsCount : 0}</p>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center p-1 pl-2">
