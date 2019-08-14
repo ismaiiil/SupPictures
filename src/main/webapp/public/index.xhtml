@@ -36,24 +36,22 @@
                 </div>
             </div>
 
-            <div class="form-inline w-75 d-flex justify-content-center">
+            <div class="form-inline w-75 d-flex justify-content-center position-relative">
 
-                <h:inputText id="searchInput" class="form-control w-75 h-50-px  mr-1" value="#{pictureLoader.query}" type="search" placeholder="Search for free photos and pictures" aria-label="Search"/>
-                <h:commandButton class="btn btn-outline-success my-2 my-sm-0 h-48-px w-50-px" action="#{pictureLoader.getPicturesByQueryAndCategory}" type="submit"><i class="fa fa-search"></i>
-                    <f:ajax  execute="searchInput dropdownCategory"   render="recenttable" />
+                <h:inputText id="searchInput" class="form-control w-75 h-50-px  mr-1 " value="#{pictureLoader.query}" type="search" placeholder="Search for free photos and pictures" aria-label="Search"/>
+                <h:commandButton class="btn btn-outline-success my-2 my-sm-0 h-48-px w-50-px" action="#{pictureLoader.getPicturesByQueryAndCategory}" type="submit" value="🔍">
+                    <f:ajax  execute="searchInput dropdownCategory "   render="recenttable" />
+
                 </h:commandButton>
 
+                <h:selectOneMenu id="dropdownCategory"  styleClass="btn border-success dropdown-toggle  btn-category position-absolute" value="#{pictureLoader.category}" style="right: 16%"  >
+                    <f:selectItems value="#{pictureLoader.categories}" />
+                </h:selectOneMenu>
 
+
+            </div>
+            <div class="form-inline w-75 d-flex justify-content-center ">
             <p class="lead pt-2"> You can search by categories or/and by word</p>
-                <div class="form-group">
-                    <label for="dropdownCategory">Select Image Category</label>
-
-                    <h:selectOneMenu id="dropdownCategory"  styleClass="btn btn-secondary dropdown-toggle w-100 btn-category" value="#{pictureLoader.category}" >
-                        <f:selectItems value="#{pictureLoader.categories}" />
-                    </h:selectOneMenu>
-
-
-                </div>
             </div>
         </div>
         <!--Jumbotron End-->
@@ -71,7 +69,7 @@
                         <h:column>
                             <div class="mb-3 mr-3  image-container ">
                                 <div class="image-wrapper">
-                                <h:graphicImage class="image-shadow img-grid-item img-fluid" value = "#{pic.path}"  />
+                                <h:graphicImage class="image-shadow img-grid-item" value = "#{pic.path}"  />
                                 </div>
                                 <div class="image-overlay">
                                     <h:commandButton styleClass="image-overlay"  action="#{pictureLoader.previewPicture(pic)}"/>

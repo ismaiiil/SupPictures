@@ -70,7 +70,7 @@ public class PictureLoader {
      * @return a list of pictures
      */
     public List<Picture> getRecentPictures() {
-        return getPictures("http://localhost:8089/rest/pictures/recent");
+        return getPictures("http://localhost:8080/rest/pictures/recent");
     }
 
     private List<Picture> getPictures(String url) {
@@ -103,7 +103,7 @@ public class PictureLoader {
     }
 
     public void getPicturesByQueryAndCategory(){
-        String url = "http://localhost:8089/rest/pictures/search/?query=" + query + "&category=" + category;
+        String url = "http://localhost:8080/rest/pictures/search/?query=" + query + "&category=" + category;
         List<Picture> result  =  getPictures(url);
         if(result == null){
             this.pictures.clear();
