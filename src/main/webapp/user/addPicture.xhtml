@@ -58,7 +58,7 @@
 
         <div class="col-6 d-flex flex-column align-items-center">
 
-            <img id="uploadImage" class="w-75 mt-1" src="#{uploadController.message?uploadController.message:'resources/images/img-placeholder.jpg'}" alt="image placeholder"/>
+            <img id="uploadImage" class="w-75 mt-1" src="#{uploadController.message?uploadController.message:'../resources/images/img-placeholder.jpg'}" alt="image placeholder"/>
             <h1:inputFile required="true" styleClass="btn btn-success mt-3 w-75" id="inputImage" mode="simple"
                           a:accept="image/*" value="#{uploadController.file1}" onchange="readURL(this);"
             />
@@ -88,5 +88,10 @@
         }
 
     </script>
+    <!--Footer-->
+    <ui:insert name="footer">
+        <ui:include src="../templates/footer.xhtml" />
+    </ui:insert>
+    <!--Footer End-->
 </h:body>
 </html>
